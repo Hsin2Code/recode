@@ -1,6 +1,8 @@
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +13,7 @@
 #include "journal.h"
 
 /* 创建服务端 套接字 */
-uint
+uint32_t
 create_server_socket(int *fd, uint16_t port)
 {
     int sock;
@@ -45,7 +47,7 @@ create_server_socket(int *fd, uint16_t port)
     return TRUE;
 }
 /* 创建客户端 套接字 */
-uint
+uint32_t
 create_client_socket(int* fd, char* ip, uint16_t port)
 {
     int sock;
@@ -74,13 +76,13 @@ create_client_socket(int* fd, char* ip, uint16_t port)
     return TRUE;
 }
 /* 接入客户端请求 */
-uint
+uint32_t
 accept_socket(int sock, int *new_sock, uint32_t * ip, uint16_t * port)
 {
 
     int fd;
     struct sockaddr_in client_addr;
-    int client_len;
+    socklen_t client_len;
 
     if (!new_sock || !ip || !port) {
 

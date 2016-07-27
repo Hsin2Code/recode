@@ -11,6 +11,8 @@
 #include "journal.h"
 #include "comint.h"
 
+
+/* 心跳函数 */
 static uint32_t
 do_heart_beat(char* ip, uint16_t port)
 {
@@ -29,6 +31,11 @@ do_heart_beat(char* ip, uint16_t port)
     return TRUE;
 }
 
+
+
 int main(int argc,char **argv) {
+
+
+
     return 0;
 }
