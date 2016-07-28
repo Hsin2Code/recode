@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
@@ -15,7 +16,7 @@
 
 /* 创建服务端 套接字 */
 uint32_t
-create_server_socket(int *fd, uint16_t port)
+create_server_socket(int *fd, const uint16_t port)
 {
     int sock;
     struct sockaddr_in server_addr;
@@ -49,7 +50,7 @@ create_server_socket(int *fd, uint16_t port)
 }
 /* 创建客户端 套接字 */
 uint32_t
-create_client_socket(int* fd, char* ip, uint16_t port)
+create_client_socket(int* fd, const char* ip, const uint16_t port)
 {
     int sock;
     struct sockaddr_in their_addr;
@@ -77,7 +78,7 @@ create_client_socket(int* fd, char* ip, uint16_t port)
 }
 /* 接入客户端请求 */
 uint32_t
-accept_socket(int sock, int *new_sock, uint32_t * ip, uint16_t * port)
+accept_socket(const int sock, int *new_sock, uint32_t * ip, uint16_t * port)
 {
 
     int fd;
@@ -105,4 +106,22 @@ accept_socket(int sock, int *new_sock, uint32_t * ip, uint16_t * port)
     *port = client_addr.sin_port;
 
     return OK;
+}
+
+/* 关闭套接字 */
+void
+close_socket(const int sock)
+{
+    if(sock >= 0) {
+        /* shutdown 也关闭了其它进程使用此sock */
+        if(shutdown(sock, SHUT_RDWR) < 0) {
+            // SGI causes EINVAL
+            if (errno != ENOTCONN && errno != EINVAL) {
+                LOG_ERR("close socket error when shutdown\n");
+            }
+        }
+        if(close(sock) < 0) {
+            LOG_ERR("inner close socket error\n");
+        }
+    }
 }

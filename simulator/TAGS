@@ -1,69 +1,131 @@
 
-client_simulator/src/pull_policy.cpp,3290
+client_simulator/src/VrvProtocol.cpp,408
+DWORD m_EncryptVersion 21,244
+BYTE m_Key[m_Key22,298
+BOOL Encrypt_V1(32,469
+BOOL Decrypt_V1(60,1143
+ULONG	    CRCTab[CRCTab68,1469
+void CRCInit(69,1492
+ULONG CRC32(84,1698
+ULONG CRC32Raw(96,1908
+int VRVPacket::SendPkt(109,2175
+int VRVPacket::sent_audit_info(168,3690
+int VRVPacket::RecvPkt(200,4782
+int VRVPacketEx::SendPktEx(249,5990
+int VRVPacketEx::RecvPktEx(308,7651
+int get_pwd(354,8833
+
+client_simulator/src/pull_policy.cpp,3320
 struct tag_S_GetPlockyGEN 10,193
-	void * pSendStr tag_S_GetPlockyGEN::pSendStr11,221
-	void * pGetStr;tag_S_GetPlockyGEN::pGetStr12,240
-	tag_S_GetPlockyGEN(tag_S_GetPlockyGEN::tag_S_GetPlockyGEN13,257
-struct tag_vrv_policyGen 21,343
-	int id tag_vrv_policyGen::id22,370
-	string func tag_vrv_policyGen::func23,382
-	unsigned int crc tag_vrv_policyGen::crc24,397
-	int    type tag_vrv_policyGen::type25,417
-	int flg tag_vrv_policyGen::flg26,432
-	tag_vrv_policyGen(tag_vrv_policyGen::tag_vrv_policyGen27,444
-enum  enPolicytype 37,539
-    SOFT_INSTALL_CTRL,enPolicytype::SOFT_INSTALL_CTRL39,583
-    PROCESS_CTRL,enPolicytype::PROCESS_CTRL41,626
-    IPMAC_BIND_CTRL,enPolicytype::IPMAC_BIND_CTRL43,666
-    SOFT_DOWN_CTRL,enPolicytype::SOFT_DOWN_CTRL45,695
-    ONLINE_DEAL_CTRL,enPolicytype::ONLINE_DEAL_CTRL47,735
-    UDISK_ACT_CTRL,enPolicytype::UDISK_ACT_CTRL49,765
-    PORT_PROTECT_CTRL,enPolicytype::PORT_PROTECT_CTRL51,805
-    DEV_INSTALL_CTRL,enPolicytype::DEV_INSTALL_CTRL53,854
-    FILE_PROTECT_CTRL,enPolicytype::FILE_PROTECT_CTRL55,902
-    HTTP_VISIT_CTRL,enPolicytype::HTTP_VISIT_CTRL57,951
-    POLICY_SEC_BURN,enPolicytype::POLICY_SEC_BURN59,980
-    FILE_OP_CTRL,enPolicytype::FILE_OP_CTRL61,1027
-    POLICY_ENCRYPTION,enPolicytype::POLICY_ENCRYPTION63,1065
-    HTTP_ACCESS_CTRL,enPolicytype::HTTP_ACCESS_CTRL65,1112
-    POLICY_AUTO_SHUTDOWN,enPolicytype::POLICY_AUTO_SHUTDOWN67,1142
-    FILE_CHECKSUM_EDIT,enPolicytype::FILE_CHECKSUM_EDIT69,1191
-    SERVICE_CTRL,enPolicytype::SERVICE_CTRL71,1235
-    SYSTEM_CONN_MONITOR,enPolicytype::SYSTEM_CONN_MONITOR73,1273
-    VIRTUAL_MACHINE_CHECK,enPolicytype::VIRTUAL_MACHINE_CHECK75,1321
-    CLI_FLOW_CTRL,enPolicytype::CLI_FLOW_CTRL77,1377
-    USER_RIGHT_POLICY,enPolicytype::USER_RIGHT_POLICY79,1422
-    HOST_CFG_EDIT,enPolicytype::HOST_CFG_EDIT81,1471
-    VIOLATION_ACT_CHK,enPolicytype::VIOLATION_ACT_CHK83,1516
-    RUN_INFOMATION,enPolicytype::RUN_INFOMATION85,1559
-    CONNECT_GATEWAY_AFFIRM,enPolicytype::CONNECT_GATEWAY_AFFIRM87,1585
-    POLICY_HEALTHCHECK,enPolicytype::POLICY_HEALTHCHECK89,1621
-    en_policytype_count,enPolicytype::en_policytype_count90,1645
-const char * policy_target[policy_target94,1675
-enPolicytype typefromTartget(106,2540
-static int  get_pkt_app_info(116,2759
-static bool _send_policy_genenral(146,3836
-#define POLICY_COUNT_TAG 190,4846
-void  trimstring(192,4882
-std::string  get_tag_val(201,5052
-int    get_policylist_fromGeneral(219,5512
-static bool _send_policy_detail(300,7450
-#define    POLICY_END_TAG 341,8439
-bool get_PolicyContent(343,8482
-bool _contain_file_policy(364,9035
-void  _log_policy_breif(384,9649
-typedef struct file_thr_args 409,10658
-    pthread_t *thread_id;file_thr_args::thread_id410,10689
-    std::string *policy_content;file_thr_args::policy_content411,10715
-    file_thr_args(file_thr_args::file_thr_args412,10748
-}file_thr_args_t;file_thr_args_t416,10833
-pthread_t *g_running_file_tid_ptr g_running_file_tid_ptr418,10852
-int policy_pull_success_times 420,10895
-int policy_pull_falied_times 421,10930
-void *file_sfd_thr_cb(file_sfd_thr_cb423,10965
-bool on_Update_pGeneral(439,11349
-static bool _get_policy_info(521,14260
-void *pull_policy_worker(pull_policy_worker552,15189
+    void * pSendStr tag_S_GetPlockyGEN::pSendStr11,221
+    void * pGetStr;tag_S_GetPlockyGEN::pGetStr12,243
+    tag_S_GetPlockyGEN(tag_S_GetPlockyGEN::tag_S_GetPlockyGEN13,263
+struct tag_vrv_policyGen 21,367
+    int id tag_vrv_policyGen::id22,394
+    string func tag_vrv_policyGen::func23,409
+    unsigned int crc tag_vrv_policyGen::crc24,427
+    int    type tag_vrv_policyGen::type25,450
+    int flg tag_vrv_policyGen::flg26,468
+    tag_vrv_policyGen(tag_vrv_policyGen::tag_vrv_policyGen27,483
+enum  enPolicytype 37,608
+    SOFT_INSTALL_CTRL,enPolicytype::SOFT_INSTALL_CTRL39,655
+    PROCESS_CTRL,enPolicytype::PROCESS_CTRL41,698
+    IPMAC_BIND_CTRL,enPolicytype::IPMAC_BIND_CTRL43,738
+    SOFT_DOWN_CTRL,enPolicytype::SOFT_DOWN_CTRL45,767
+    ONLINE_DEAL_CTRL,enPolicytype::ONLINE_DEAL_CTRL47,807
+    UDISK_ACT_CTRL,enPolicytype::UDISK_ACT_CTRL49,837
+    PORT_PROTECT_CTRL,enPolicytype::PORT_PROTECT_CTRL51,877
+    DEV_INSTALL_CTRL,enPolicytype::DEV_INSTALL_CTRL53,926
+    FILE_PROTECT_CTRL,enPolicytype::FILE_PROTECT_CTRL55,974
+    HTTP_VISIT_CTRL,enPolicytype::HTTP_VISIT_CTRL57,1023
+    POLICY_SEC_BURN,enPolicytype::POLICY_SEC_BURN59,1052
+    FILE_OP_CTRL,enPolicytype::FILE_OP_CTRL61,1099
+    POLICY_ENCRYPTION,enPolicytype::POLICY_ENCRYPTION63,1137
+    HTTP_ACCESS_CTRL,enPolicytype::HTTP_ACCESS_CTRL65,1184
+    POLICY_AUTO_SHUTDOWN,enPolicytype::POLICY_AUTO_SHUTDOWN67,1214
+    FILE_CHECKSUM_EDIT,enPolicytype::FILE_CHECKSUM_EDIT69,1263
+    SERVICE_CTRL,enPolicytype::SERVICE_CTRL71,1307
+    SYSTEM_CONN_MONITOR,enPolicytype::SYSTEM_CONN_MONITOR73,1345
+    VIRTUAL_MACHINE_CHECK,enPolicytype::VIRTUAL_MACHINE_CHECK75,1393
+    CLI_FLOW_CTRL,enPolicytype::CLI_FLOW_CTRL77,1449
+    USER_RIGHT_POLICY,enPolicytype::USER_RIGHT_POLICY79,1494
+    HOST_CFG_EDIT,enPolicytype::HOST_CFG_EDIT81,1543
+    VIOLATION_ACT_CHK,enPolicytype::VIOLATION_ACT_CHK83,1588
+    RUN_INFOMATION,enPolicytype::RUN_INFOMATION85,1631
+    CONNECT_GATEWAY_AFFIRM,enPolicytype::CONNECT_GATEWAY_AFFIRM87,1659
+    POLICY_HEALTHCHECK,enPolicytype::POLICY_HEALTHCHECK89,1695
+    en_policytype_count,enPolicytype::en_policytype_count90,1719
+const char * policy_target[policy_target94,1749
+enPolicytype typefromTartget(106,2790
+static int  get_pkt_app_info(116,3039
+static bool _send_policy_genenral(146,4168
+#define POLICY_COUNT_TAG 190,5213
+void  trimstring(192,5249
+std::string  get_tag_val(201,5443
+int    get_policylist_fromGeneral(219,5957
+static bool _send_policy_detail(300,8305
+#define    POLICY_END_TAG 341,9329
+bool get_PolicyContent(343,9372
+bool _contain_file_policy(364,9988
+void  _log_policy_breif(384,10631
+typedef struct file_thr_args 409,11669
+    pthread_t *thread_id;file_thr_args::thread_id410,11700
+    std::string *policy_content;file_thr_args::policy_content411,11726
+    file_thr_args(file_thr_args::file_thr_args412,11759
+}file_thr_args_t;file_thr_args_t416,11844
+pthread_t *g_running_file_tid_ptr g_running_file_tid_ptr418,11863
+int policy_pull_success_times 420,11906
+int policy_pull_falied_times 421,11941
+void *file_sfd_thr_cb(file_sfd_thr_cb423,11976
+bool on_Update_pGeneral(439,12360
+static bool _get_policy_info(521,15478
+void *pull_policy_worker(pull_policy_worker552,16418
+
+client_simulator/src/simulator.cpp,326
+#define UNUSED(16,302
+static bool quit_flags 18,331
+static pthread_t hb_thr 19,363
+static pthread_t pull_policy_thr 20,392
+static pthread_t send_thr 21,430
+static int toggle_report_assert 22,461
+static int random_wait_sec 23,498
+void sig_action(25,532
+void usage(96,2796
+void init_logger(115,3591
+int main(143,4860
+
+client_simulator/src/socket.cpp,320
+CommonSocket::CommonSocket(4,46
+int CommonSocket::socket_id(11,204
+int CommonSocket::open(19,370
+int CommonSocket::close(31,644
+TCP::TCP(44,886
+TCP::TCP(49,1086
+string TCP::ip(56,1370
+uint16_t TCP::port(59,1446
+uint32_t TCP::passwd(62,1522
+struct sockaddr_in TCP::sockaddr_in(69,1684
+int TCP::connect(72,1761
+
+client_simulator/src/CSoftInstallHelper.cpp,460
+#define  SINSTALL_TMP_FILE 20,312
+std::string ins_soft_hash(23,380
+struct install_time41,805
+    char date[install_time::date43,827
+    char day[install_time::day44,847
+    char time[install_time::time45,866
+static  int  get_soft_info(48,891
+CSoftInstallHelper::CSoftInstallHelper(228,6180
+CSoftInstallHelper::~CSoftInstallHelper(233,6228
+int get_rpm_all(238,6277
+bool  CSoftInstallHelper::Init(251,6600
+void  CSoftInstallHelper::Check(273,6982
+
+client_simulator/src/old_functions.cpp,100
+bool conn_serv(9,156
+void closeSocket(62,1569
+void close_socket(79,2087
+int getSO_ERROR(89,2299
 
 client_simulator/src/Markup.cpp,16606
 #define x_ATTRIBQUOTE 20,551
@@ -426,23 +488,43 @@ void CMarkup::x_AdjustForNode(5341,172408
 bool CMarkup::x_AddNode(5365,172984
 void CMarkup::x_RemoveNode(5429,174936
 
-client_simulator/src/common.cpp,449
-std::string g_server_ip 5,65
-std::string g_dev_id 6,95
-int g_server_port 7,122
-std::string g_mac_addr 8,146
-std::string g_self_ipaddr 9,175
-std::string g_gw_ip 10,207
-int g_run_times;11,233
-int g_log_interval 13,251
-int g_policy_interval 14,275
-int g_sfd_flag 15,302
-int g_upload_log_times 16,322
-void test(19,352
-void get_local_time(23,437
-static bool Get_Network_Info(34,717
-int      get_logHeader(49,1149
-int code_convert(86,2208
+client_simulator/src/CDeviceinfoHelper.cpp,1019
+#define SIOCETHTOOL 32,580
+#define ARRAY_SIZE(35,637
+static void trimEnter(41,699
+static  int get_cpu_name(52,867
+static int get_cpu_id(58,1006
+static int get_cpu_hz(64,1150
+static int get_sys_hostname(71,1287
+int get_os_type(79,1445
+static int get_sys_defaultLang(85,1577
+static int get_mem_total(93,1718
+static int get_monitor_info(100,1850
+static int get_keyboard_name(107,1994
+static int get_audio_info(114,2142
+static int get_mouse_name(120,2260
+static int get_eth_name(126,2374
+static int get_floppy_info(132,2500
+static int get_slot_info(138,2616
+static int get_usb_info(145,2751
+static int get_eth_speed(152,2894
+static int str_to_num(159,3012
+static int get_mem_space(171,3214
+static int get_disk_space(186,3625
+CDeviceinfoHelper::CDeviceinfoHelper(202,3953
+CDeviceinfoHelper::~CDeviceinfoHelper(207,3999
+std::string & CDeviceinfoHelper::getAssetVal(211,4045
+bool   CDeviceinfoHelper::getfrot(227,4391
+bool   CDeviceinfoHelper::init(272,5818
+void  CDeviceinfoHelper::check(363,7689
+
+client_simulator/src/send_thread.cpp,153
+uint32_t send_num 6,63
+uint32_t error_num 7,86
+uint32_t success_num 8,110
+int make_data(10,137
+int send_data(31,865
+void * thread_send_msg(61,1820
 
 client_simulator/src/regesiter.cpp,1267
 struct tag_S_Soft_Asset 12,241
@@ -474,6 +556,46 @@ void _report_hard_assert(474,15052
 void report_assert(501,15872
 static bool _do_heart_beat(507,15953
 void *heart_beat_worker(heart_beat_worker562,17308
+
+client_simulator/src/ConvertUTF.c,837
+static const int halfShift 47,1743
+static const UTF32 halfBase 49,1813
+static const UTF32 halfMask 50,1856
+#define UNI_SUR_HIGH_START 52,1896
+#define UNI_SUR_HIGH_END 53,1938
+#define UNI_SUR_LOW_START 54,1980
+#define UNI_SUR_LOW_END 55,2022
+#define false	56,2064
+#define true	57,2083
+ConversionResult ConvertUTF32toUTF16 61,2180
+ConversionResult ConvertUTF16toUTF32 110,3729
+static const char trailingBytesForUTF8[trailingBytesForUTF8174,6033
+static const UTF32 offsetsFromUTF8[offsetsFromUTF8190,6817
+static const UTF8 firstByteMark[firstByteMark200,7297
+ConversionResult ConvertUTF16toUTF8 214,7923
+static Boolean isLegalUTF8(295,11059
+Boolean isLegalUTF8Sequence(326,12118
+ConversionResult ConvertUTF8toUTF16 336,12419
+ConversionResult ConvertUTF32toUTF8 409,14838
+ConversionResult ConvertUTF8toUTF32 462,16679
+
+client_simulator/src/common.cpp,449
+std::string g_server_ip 5,65
+std::string g_dev_id 6,95
+int g_server_port 7,122
+std::string g_mac_addr 8,146
+std::string g_self_ipaddr 9,175
+std::string g_gw_ip 10,207
+int g_run_times;11,233
+int g_log_interval 13,251
+int g_policy_interval 14,275
+int g_sfd_flag 15,302
+int g_upload_log_times 16,322
+void test(19,352
+void get_local_time(23,437
+static bool Get_Network_Info(34,717
+int      get_logHeader(49,1149
+int code_convert(86,2208
 
 client_simulator/src/run_policy_sfd.cpp,1306
 #define	EDPSERVER_PORT	17,340
@@ -514,700 +636,33 @@ static int get_dl_file_full_name(438,15971
 static int download_file(485,17398
 void run_policy_sfd(738,25316
 
-client_simulator/src/simulator.cpp,326
-#define UNUSED(16,302
-static bool quit_flags 18,331
-static pthread_t hb_thr 19,363
-static pthread_t pull_policy_thr 20,392
-static pthread_t send_thr 21,430
-static int toggle_report_assert 22,461
-static int random_wait_sec 23,498
-void sig_action(25,532
-void usage(96,2797
-void init_logger(115,3592
-int main(143,4863
-
-client_simulator/src/send_thread.cpp,153
-uint32_t send_num 6,63
-uint32_t error_num 7,86
-uint32_t success_num 8,110
-int make_data(10,137
-int send_data(31,865
-void * thread_send_msg(61,1820
-
-client_simulator/src/CDeviceinfoHelper.cpp,1019
-#define SIOCETHTOOL 32,580
-#define ARRAY_SIZE(35,637
-static void trimEnter(41,699
-static  int get_cpu_name(52,867
-static int get_cpu_id(58,1006
-static int get_cpu_hz(64,1150
-static int get_sys_hostname(71,1287
-int get_os_type(79,1445
-static int get_sys_defaultLang(85,1577
-static int get_mem_total(93,1718
-static int get_monitor_info(100,1850
-static int get_keyboard_name(107,1994
-static int get_audio_info(114,2142
-static int get_mouse_name(120,2260
-static int get_eth_name(126,2374
-static int get_floppy_info(132,2500
-static int get_slot_info(138,2616
-static int get_usb_info(145,2751
-static int get_eth_speed(152,2894
-static int str_to_num(159,3012
-static int get_mem_space(171,3214
-static int get_disk_space(186,3625
-CDeviceinfoHelper::CDeviceinfoHelper(202,3953
-CDeviceinfoHelper::~CDeviceinfoHelper(207,3999
-std::string & CDeviceinfoHelper::getAssetVal(211,4045
-bool   CDeviceinfoHelper::getfrot(227,4391
-bool   CDeviceinfoHelper::init(272,5818
-void  CDeviceinfoHelper::check(363,7689
-
-client_simulator/src/old_functions.cpp,100
-bool conn_serv(9,156
-void closeSocket(62,1569
-void close_socket(79,2087
-int getSO_ERROR(89,2299
-
-client_simulator/src/CSoftInstallHelper.cpp,460
-#define  SINSTALL_TMP_FILE 20,312
-std::string ins_soft_hash(23,380
-struct install_time41,805
-    char date[install_time::date43,827
-    char day[install_time::day44,847
-    char time[install_time::time45,866
-static  int  get_soft_info(48,891
-CSoftInstallHelper::CSoftInstallHelper(228,6180
-CSoftInstallHelper::~CSoftInstallHelper(233,6228
-int get_rpm_all(238,6277
-bool  CSoftInstallHelper::Init(251,6600
-void  CSoftInstallHelper::Check(273,6982
-
-client_simulator/src/socket.cpp,320
-CommonSocket::CommonSocket(4,46
-int CommonSocket::socket_id(11,204
-int CommonSocket::open(19,370
-int CommonSocket::close(31,644
-TCP::TCP(44,886
-TCP::TCP(49,1086
-string TCP::ip(56,1370
-uint16_t TCP::port(59,1446
-uint32_t TCP::passwd(62,1522
-struct sockaddr_in TCP::sockaddr_in(69,1684
-int TCP::connect(72,1761
-
-client_simulator/src/VrvProtocol.cpp,408
-DWORD m_EncryptVersion 21,244
-BYTE m_Key[m_Key22,298
-BOOL Encrypt_V1(32,469
-BOOL Decrypt_V1(60,1143
-ULONG	    CRCTab[CRCTab68,1469
-void CRCInit(69,1492
-ULONG CRC32(84,1698
-ULONG CRC32Raw(96,1908
-int VRVPacket::SendPkt(109,2175
-int VRVPacket::sent_audit_info(168,3690
-int VRVPacket::RecvPkt(200,4782
-int VRVPacketEx::SendPktEx(249,5990
-int VRVPacketEx::RecvPktEx(308,7651
-int get_pwd(354,8833
-
-client_simulator/src/ConvertUTF.c,837
-static const int halfShift 47,1743
-static const UTF32 halfBase 49,1813
-static const UTF32 halfMask 50,1856
-#define UNI_SUR_HIGH_START 52,1896
-#define UNI_SUR_HIGH_END 53,1938
-#define UNI_SUR_LOW_START 54,1980
-#define UNI_SUR_LOW_END 55,2022
-#define false	56,2064
-#define true	57,2083
-ConversionResult ConvertUTF32toUTF16 61,2180
-ConversionResult ConvertUTF16toUTF32 110,3729
-static const char trailingBytesForUTF8[trailingBytesForUTF8174,6033
-static const UTF32 offsetsFromUTF8[offsetsFromUTF8190,6817
-static const UTF8 firstByteMark[firstByteMark200,7297
-ConversionResult ConvertUTF16toUTF8 214,7923
-static Boolean isLegalUTF8(295,11059
-Boolean isLegalUTF8Sequence(326,12118
-ConversionResult ConvertUTF8toUTF16 336,12419
-ConversionResult ConvertUTF32toUTF8 409,14838
-ConversionResult ConvertUTF8toUTF32 462,16679
-
-client_simulator/inc/VRVProtocol.hxx,11853
-#define EXPROTOCOL_H7,194
-    typedef __int32_t			    BOOL;13,284
-    typedef char					CHAR;14,318
-    typedef __int32_t				INT;15,345
-    typedef __int32_t				LONG;16,375
-    typedef unsigned short		    WORD;17,406
-    typedef unsigned char		    UCHAR;18,444
-    typedef __uint32_t			    UINT;19,482
-    typedef __uint32_t		        ULONG;20,517
-    typedef unsigned short		    USHORT;21,556
-    typedef UCHAR				    BYTE;22,596
-    typedef ULONG				    DWORD;23,627
-    typedef 	DWORD* 				LPVOID 24,659
-    typedef long					BOOL;27,717
-    typedef char					CHAR;28,744
-    typedef int					    INT;29,771
-    typedef long					LONG;30,800
-    typedef unsigned short		    WORD;31,827
-    typedef unsigned char		    UCHAR;32,865
-    typedef unsigned int			UINT;33,903
-    typedef unsigned long		    ULONG;34,936
-    typedef unsigned short		    USHORT;35,974
-    typedef UCHAR				    BYTE;36,1014
-    typedef ULONG				    DWORD;37,1045
-    typedef 	DWORD* 				LPVOID 38,1077
-#define TRUE	44,1166
-#define FALSE	47,1202
-#define EX_OK	53,1460
-#define EX_FAIL	54,1490
-#define REG_DEVICE_040726	55,1528
-#define SCAN_RESULT	56,1595
-#define SCAN_ASK_050313	57,1688
-#define SCAN_NEWIP 58,1763
-#define SCAN_HACK_IP 59,1829
-#define MODOULE_ECHO 60,1910
-#define DEVICE_CHANGE_050313 61,1994
-#define REG_CONFIG	62,2069
-#define REG_TRANSFILE	63,2162
-#define REG_TRANSFINISH	64,2253
-#define TRANS_REG_DEVICE	66,2335
-#define TRANS_SCAN_RESULT	67,2404
-#define TRANS_DEVICE_CHANGE	68,2474
-#define FIND_DAILUP_050103	70,2547
-#define TRANS_FIND_DAILUP	71,2622
-#define VRV_UPGRADE	72,2717
-#define AGENT_PROCESS	73,2759
-#define TRANS_AGENT_PROCESS	74,2843
-#define SCAN_CONFIG_050313	75,2952
-#define SCAN_REQUEST_050413	76,3055
-#define TRANS_SCAN_REQUEST 77,3130
-#define DETECT_ACTIVE	78,3229
-#define	SCAN_GETCHANGE	79,3314
-#define	AGENT_GETCONFIG	80,3412
-#define	AGENT_RPTSTATUS_050103	81,3517
-#define DISTRIBUTE_SOFTWARE	82,3603
-#define APPLET_GETSQLCFG	83,3651
-#define	REPORT_DOWNPATCH	84,3705
-#define	REPORT_SYSTEMPATCH	85,3787
-#define	REPORT_SOFTWARE	86,3840
-#define	REPORT_VIRUS	87,3891
-#define SCAN_NEWDEVICE	88,3933
-#define AGENT_DOWNLOAD	89,3998
-#define GET_FILEATTRIBUTE	90,4048
-#define AGENT_RPTKVS_050313	91,4100
-#define REG_DEVICE	92,4154
-#define GET_AGENTPROCESS	93,4213
-#define	KILL_AGENTPROCESS	94,4267
-#define	GET_PATCH	95,4319
-#define SENDREG_MESSAGE	96,4368
-#define AGENT_GET_TASK	97,4431
-#define LOWERDEPT_DOWNLOAD	98,4505
-#define AGENT_RPTDEVEX_050622	99,4558
-#define AGENT_RPTNOINSPATCH	100,4625
-#define AGENT_RPTPATCHSTATUS	101,4685
-#define DETECTAGENT_ISACTIVE	102,4796
-#define GET_AGENTLOG	103,4942
-#define FIND_DAILUP	104,5014
-#define	AGENT_RPTSTATUS	105,5080
-#define DISTRIBUTE_POLICY	112,5414
-#define DOWNLOAD_POLICY	113,5460
-#define DEVICE_CHANGE	114,5505
-#define SCAN_REQUEST	115,5568
-#define SCAN_ASK	116,5657
-#define SCAN_CONFIG	117,5720
-#define AGENT_RPTKVS	118,5818
-#define AGENT_RPTAUDITLOG	119,5866
-#define AGENT_RPTFLUX	120,5918
-#define REG_DEVICE_STRING	121,5961
-#define REG_TRANSFILE_STRING	122,5992
-#define REG_TRANSFINISH_STRING	123,6025
-#define T_POLICY_IFCHANGED 128,6237
-#define T_REPORT_POLICYLOG 129,6299
-#define T_REQUEST_DISCON 130,6368
-#define T_REQUEST_SHUTDOWN 131,6430
-#define T_POLICY_LOGDELETED 132,6489
-#define T_WHOCAN_DISCON 133,6557
-#define T_POINT_GET_CPU_MEM_INFO 135,6653
-#define T_POINT_RUNEXE 136,6727
-#define T_POINT_GET_IECACHE	137,6779
-#define T_POINT_GET_SOFT_INFO	138,6830
-#define T_POINT_CHANGE_IP	139,6886
-#define T_POINT_GET_SERVICE	140,6941
-#define T_POINT_GET_PORT	141,6995
-#define T_POINT_GET_CAP	142,7046
-#define T_POINT_GET_SHAREPATH	143,7097
-#define T_POINT_MESSAGE	144,7130
-#define T_POINT_KILLVIRUS	145,7178
-#define T_POINT_DEBUGVRVEDP	146,7239
-#define T_POINT_GET_FILE	147,7276
-#define T_POINT_BATCH_PATCH	148,7310
-#define T_POINT_USERGROUP	149,7347
-#define T_POINT_WORKDIRECTORYPOLICY	150,7378
-#define T_POINT_QUERYFILE	151,7419
-#define T_POINT_QUERYPOLICY	152,7452
-#define T_POINT_QUERYPATCHSTATE	153,7487
-#define T_POINT_UNINSTALLSOFT	154,7525
-#define AGENT_RCVMSGSUCCESS	164,8006
-#define AGENT_RPTSOFTSTATUS	165,8072
-#define AUTOLOAD_DETECTSTATUS	166,8138
-#define AGENT_RPTDEVEX	167,8223
-#define AGENT_SYNTIME	168,8285
-#define WEB_UPLOAD_FILE	169,8334
-#define IPORMAC_CHANGE	170,8412
-#define AGENT_SCANRESOULT	171,8464
-#define SCAN_FETCHCACHE	172,8543
-#define AGENT_WARNING	173,8636
-#define SCAN_NOTIFY	175,8705
-#define	AGENT_ONLINETIME	179,9000
-#define	AGENT_UPGRADE	180,9051
-#define	AGENT_RPTRUNLEVEL	181,9118
-#define	AGENT_RPTIDLESTATUS	182,9176
-#define AGENT_DOWNLOADFILE	183,9236
-#define AGENT_DOWNLOADFINISH	184,9289
-#define AGENT_GETDOWNLOADLIST	185,9343
-#define USB_AUTHENTICATION	186,9406
-#define AGENT_UPLOADFILE	187,9451
-#define REPORT_WARCENTER	188,9503
-#define USB_ATCIONLOG	189,9567
-#define AGENT_UPDATEONLYID	190,9621
-#define DETECT_ENCRYPT	191,9677
-#define AGENT_RPT_PROCESS	192,9734
-#define AGENT_RPT_SOFTWARE	193,9781
-#define AGENT_RPT_SYSTEMPATCH	194,9835
-#define AGENT_GETCONFIG_STRING	195,9888
-#define AGENT_RTP_AMTSTATUS	196,9923
-#define AGENT_RPT_LONGINUSERS	197,9996
-#define AGENT_RPT_IPMACBINDST	198,10073
-#define AGENT_RPT_SHAREFOLDERS	199,10138
-#define AGENT_REQUEST_UPDATE	204,10385
-#define REG_AUTHENTICATION	207,10474
-#define REG_LCS_AUTHENTICATION	208,10520
-#define W_MAINDO_DISCON	211,10619
-#define W_AGENTDO_DISCON	212,10672
-#define DISCON_NORMAL_MODE 216,10862
-#define DISCON_ALL_MODE 217,10935
-#define DISCON_SUPER_MODE 218,11025
-#define DISCON_DEFAULE_MODE	219,11230
-#define W_POLICY_NOTCHANGED	222,11386
-#define W_POLICY_CHANGED	223,11436
-#define	CALL_STARTCLIENT	227,11553
-#define	CALL_STARTSERVER	228,11608
-#define CALL_MANAGER 229,11666
-#define	CALL_STARTCLIENT2	230,11720
-#define	CALL_STARTSERVER2	231,11777
-#define CALL_MANAGER2 232,11837
-#define REPORT_CLIENT_SYS_LOG_LINUX 235,11934
-#define LOG_REPORT_STATE 237,11989
-#define LOG_REFRESH 238,12082
-#define LOG_APPEND 239,12127
-#define Illegal_Behavior 244,12273
-#define Abnormal_Behavior 245,12317
-#define General_Behavior 246,12361
-#define Event_Emergency 249,12448
-#define Event_Alarm 250,12502
-#define Event_Critical 251,12565
-#define Event_Error 252,12622
-#define Event_Caution 253,12679
-#define Event_Inform 254,12736
-#define Event_Message 255,12811
-#define Event_Debug 256,12868
-#define GETFORCEOUT_UPDATE	266,13247
-#define ECHOFORCEOUT_UPDATE	267,13304
-#define HACK_ARP 270,13375
-#define HACK_DOWN 271,13438
-#define HACK_ALLSTYLE 272,13489
-#define FAIL_NOIPMALLOC	275,13552
-#define FAIL_NETIPRESERVED	276,13600
-#define FAIL_NETIPFORBID	277,13655
-#define FAIL_SENDTOUPREG	278,13703
-#define FAIL_COM_ERROR	279,13767
-#define FAIL_UNKNOWN	280,13815
-#define FAIL_LINCE_ERROR	281,13849
-#define FAIL_LINCE_EMPTY	282,13895
-#define IP_CHANGE	285,13951
-#define MAC_CHANGE	286,13991
-#define NAME_CHANGE	287,14033
-#define ID_CHANGE	288,14079
-#define MEM_CHANGE	289,14135
-#define DISKSIZE_CHANGE	290,14184
-#define	RUNLEVEL_CHANGE	291,14237
-#define FIND_DAILUPING	293,14302
-#define FIND_DAILUPED	294,14344
-#define FIND_OUTOFNETWORK	295,14388
-#define REQUEST_UPGRAD	298,14457
-#define ECHO_UPGRAD	299,14499
-#define FORCE_UPGRAD	300,14548
-#define CONFIG_GET	303,14635
-#define CONFIG_ECHO	304,14658
-#define RESOULT_KILL	307,14733
-#define RESOULT_SUCCESS	308,14760
-#define RESOULT_REGISTERED	309,14790
-#define RESOULT_FAIL	310,14822
-#define RESOULT_CFGKILL	311,14849
-#define RESOULT_KILLNOTIFY	312,14879
-#define RESOULT_MANUAL	313,14911
-#define RUN_ACTIVE	316,14996
-#define RUN_SHUTDOWN	317,15019
-#define AGENT_UNINSTALL	318,15043
-#define AGENT_ACTIVE	319,15070
-#define ATTACK_REQUEST	320,15094
-#define DETECT_REQUEST	323,15259
-#define DETECT_ECHO	324,15285
-#define	AGENT_REQUEST	327,15401
-#define AGENT_ECHO	328,15426
-#define	STATUS_FINDOUT	331,15517
-#define ATTACK_CHANGE	334,15581
-#define DISTRIBUTE_FILE	338,15669
-#define DISTRIBUTE_MSG	339,15713
-#define DISTRIBUTE_SCRIPT	340,15756
-#define TRANS_DATA	341,15801
-#define TRANS_FINISH	342,15841
-#define DISTRIBUTE_PATCH_PLOICY	343,15888
-#define DISTRIBUTE_PATCH_FILE	344,15944
-#define DISTRIBUTE_FILE_2	347,16077
-#define DISTRIBUTE_MSG_2	348,16136
-#define DISTRIBUTE_SCRIPT_2	349,16182
-#define DISTRIBUTE_PATCH_PLOICY_2	350,16231
-#define DISTRIBUTE_PATCH_FILE_2	351,16290
-#define ERROR_OK	354,16364
-#define	ERROR_CRC32	355,16390
-#define	ERROR_PWD	356,16426
-#define	APPLET_REQUEST	359,16508
-#define APPLET_ECHO	360,16534
-#define PATCH_REFRESH	363,16599
-#define PATCH_ADDTAIL	364,16685
-#define PATCH_DELETE	365,16719
-#define SOFTWARE_REFRESH	368,16790
-#define SOFTWARE_ADDTAIL	369,16879
-#define SOFTWARE_DELETE	370,16916
-#define NEWDEVICE_REQUEST	373,17029
-#define NEWDEVICE_ECHO	374,17067
-#define DOWNLOAD_REQUEST	377,17138
-#define DOWNLOAD_OK	378,17175
-#define DOWNLOAD_DATAERROR	379,17207
-#define DOWNLOAD_RETRYLATER	380,17252
-#define DOWNLOAD_REQUEST_2	381,17301
-#define DOWNLOAD_IPLIST	382,17392
-#define DOWNLOAD_FINISH	383,17440
-#define DOWNLOAD_DISTRIBUTE	384,17495
-#define FILEATTRIBUTE_REQUEST	387,17597
-#define FILEATTRIBUTE_ECHO	388,17629
-#define KVS_SHUTDOWN	391,17697
-#define KVS_PROMPT	392,17743
-#define KVS_CUTNET	393,17794
-#define AGENTPROCESS_REQUEST 396,17852
-#define AGENTPROCESS_ECHO	397,17892
-#define TYPE_ERR_CONNECT	402,17995
-#define TYPE_ERR_NOREPORT	403,18023
-#define TYPE_ERR_DBNOINIT	404,18052
-#define NOTIFY_COUNT	407,18115
-#define NOTIFY_INOUT_SHUTDOWN	409,18171
-#define NOTIFY_INOUT_PROMPT	410,18219
-#define NOTIFY_INOUT_CHECK	411,18263
-#define NOTIFY_INOUT_CUTNET	412,18330
-#define NOTIFY_OUT_SHUTDOWN	414,18404
-#define NOTIFY_OUT_PROMPT	415,18451
-#define NOTIFY_OUT_CHECK	416,18493
-#define NOTIFY_OUT_CUTNET	417,18555
-#define NOTIFY_KVS_SHUTDOWN	419,18634
-#define NOTIFY_KVS_PROMPT	420,18681
-#define NOTIFY_KVS_CUTNET	421,18723
-#define SCREEN_READONLY	424,18809
-#define SCREEN_READWRITE	425,18858
-#define _CONNECT_PROMPT	427,18903
-#define _CONNECT_PASSWORD	428,18931
-#define _CONNECT_AUTO	429,18960
-#define LOG_ATTACK	432,19021
-#define LOG_PATIOLATE	433,19045
-#define LOG_SETTING	434,19071
-#define LOG_PATCH	435,19096
-#define LOG_NETWORKDATA	436,19119
-#define LOG_HARDWARE	437,19147
-#define LOG_SYSTEMLOG	438,19173
-#define DETECT_POLICY	441,19232
-#define GET_POLICY	442,19258
-#define ECHO_POLICY	443,19282
-#define LOWER_DETECT_POLICY	444,19307
-#define LOWER_GET_POLICY	445,19338
-#define AUDITLOG_REQUEST	448,19407
-#define AUDITLOG_ECHO	449,19450
-#define FLUX_REQUEST	452,19528
-#define FLUX_ECHO	453,19567
-#define FLUX_OVERLIMIT	454,19604
-#define AUTOLOAD_REQUEST	457,19725
-#define AUTOLOAD_ECHO	458,19767
-#define GET_FILELIST	461,19872
-#define UPLOAD_FILE	462,19926
-#define UPLOAD_EXPORT_FILE	463,19965
-#define USB_SUCCESS	466,20059
-#define USB_FAILED	467,20083
-#define USB_FAILED_ONUSER	468,20111
-#define USB_FAILED_PASSERR	469,20144
-#define USB_FAILED_DBERR	470,20178
-#define DATA_PORT	491,20973
-#define ALERT_PORT	492,21019
-#define MANAGER_PORT 493,21066
-#define SCANER_PORT 494,21145
-#define MODOULE_PORT 495,21231
-#define VRV_FLAG	496,21317
-#define VRV_FLAG10	497,21353
-#define VRV_FLAG11	498,21391
-#define AGENT_VERSION	499,21429
-#define VERSION_FLAG	500,21466
-#define VRV_DOWNFLAG	501,21497
-#define VRV_NOTIFY	502,21537
-#define AUTOLOADECHO1_SIZE	503,21576
-#define PKTHEAD_SIZE	504,21606
-#define SCANRESOULT_SIZE	505,21631
-#define SCANRESOULTEX_SIZE	506,21676
-#define MAX_PKTHEAD_NUM	507,21725
-#define SZ_DEVEX_1	508,21762
-struct PktHead516,21913
-	DWORD m_Flag;PktHead::m_Flag518,21930
-	WORD  m_Type;PktHead::m_Type519,21964
-	WORD  m_What;PktHead::m_What520,22041
-	DWORD m_Pwd;PktHead::m_Pwd521,22070
-	DWORD PktCrc;PktHead::PktCrc522,22084
-	DWORD PktLen;PktHead::PktLen523,22099
-
-client_simulator/inc/SimpleIni.h,12944
-#define INCLUDED_SimpleIni_h195,10179
-# define SI_ASSERT(230,11197
-# define SI_ASSERT(232,11237
-enum SI_Error 235,11267
-    SI_OK 236,11283
-    SI_UPDATED 237,11321
-    SI_INSERTED 238,11380
-    SI_FAIL 241,11485
-    SI_NOMEM 242,11530
-    SI_FILE 243,11579
-#define SI_UTF8_SIGNATURE 246,11652
-# define SI_NEWLINE_A 249,11712
-# define SI_NEWLINE_W 250,11743
-# define SI_NEWLINE_A 252,11792
-# define SI_NEWLINE_W 253,11821
-# define SI_HAS_WIDE_FILE261,11955
-# define SI_WCHAR_T 262,11981
-# define SI_HAS_WIDE_FILE264,12043
-# define SI_WCHAR_T 265,12069
-class CSimpleIniTempl293,13269
-    typedef SI_CHAR SI_CHAR_T;CSimpleIniTempl::SI_CHAR_T296,13301
-    struct Entry CSimpleIniTempl::Entry299,13354
-        const SI_CHAR * pItem;CSimpleIniTempl::Entry::pItem300,13373
-        const SI_CHAR * pComment;CSimpleIniTempl::Entry::pComment301,13404
-        int             nOrder;CSimpleIniTempl::Entry::nOrder302,13438
-        Entry(CSimpleIniTempl::Entry::Entry304,13471
-        Entry(CSimpleIniTempl::Entry::Entry309,13640
-        Entry(CSimpleIniTempl::Entry::Entry314,13836
-        Entry & operator=(CSimpleIniTempl::Entry::operator=315,13889
-        bool operator<(CSimpleIniTempl::Entry::operator<324,14210
-        bool operator>(CSimpleIniTempl::Entry::operator>325,14294
-        struct KeyOrder CSimpleIniTempl::Entry::KeyOrder329,14442
-            bool operator()(CSimpleIniTempl::Entry::KeyOrder::operator()330,14511
-        struct LoadOrder CSimpleIniTempl::Entry::LoadOrder337,14794
-            bool operator()(CSimpleIniTempl::Entry::LoadOrder::operator()338,14864
-    typedef std::multimap<Entry,CSimpleIniTempl::Entry348,15176
-    typedef std::multimap<Entry,const SI_CHAR CSimpleIniTempl::SI_CHAR348,15176
-    typedef std::multimap<Entry,const SI_CHAR *,typename Entry::KeyOrder> TKeyVal;CSimpleIniTempl::TKeyVal348,15176
-    typedef std::map<Entry,CSimpleIniTempl::Entry351,15301
-    typedef std::map<Entry,TKeyVal,CSimpleIniTempl::TKeyVal351,15301
-    typedef std::map<Entry,TKeyVal,typename Entry::KeyOrder> TSection;CSimpleIniTempl::TSection351,15301
-    typedef std::list<Entry> TNamesDepend;CSimpleIniTempl::TNamesDepend356,15500
-    class OutputWriter CSimpleIniTempl::OutputWriter361,15672
-        OutputWriter(CSimpleIniTempl::OutputWriter::OutputWriter363,15709
-        virtual ~OutputWriter(CSimpleIniTempl::OutputWriter::~OutputWriter364,15736
-    class FileWriter CSimpleIniTempl::FileWriter372,16042
-        FILE * m_file;CSimpleIniTempl::FileWriter::m_file373,16087
-        FileWriter(CSimpleIniTempl::FileWriter::FileWriter375,16122
-        void Write(CSimpleIniTempl::FileWriter::Write376,16177
-    class StringWriter CSimpleIniTempl::StringWriter385,16475
-        std::string & m_string;CSimpleIniTempl::StringWriter::m_string386,16522
-        StringWriter(CSimpleIniTempl::StringWriter::StringWriter388,16566
-        void Write(CSimpleIniTempl::StringWriter::Write389,16636
-    class StreamWriter CSimpleIniTempl::StreamWriter399,16974
-        std::ostream & m_ostream;CSimpleIniTempl::StreamWriter::m_ostream400,17021
-        StreamWriter(CSimpleIniTempl::StreamWriter::StreamWriter402,17067
-        void Write(CSimpleIniTempl::StreamWriter::Write403,17141
-    class Converter CSimpleIniTempl::Converter415,17539
-        using SI_CONVERTER::SizeToStore;CSimpleIniTempl::Converter::SI_CONVERTER::SizeToStore417,17596
-        Converter(CSimpleIniTempl::Converter::Converter418,17637
-        Converter(CSimpleIniTempl::Converter::Converter421,17755
-        Converter & operator=(CSimpleIniTempl::Converter::operator=422,17816
-        bool ConvertToStore(CSimpleIniTempl::Converter::ConvertToStore426,17946
-        const char * Data(CSimpleIniTempl::Converter::Data439,18433
-        std::string m_scratch;CSimpleIniTempl::Converter::m_scratch441,18503
-    bool IsEmpty(CSimpleIniTempl::IsEmpty466,19176
-    void SetUnicode(CSimpleIniTempl::SetUnicode485,20157
-    bool IsUnicode(CSimpleIniTempl::IsUnicode490,20310
-    void SetMultiKey(CSimpleIniTempl::SetMultiKey510,21063
-    bool IsMultiKey(CSimpleIniTempl::IsMultiKey515,21219
-    void SetMultiLine(CSimpleIniTempl::SetMultiLine524,21617
-    bool IsMultiLine(CSimpleIniTempl::IsMultiLine529,21773
-    void SetSpaces(CSimpleIniTempl::SetSpaces537,22139
-    bool UsingSpaces(CSimpleIniTempl::UsingSpaces542,22266
-    SI_Error LoadData(CSimpleIniTempl::LoadData601,23867
-    SI_Error Save(CSimpleIniTempl::Save720,28298
-    SI_Error Save(CSimpleIniTempl::Save741,29041
-    SI_Error SetValue(CSimpleIniTempl::SetValue965,39085
-    Converter GetConverter(CSimpleIniTempl::GetConverter1097,45004
-    inline bool IsSpace(CSimpleIniTempl::IsSpace1160,47701
-    inline bool IsComment(CSimpleIniTempl::IsComment1165,47883
-    inline void SkipNewLine(CSimpleIniTempl::SkipNewLine1171,48058
-    bool IsLess(CSimpleIniTempl::IsLess1182,48504
-    SI_CHAR * m_pData;CSimpleIniTempl::m_pData1209,49506
-    size_t m_uDataLen;CSimpleIniTempl::m_uDataLen1215,49706
-    const SI_CHAR * m_pFileComment;CSimpleIniTempl::m_pFileComment1218,49784
-    TSection m_data;CSimpleIniTempl::m_data1221,49876
-    TNamesDepend m_strings;CSimpleIniTempl::m_strings1227,50085
-    bool m_bStoreIsUtf8;CSimpleIniTempl::m_bStoreIsUtf81230,50170
-    bool m_bAllowMultiKey;CSimpleIniTempl::m_bAllowMultiKey1233,50255
-    bool m_bAllowMultiLine;CSimpleIniTempl::m_bAllowMultiLine1236,50344
-    bool m_bSpaces;CSimpleIniTempl::m_bSpaces1239,50442
-    int m_nOrder;CSimpleIniTempl::m_nOrder1244,50599
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::CSimpleIniTempl(CSimpleIniTempl1252,50893
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::~CSimpleIniTempl(~CSimpleIniTempl1268,51311
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Reset(Reset1275,51465
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1298,52090
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1319,52595
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1344,53281
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(LoadData1384,54203
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(LoadData1461,56375
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindFileComment(FindFileComment1478,56780
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindEntry(FindEntry1505,57481
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineTag(IsMultiLineTag1638,61288
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineData(IsMultiLineData1651,61659
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsNewLineChar(IsNewLineChar1688,62390
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadMultiLineText(LoadMultiLineText1697,62596
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::CopyString(CopyString1821,66998
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::AddEntry(AddEntry1848,67713
-        typedef typename TSection::iterator 1886,68997
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetValue(GetValue1953,71318
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetLongValue(GetLongValue1990,72380
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetLongValue(SetLongValue2029,73584
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetDoubleValue(GetDoubleValue2061,74611
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetDoubleValue(SetDoubleValue2092,75553
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetBoolValue(GetBoolValue2123,76443
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetBoolValue(SetBoolValue2158,77500
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllValues(GetAllValues2184,78297
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSectionSize(GetSectionSize2219,79343
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSection(GetSection2254,80413
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllSections(GetAllSections2269,80779
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllKeys(GetAllKeys2282,81130
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2313,81960
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2333,82512
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2359,83280
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Save(Save2370,83551
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::OutputMultiLineText(OutputMultiLineText2497,87813
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Delete(Delete2526,88761
-CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::DeleteString(DeleteString2586,90585
-#  define SI_CONVERT_WIN322621,92093
-#  define SI_CONVERT_GENERIC2623,92127
-struct SI_GenericCase 2633,92368
-    bool operator()(SI_GenericCase::operator()2634,92392
-struct SI_GenericNoCase 2653,93040
-    inline SI_CHAR locase(SI_GenericNoCase::locase2654,93066
-    bool operator()(SI_GenericNoCase::operator()2657,93181
-class SI_ConvertA 2673,93615
-    bool m_bStoreIsUtf8;SI_ConvertA::m_bStoreIsUtf82674,93635
-    SI_ConvertA(SI_ConvertA::SI_ConvertA2676,93671
-    SI_ConvertA(SI_ConvertA::SI_ConvertA2678,93701
-    SI_ConvertA(SI_ConvertA::SI_ConvertA2681,93806
-    SI_ConvertA & operator=(SI_ConvertA::operator=2682,93867
-    size_t SizeFromStore(SI_ConvertA::SizeFromStore2700,94829
-    bool ConvertFromStore(SI_ConvertA::ConvertFromStore2724,95851
-    size_t SizeToStore(SI_ConvertA::SizeToStore2748,96868
-    bool ConvertToStore(SI_ConvertA::ConvertToStore2768,97745
-#define SI_Case 2791,98484
-#define SI_NoCase 2792,98519
-class SI_ConvertW 2802,98765
-    bool m_bStoreIsUtf8;SI_ConvertW::m_bStoreIsUtf82803,98785
-    SI_ConvertW(SI_ConvertW::SI_ConvertW2805,98821
-    SI_ConvertW(SI_ConvertW::SI_ConvertW2807,98851
-    SI_ConvertW(SI_ConvertW::SI_ConvertW2810,98956
-    SI_ConvertW & operator=(SI_ConvertW::operator=2811,99017
-    size_t SizeFromStore(SI_ConvertW::SizeFromStore2829,99979
-    bool ConvertFromStore(SI_ConvertW::ConvertFromStore2866,101589
-    size_t SizeToStore(SI_ConvertW::SizeToStore2913,103740
-    bool ConvertToStore(SI_ConvertW::ConvertToStore2946,105004
-#define SI_Case 2999,107036
-#define SI_NoCase 3000,107071
-class SI_ConvertW 3008,107246
-    const char * m_pEncoding;SI_ConvertW::m_pEncoding3009,107266
-    UConverter * m_pConverter;SI_ConvertW::m_pConverter3010,107296
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3012,107338
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3014,107408
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3019,107560
-    SI_ConvertW & operator=(SI_ConvertW::operator=3020,107621
-    ~SI_ConvertW(SI_ConvertW::~SI_ConvertW3025,107772
-    size_t SizeFromStore(SI_ConvertW::SizeFromStore3040,108667
-    bool ConvertFromStore(SI_ConvertW::ConvertFromStore3079,110122
-    size_t SizeToStore(SI_ConvertW::SizeToStore3116,111442
-    bool ConvertToStore(SI_ConvertW::ConvertToStore3152,112744
-#define SI_Case 3187,113664
-#  define SI_NO_MBCS3192,113789
-# define SI_NoCase 3198,113865
-struct SI_NoCase 3210,114379
-    bool operator()(SI_NoCase::operator()3211,114398
-class SI_ConvertW 3232,115193
-    UINT m_uCodePage;SI_ConvertW::m_uCodePage3233,115213
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3235,115246
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3237,115276
-    SI_ConvertW(SI_ConvertW::SI_ConvertW3242,115409
-    SI_ConvertW & operator=(SI_ConvertW::operator=3243,115470
-    size_t SizeFromStore(SI_ConvertW::SizeFromStore3261,116426
-    bool ConvertFromStore(SI_ConvertW::ConvertFromStore3287,117529
-    size_t SizeToStore(SI_ConvertW::SizeToStore3310,118531
-    bool ConvertToStore(SI_ConvertW::ConvertToStore3333,119500
-typedef CSimpleIniTempl<char,char3353,120106
-    SI_NoCase<SI_NoCase3354,120136
-    SI_NoCase<char>,SI_ConvertA<char> >                 CSimpleIniA;3354,120136
-typedef CSimpleIniTempl<char,char3355,120205
-    SI_Case<SI_Case3356,120235
-    SI_Case<char>,SI_ConvertA<char> >                   CSimpleIniCaseA;3356,120235
-typedef CSimpleIniTempl<UChar,UChar3359,120337
-    SI_NoCase<SI_NoCase3360,120368
-    SI_NoCase<UChar>,SI_ConvertW<UChar> >               CSimpleIniW;3360,120368
-typedef CSimpleIniTempl<UChar,UChar3361,120437
-    SI_Case<SI_Case3362,120468
-    SI_Case<UChar>,SI_ConvertW<UChar> >                 CSimpleIniCaseW;3362,120468
-typedef CSimpleIniTempl<wchar_t,wchar_t3364,120547
-    SI_NoCase<SI_NoCase3365,120580
-    SI_NoCase<wchar_t>,SI_ConvertW<wchar_t> >           CSimpleIniW;3365,120580
-typedef CSimpleIniTempl<wchar_t,wchar_t3366,120649
-    SI_Case<SI_Case3367,120682
-    SI_Case<wchar_t>,SI_ConvertW<wchar_t> >             CSimpleIniCaseW;3367,120682
-# define CSimpleIni 3371,120779
-# define CSimpleIniCase 3372,120816
-# define SI_NEWLINE 3373,120857
-# define CSimpleIni 3375,120914
-# define CSimpleIniCase 3376,120951
-# define SI_NEWLINE 3377,120992
-
-client_simulator/inc/regesiter.h,29
-#define REGESITER_H_XXX2,24
-
-client_simulator/inc/VrvProtocol.h,539
-#define _VrvProtocol_H2,23
-using namespace std;4,64
-#define ENC_VERSION1 10,163
-    PktHead linux_head;14,246
-	string linux_data;15,270
-}Linux_Pkt;Linux_Pkt16,290
-	class VRVPacket31,792
-		PktHead head;VRVPacket::head34,821
-		string m_data;VRVPacket::m_data35,837
-	    Linux_Pkt linux_pkt;VRVPacket::linux_pkt37,885
-		VRVPacket(VRVPacket::VRVPacket39,912
-class VRVPacketEx53,1401
-    PktHeadEx head;VRVPacketEx::head56,1429
-    string m_data;VRVPacketEx::m_data57,1449
-    VRVPacketEx(VRVPacketEx::VRVPacketEx64,1767
+client_simulator/inc/CDeviceinfoHelper.h,784
+#define CDEVICEINFOHELPER_H_11,141
+	asset_hd 17,241
+	asset_cd 18,263
+	asset_cpu,19,285
+	asset_mbd,20,310
+	asset_mem,21,332
+	asset_vc 22,354
+	asset_kb,23,376
+	asset_svctl 24,398
+	asset_mouse,25,450
+	asset_nic,26,495
+	asset_fd,27,518
+	asset_slot,28,550
+	asset_usb,29,580
+	asset_nic_speed,30,611
+	asset_mem_used 31,645
+	asset_hd_used,32,685
+	asset_count,33,725
+} en_assetType;34,739
+typedef std::map<int int36,756
+typedef std::map<int , std::string>  CDeviceInfoMap 36,756
+class CDeviceinfoHelper 38,811
+	std::string    &    getfront(CDeviceinfoHelper::getfront52,1130
+	CDeviceInfoMap &    getMap(CDeviceinfoHelper::getMap56,1192
+	CDeviceInfoMap  m_devmap CDeviceinfoHelper::m_devmap63,1325
+	std::string     m_strFront CDeviceinfoHelper::m_strFront64,1353
 
 client_simulator/inc/run_policy_sfd.h,1059
 #define RUN_POLICY_FILE_XXXX_XX2,32
@@ -1245,74 +700,23 @@ typedef struct dl_file_info_s45,1344
     int stat_ok;48,1415
 } dl_file_info_st;49,1433
 
-client_simulator/inc/old_functions.h,31
-#define OLD_FUNCTIONS_XXX2,26
-
-client_simulator/inc/ConvertUTF.h,532
-typedef unsigned int	UTF32;90,3943
-typedef unsigned short	UTF16;91,3994
-typedef unsigned char	UTF8;92,4047
-typedef unsigned char	Boolean;93,4098
-#define UNI_REPLACEMENT_CHAR 96,4176
-#define UNI_MAX_BMP 97,4223
-#define UNI_MAX_UTF16 98,4261
-#define UNI_MAX_UTF32 99,4301
-#define UNI_MAX_LEGAL_UTF32 100,4341
-	conversionOK,103,4403
-	sourceExhausted,104,4448
-	targetExhausted,105,4513
-	sourceIllegal	106,4575
-} ConversionResult;107,4634
-	strictConversion 110,4670
-	lenientConversion111,4693
-} ConversionFlags;112,4712
-
-client_simulator/inc/common.h,1444
-#define COMMON_H_XXX2,21
-#define ELPP_THREAD_SAFE21,376
-#define ELPP_DISABLE_DEFAULT_CRASH_HANDLING24,409
-#define ELPP_DEFAULT_LOG_FILE 26,483
-#define STRITEM_TAG_END 33,591
-#define IL 35,624
-#define EL 37,680
-#define PL 38,706
-#define SM_LOG(40,734
-#define SM_WARN(41,766
-#define SM_ERROR(42,802
-#define SM_POLICY(44,838
-    SEND,48,890
-    RECIVE,49,900
-    NO_SUB_ACTION50,912
-} SUB_ACTION;51,930
-    REGESITER,54,960
-    REPORT_ASSERT,55,975
-    PULL_POLICY,56,994
-    SEND_LOG,57,1011
-    NO_ACTION58,1025
-} ACTION;59,1039
-typedef struct action 61,1050
-    ACTION p;62,1074
-    SUB_ACTION s;63,1088
-} action_t;64,1106
-typedef struct action_result 66,1119
-    int ret;67,1150
-    std::string reason;action_result::reason68,1163
-    action_result(action_result::action_result69,1187
-} action_result_t;73,1261
-typedef struct clog_header 75,1281
-    std::string time;clog_header::time76,1310
-    action_t action;clog_header::action77,1332
-    action_result_t result;clog_header::result78,1353
-    std::string content;clog_header::content79,1381
-    clog_header(clog_header::clog_header80,1406
-} clog_header_t;84,1521
-typedef struct network_info{network_info87,1540
-	char ip[network_info::ip88,1569
-	char mac[network_info::mac89,1583
-	char gateway[network_info::gateway90,1598
-	char sub_mask[network_info::sub_mask91,1617
-	char eth_name[network_info::eth_name92,1637
-} net_info;94,1680
+client_simulator/inc/cli_config.h,497
+#define  THIS_IS_CLI_CONFIG_HEADER2,35
+#define EDP_SERVICE_VER 9,225
+#define CLIENT_VERSION 12,285
+#define EDP_SERVICE_FLOCK 13,319
+#define EDP_WATCHV_FLOCK 14,367
+#define   WINSRV19,447
+	#define STRITEM_TAG_END 22,485
+	#define STRITEM_TAG_END 24,524
+#define  EDP_GUIAPP_REGISTER 31,596
+#define  EDP_GUIAPP_TRAY 32,634
+#define  EDP_SVRAPP_NAME 33,671
+#define  EDP_UNINSTALL 34,713
+#define   HW_SW41,791
+#define   HW_X8642,807
+#define   OEM_ZB_KYLIN 55,1012
+#define PKG_DEB 65,1275
 
 client_simulator/inc/easylogging++.h,79398
 #define EASYLOGGINGPP_H17,416
@@ -2756,26 +2160,6 @@ class TCP 32,490
     struct sockaddr_in _sockaddr_in;TCP::_sockaddr_in35,535
     uint32_t _passwd;TCP::_passwd36,572
 
-client_simulator/inc/pull_policy.h,29
-#define PULL_POLICY_XXX2,24
-
-client_simulator/inc/CSoftInstallHelper.h,699
-#define CSOFTINSTALLHELPER_H_9,113
-struct  tag_SoftInstall 16,221
-	std::string version tag_SoftInstall::version17,247
-	std::string time tag_SoftInstall::time18,270
-struct  tag_SoftInstallEx 22,343
-	std::string name tag_SoftInstallEx::name23,371
-	std::string version tag_SoftInstallEx::version24,391
-	std::string time tag_SoftInstallEx::time25,414
-	ins_soft_new ::ins_soft_new29,446
-	ins_soft_del ::ins_soft_del30,467
-	ins_soft_modify ::ins_soft_modify31,488
-typedef std::map<std::string std::string40,635
-typedef std::map<std::string ,tag_SoftInstall>  CSoftinstallmap 40,635
-class CSoftInstallHelper 42,702
-	CSoftinstallmap     m_newMap CSoftInstallHelper::m_newMap55,1066
-
 client_simulator/inc/VRVProtocolEx.hxx,1038
 #define EXPROTOCOL_1_H7,199
 #define VRV_TAG	13,396
@@ -2809,54 +2193,27 @@ struct PktHeadEx67,2499
 	WORD  m_Size;PktHeadEx::m_Size76,2828
 	DWORD m_Address;PktHeadEx::m_Address77,2859
 
-client_simulator/inc/cli_config.h,497
-#define  THIS_IS_CLI_CONFIG_HEADER2,35
-#define EDP_SERVICE_VER 9,225
-#define CLIENT_VERSION 12,285
-#define EDP_SERVICE_FLOCK 13,319
-#define EDP_WATCHV_FLOCK 14,367
-#define   WINSRV19,447
-	#define STRITEM_TAG_END 22,485
-	#define STRITEM_TAG_END 24,524
-#define  EDP_GUIAPP_REGISTER 31,596
-#define  EDP_GUIAPP_TRAY 32,634
-#define  EDP_SVRAPP_NAME 33,671
-#define  EDP_UNINSTALL 34,713
-#define   HW_SW41,791
-#define   HW_X8642,807
-#define   OEM_ZB_KYLIN 55,1012
-#define PKG_DEB 65,1275
+client_simulator/inc/ConvertUTF.h,532
+typedef unsigned int	UTF32;90,3943
+typedef unsigned short	UTF16;91,3994
+typedef unsigned char	UTF8;92,4047
+typedef unsigned char	Boolean;93,4098
+#define UNI_REPLACEMENT_CHAR 96,4176
+#define UNI_MAX_BMP 97,4223
+#define UNI_MAX_UTF16 98,4261
+#define UNI_MAX_UTF32 99,4301
+#define UNI_MAX_LEGAL_UTF32 100,4341
+	conversionOK,103,4403
+	sourceExhausted,104,4448
+	targetExhausted,105,4513
+	sourceIllegal	106,4575
+} ConversionResult;107,4634
+	strictConversion 110,4670
+	lenientConversion111,4693
+} ConversionFlags;112,4712
 
 client_simulator/inc/send_thread.h,28
 #define SEND_THREAD_XX2,23
-
-client_simulator/inc/CDeviceinfoHelper.h,784
-#define CDEVICEINFOHELPER_H_11,141
-	asset_hd 17,241
-	asset_cd 18,263
-	asset_cpu,19,285
-	asset_mbd,20,310
-	asset_mem,21,332
-	asset_vc 22,354
-	asset_kb,23,376
-	asset_svctl 24,398
-	asset_mouse,25,450
-	asset_nic,26,495
-	asset_fd,27,518
-	asset_slot,28,550
-	asset_usb,29,580
-	asset_nic_speed,30,611
-	asset_mem_used 31,645
-	asset_hd_used,32,685
-	asset_count,33,725
-} en_assetType;34,739
-typedef std::map<int int36,756
-typedef std::map<int , std::string>  CDeviceInfoMap 36,756
-class CDeviceinfoHelper 38,811
-	std::string    &    getfront(CDeviceinfoHelper::getfront52,1130
-	CDeviceInfoMap &    getMap(CDeviceinfoHelper::getMap56,1192
-	CDeviceInfoMap  m_devmap CDeviceinfoHelper::m_devmap63,1325
-	std::string     m_strFront CDeviceinfoHelper::m_strFront64,1353
 
 client_simulator/inc/Markup.h,10297
 #define _MARKUP_H_INCLUDED_10,382
@@ -3103,16 +2460,739 @@ class CMarkup265,9917
 #define MARKUP_SETDEBUGSTATE 431,17955
 #define MARKUP_SETDEBUGSTATE433,18023
 
+client_simulator/inc/VrvProtocol.h,539
+#define _VrvProtocol_H2,23
+using namespace std;4,64
+#define ENC_VERSION1 10,163
+    PktHead linux_head;14,246
+	string linux_data;15,270
+}Linux_Pkt;Linux_Pkt16,290
+	class VRVPacket31,792
+		PktHead head;VRVPacket::head34,821
+		string m_data;VRVPacket::m_data35,837
+	    Linux_Pkt linux_pkt;VRVPacket::linux_pkt37,885
+		VRVPacket(VRVPacket::VRVPacket39,912
+class VRVPacketEx53,1401
+    PktHeadEx head;VRVPacketEx::head56,1429
+    string m_data;VRVPacketEx::m_data57,1449
+    VRVPacketEx(VRVPacketEx::VRVPacketEx64,1767
+
+client_simulator/inc/CSoftInstallHelper.h,699
+#define CSOFTINSTALLHELPER_H_9,113
+struct  tag_SoftInstall 16,221
+	std::string version tag_SoftInstall::version17,247
+	std::string time tag_SoftInstall::time18,270
+struct  tag_SoftInstallEx 22,343
+	std::string name tag_SoftInstallEx::name23,371
+	std::string version tag_SoftInstallEx::version24,391
+	std::string time tag_SoftInstallEx::time25,414
+	ins_soft_new ::ins_soft_new29,446
+	ins_soft_del ::ins_soft_del30,467
+	ins_soft_modify ::ins_soft_modify31,488
+typedef std::map<std::string std::string40,635
+typedef std::map<std::string ,tag_SoftInstall>  CSoftinstallmap 40,635
+class CSoftInstallHelper 42,702
+	CSoftinstallmap     m_newMap CSoftInstallHelper::m_newMap55,1066
+
+client_simulator/inc/regesiter.h,29
+#define REGESITER_H_XXX2,24
+
+client_simulator/inc/VRVProtocol.hxx,11853
+#define EXPROTOCOL_H7,194
+    typedef __int32_t			    BOOL;13,284
+    typedef char					CHAR;14,318
+    typedef __int32_t				INT;15,345
+    typedef __int32_t				LONG;16,375
+    typedef unsigned short		    WORD;17,406
+    typedef unsigned char		    UCHAR;18,444
+    typedef __uint32_t			    UINT;19,482
+    typedef __uint32_t		        ULONG;20,517
+    typedef unsigned short		    USHORT;21,556
+    typedef UCHAR				    BYTE;22,596
+    typedef ULONG				    DWORD;23,627
+    typedef 	DWORD* 				LPVOID 24,659
+    typedef long					BOOL;27,717
+    typedef char					CHAR;28,744
+    typedef int					    INT;29,771
+    typedef long					LONG;30,800
+    typedef unsigned short		    WORD;31,827
+    typedef unsigned char		    UCHAR;32,865
+    typedef unsigned int			UINT;33,903
+    typedef unsigned long		    ULONG;34,936
+    typedef unsigned short		    USHORT;35,974
+    typedef UCHAR				    BYTE;36,1014
+    typedef ULONG				    DWORD;37,1045
+    typedef 	DWORD* 				LPVOID 38,1077
+#define TRUE	44,1166
+#define FALSE	47,1202
+#define EX_OK	53,1460
+#define EX_FAIL	54,1490
+#define REG_DEVICE_040726	55,1528
+#define SCAN_RESULT	56,1595
+#define SCAN_ASK_050313	57,1688
+#define SCAN_NEWIP 58,1763
+#define SCAN_HACK_IP 59,1829
+#define MODOULE_ECHO 60,1910
+#define DEVICE_CHANGE_050313 61,1994
+#define REG_CONFIG	62,2069
+#define REG_TRANSFILE	63,2162
+#define REG_TRANSFINISH	64,2253
+#define TRANS_REG_DEVICE	66,2335
+#define TRANS_SCAN_RESULT	67,2404
+#define TRANS_DEVICE_CHANGE	68,2474
+#define FIND_DAILUP_050103	70,2547
+#define TRANS_FIND_DAILUP	71,2622
+#define VRV_UPGRADE	72,2717
+#define AGENT_PROCESS	73,2759
+#define TRANS_AGENT_PROCESS	74,2843
+#define SCAN_CONFIG_050313	75,2952
+#define SCAN_REQUEST_050413	76,3055
+#define TRANS_SCAN_REQUEST 77,3130
+#define DETECT_ACTIVE	78,3229
+#define	SCAN_GETCHANGE	79,3314
+#define	AGENT_GETCONFIG	80,3412
+#define	AGENT_RPTSTATUS_050103	81,3517
+#define DISTRIBUTE_SOFTWARE	82,3603
+#define APPLET_GETSQLCFG	83,3651
+#define	REPORT_DOWNPATCH	84,3705
+#define	REPORT_SYSTEMPATCH	85,3787
+#define	REPORT_SOFTWARE	86,3840
+#define	REPORT_VIRUS	87,3891
+#define SCAN_NEWDEVICE	88,3933
+#define AGENT_DOWNLOAD	89,3998
+#define GET_FILEATTRIBUTE	90,4048
+#define AGENT_RPTKVS_050313	91,4100
+#define REG_DEVICE	92,4154
+#define GET_AGENTPROCESS	93,4213
+#define	KILL_AGENTPROCESS	94,4267
+#define	GET_PATCH	95,4319
+#define SENDREG_MESSAGE	96,4368
+#define AGENT_GET_TASK	97,4431
+#define LOWERDEPT_DOWNLOAD	98,4505
+#define AGENT_RPTDEVEX_050622	99,4558
+#define AGENT_RPTNOINSPATCH	100,4625
+#define AGENT_RPTPATCHSTATUS	101,4685
+#define DETECTAGENT_ISACTIVE	102,4796
+#define GET_AGENTLOG	103,4942
+#define FIND_DAILUP	104,5014
+#define	AGENT_RPTSTATUS	105,5080
+#define DISTRIBUTE_POLICY	112,5414
+#define DOWNLOAD_POLICY	113,5460
+#define DEVICE_CHANGE	114,5505
+#define SCAN_REQUEST	115,5568
+#define SCAN_ASK	116,5657
+#define SCAN_CONFIG	117,5720
+#define AGENT_RPTKVS	118,5818
+#define AGENT_RPTAUDITLOG	119,5866
+#define AGENT_RPTFLUX	120,5918
+#define REG_DEVICE_STRING	121,5961
+#define REG_TRANSFILE_STRING	122,5992
+#define REG_TRANSFINISH_STRING	123,6025
+#define T_POLICY_IFCHANGED 128,6237
+#define T_REPORT_POLICYLOG 129,6299
+#define T_REQUEST_DISCON 130,6368
+#define T_REQUEST_SHUTDOWN 131,6430
+#define T_POLICY_LOGDELETED 132,6489
+#define T_WHOCAN_DISCON 133,6557
+#define T_POINT_GET_CPU_MEM_INFO 135,6653
+#define T_POINT_RUNEXE 136,6727
+#define T_POINT_GET_IECACHE	137,6779
+#define T_POINT_GET_SOFT_INFO	138,6830
+#define T_POINT_CHANGE_IP	139,6886
+#define T_POINT_GET_SERVICE	140,6941
+#define T_POINT_GET_PORT	141,6995
+#define T_POINT_GET_CAP	142,7046
+#define T_POINT_GET_SHAREPATH	143,7097
+#define T_POINT_MESSAGE	144,7130
+#define T_POINT_KILLVIRUS	145,7178
+#define T_POINT_DEBUGVRVEDP	146,7239
+#define T_POINT_GET_FILE	147,7276
+#define T_POINT_BATCH_PATCH	148,7310
+#define T_POINT_USERGROUP	149,7347
+#define T_POINT_WORKDIRECTORYPOLICY	150,7378
+#define T_POINT_QUERYFILE	151,7419
+#define T_POINT_QUERYPOLICY	152,7452
+#define T_POINT_QUERYPATCHSTATE	153,7487
+#define T_POINT_UNINSTALLSOFT	154,7525
+#define AGENT_RCVMSGSUCCESS	164,8006
+#define AGENT_RPTSOFTSTATUS	165,8072
+#define AUTOLOAD_DETECTSTATUS	166,8138
+#define AGENT_RPTDEVEX	167,8223
+#define AGENT_SYNTIME	168,8285
+#define WEB_UPLOAD_FILE	169,8334
+#define IPORMAC_CHANGE	170,8412
+#define AGENT_SCANRESOULT	171,8464
+#define SCAN_FETCHCACHE	172,8543
+#define AGENT_WARNING	173,8636
+#define SCAN_NOTIFY	175,8705
+#define	AGENT_ONLINETIME	179,9000
+#define	AGENT_UPGRADE	180,9051
+#define	AGENT_RPTRUNLEVEL	181,9118
+#define	AGENT_RPTIDLESTATUS	182,9176
+#define AGENT_DOWNLOADFILE	183,9236
+#define AGENT_DOWNLOADFINISH	184,9289
+#define AGENT_GETDOWNLOADLIST	185,9343
+#define USB_AUTHENTICATION	186,9406
+#define AGENT_UPLOADFILE	187,9451
+#define REPORT_WARCENTER	188,9503
+#define USB_ATCIONLOG	189,9567
+#define AGENT_UPDATEONLYID	190,9621
+#define DETECT_ENCRYPT	191,9677
+#define AGENT_RPT_PROCESS	192,9734
+#define AGENT_RPT_SOFTWARE	193,9781
+#define AGENT_RPT_SYSTEMPATCH	194,9835
+#define AGENT_GETCONFIG_STRING	195,9888
+#define AGENT_RTP_AMTSTATUS	196,9923
+#define AGENT_RPT_LONGINUSERS	197,9996
+#define AGENT_RPT_IPMACBINDST	198,10073
+#define AGENT_RPT_SHAREFOLDERS	199,10138
+#define AGENT_REQUEST_UPDATE	204,10385
+#define REG_AUTHENTICATION	207,10474
+#define REG_LCS_AUTHENTICATION	208,10520
+#define W_MAINDO_DISCON	211,10619
+#define W_AGENTDO_DISCON	212,10672
+#define DISCON_NORMAL_MODE 216,10862
+#define DISCON_ALL_MODE 217,10935
+#define DISCON_SUPER_MODE 218,11025
+#define DISCON_DEFAULE_MODE	219,11230
+#define W_POLICY_NOTCHANGED	222,11386
+#define W_POLICY_CHANGED	223,11436
+#define	CALL_STARTCLIENT	227,11553
+#define	CALL_STARTSERVER	228,11608
+#define CALL_MANAGER 229,11666
+#define	CALL_STARTCLIENT2	230,11720
+#define	CALL_STARTSERVER2	231,11777
+#define CALL_MANAGER2 232,11837
+#define REPORT_CLIENT_SYS_LOG_LINUX 235,11934
+#define LOG_REPORT_STATE 237,11989
+#define LOG_REFRESH 238,12082
+#define LOG_APPEND 239,12127
+#define Illegal_Behavior 244,12273
+#define Abnormal_Behavior 245,12317
+#define General_Behavior 246,12361
+#define Event_Emergency 249,12448
+#define Event_Alarm 250,12502
+#define Event_Critical 251,12565
+#define Event_Error 252,12622
+#define Event_Caution 253,12679
+#define Event_Inform 254,12736
+#define Event_Message 255,12811
+#define Event_Debug 256,12868
+#define GETFORCEOUT_UPDATE	266,13247
+#define ECHOFORCEOUT_UPDATE	267,13304
+#define HACK_ARP 270,13375
+#define HACK_DOWN 271,13438
+#define HACK_ALLSTYLE 272,13489
+#define FAIL_NOIPMALLOC	275,13552
+#define FAIL_NETIPRESERVED	276,13600
+#define FAIL_NETIPFORBID	277,13655
+#define FAIL_SENDTOUPREG	278,13703
+#define FAIL_COM_ERROR	279,13767
+#define FAIL_UNKNOWN	280,13815
+#define FAIL_LINCE_ERROR	281,13849
+#define FAIL_LINCE_EMPTY	282,13895
+#define IP_CHANGE	285,13951
+#define MAC_CHANGE	286,13991
+#define NAME_CHANGE	287,14033
+#define ID_CHANGE	288,14079
+#define MEM_CHANGE	289,14135
+#define DISKSIZE_CHANGE	290,14184
+#define	RUNLEVEL_CHANGE	291,14237
+#define FIND_DAILUPING	293,14302
+#define FIND_DAILUPED	294,14344
+#define FIND_OUTOFNETWORK	295,14388
+#define REQUEST_UPGRAD	298,14457
+#define ECHO_UPGRAD	299,14499
+#define FORCE_UPGRAD	300,14548
+#define CONFIG_GET	303,14635
+#define CONFIG_ECHO	304,14658
+#define RESOULT_KILL	307,14733
+#define RESOULT_SUCCESS	308,14760
+#define RESOULT_REGISTERED	309,14790
+#define RESOULT_FAIL	310,14822
+#define RESOULT_CFGKILL	311,14849
+#define RESOULT_KILLNOTIFY	312,14879
+#define RESOULT_MANUAL	313,14911
+#define RUN_ACTIVE	316,14996
+#define RUN_SHUTDOWN	317,15019
+#define AGENT_UNINSTALL	318,15043
+#define AGENT_ACTIVE	319,15070
+#define ATTACK_REQUEST	320,15094
+#define DETECT_REQUEST	323,15259
+#define DETECT_ECHO	324,15285
+#define	AGENT_REQUEST	327,15401
+#define AGENT_ECHO	328,15426
+#define	STATUS_FINDOUT	331,15517
+#define ATTACK_CHANGE	334,15581
+#define DISTRIBUTE_FILE	338,15669
+#define DISTRIBUTE_MSG	339,15713
+#define DISTRIBUTE_SCRIPT	340,15756
+#define TRANS_DATA	341,15801
+#define TRANS_FINISH	342,15841
+#define DISTRIBUTE_PATCH_PLOICY	343,15888
+#define DISTRIBUTE_PATCH_FILE	344,15944
+#define DISTRIBUTE_FILE_2	347,16077
+#define DISTRIBUTE_MSG_2	348,16136
+#define DISTRIBUTE_SCRIPT_2	349,16182
+#define DISTRIBUTE_PATCH_PLOICY_2	350,16231
+#define DISTRIBUTE_PATCH_FILE_2	351,16290
+#define ERROR_OK	354,16364
+#define	ERROR_CRC32	355,16390
+#define	ERROR_PWD	356,16426
+#define	APPLET_REQUEST	359,16508
+#define APPLET_ECHO	360,16534
+#define PATCH_REFRESH	363,16599
+#define PATCH_ADDTAIL	364,16685
+#define PATCH_DELETE	365,16719
+#define SOFTWARE_REFRESH	368,16790
+#define SOFTWARE_ADDTAIL	369,16879
+#define SOFTWARE_DELETE	370,16916
+#define NEWDEVICE_REQUEST	373,17029
+#define NEWDEVICE_ECHO	374,17067
+#define DOWNLOAD_REQUEST	377,17138
+#define DOWNLOAD_OK	378,17175
+#define DOWNLOAD_DATAERROR	379,17207
+#define DOWNLOAD_RETRYLATER	380,17252
+#define DOWNLOAD_REQUEST_2	381,17301
+#define DOWNLOAD_IPLIST	382,17392
+#define DOWNLOAD_FINISH	383,17440
+#define DOWNLOAD_DISTRIBUTE	384,17495
+#define FILEATTRIBUTE_REQUEST	387,17597
+#define FILEATTRIBUTE_ECHO	388,17629
+#define KVS_SHUTDOWN	391,17697
+#define KVS_PROMPT	392,17743
+#define KVS_CUTNET	393,17794
+#define AGENTPROCESS_REQUEST 396,17852
+#define AGENTPROCESS_ECHO	397,17892
+#define TYPE_ERR_CONNECT	402,17995
+#define TYPE_ERR_NOREPORT	403,18023
+#define TYPE_ERR_DBNOINIT	404,18052
+#define NOTIFY_COUNT	407,18115
+#define NOTIFY_INOUT_SHUTDOWN	409,18171
+#define NOTIFY_INOUT_PROMPT	410,18219
+#define NOTIFY_INOUT_CHECK	411,18263
+#define NOTIFY_INOUT_CUTNET	412,18330
+#define NOTIFY_OUT_SHUTDOWN	414,18404
+#define NOTIFY_OUT_PROMPT	415,18451
+#define NOTIFY_OUT_CHECK	416,18493
+#define NOTIFY_OUT_CUTNET	417,18555
+#define NOTIFY_KVS_SHUTDOWN	419,18634
+#define NOTIFY_KVS_PROMPT	420,18681
+#define NOTIFY_KVS_CUTNET	421,18723
+#define SCREEN_READONLY	424,18809
+#define SCREEN_READWRITE	425,18858
+#define _CONNECT_PROMPT	427,18903
+#define _CONNECT_PASSWORD	428,18931
+#define _CONNECT_AUTO	429,18960
+#define LOG_ATTACK	432,19021
+#define LOG_PATIOLATE	433,19045
+#define LOG_SETTING	434,19071
+#define LOG_PATCH	435,19096
+#define LOG_NETWORKDATA	436,19119
+#define LOG_HARDWARE	437,19147
+#define LOG_SYSTEMLOG	438,19173
+#define DETECT_POLICY	441,19232
+#define GET_POLICY	442,19258
+#define ECHO_POLICY	443,19282
+#define LOWER_DETECT_POLICY	444,19307
+#define LOWER_GET_POLICY	445,19338
+#define AUDITLOG_REQUEST	448,19407
+#define AUDITLOG_ECHO	449,19450
+#define FLUX_REQUEST	452,19528
+#define FLUX_ECHO	453,19567
+#define FLUX_OVERLIMIT	454,19604
+#define AUTOLOAD_REQUEST	457,19725
+#define AUTOLOAD_ECHO	458,19767
+#define GET_FILELIST	461,19872
+#define UPLOAD_FILE	462,19926
+#define UPLOAD_EXPORT_FILE	463,19965
+#define USB_SUCCESS	466,20059
+#define USB_FAILED	467,20083
+#define USB_FAILED_ONUSER	468,20111
+#define USB_FAILED_PASSERR	469,20144
+#define USB_FAILED_DBERR	470,20178
+#define DATA_PORT	491,20973
+#define ALERT_PORT	492,21019
+#define MANAGER_PORT 493,21066
+#define SCANER_PORT 494,21145
+#define MODOULE_PORT 495,21231
+#define VRV_FLAG	496,21317
+#define VRV_FLAG10	497,21353
+#define VRV_FLAG11	498,21391
+#define AGENT_VERSION	499,21429
+#define VERSION_FLAG	500,21466
+#define VRV_DOWNFLAG	501,21497
+#define VRV_NOTIFY	502,21537
+#define AUTOLOADECHO1_SIZE	503,21576
+#define PKTHEAD_SIZE	504,21606
+#define SCANRESOULT_SIZE	505,21631
+#define SCANRESOULTEX_SIZE	506,21676
+#define MAX_PKTHEAD_NUM	507,21725
+#define SZ_DEVEX_1	508,21762
+struct PktHead516,21913
+	DWORD m_Flag;PktHead::m_Flag518,21930
+	WORD  m_Type;PktHead::m_Type519,21964
+	WORD  m_What;PktHead::m_What520,22041
+	DWORD m_Pwd;PktHead::m_Pwd521,22070
+	DWORD PktCrc;PktHead::PktCrc522,22084
+	DWORD PktLen;PktHead::PktLen523,22099
+
+client_simulator/inc/common.h,1444
+#define COMMON_H_XXX2,21
+#define ELPP_THREAD_SAFE21,376
+#define ELPP_DISABLE_DEFAULT_CRASH_HANDLING24,409
+#define ELPP_DEFAULT_LOG_FILE 26,483
+#define STRITEM_TAG_END 33,591
+#define IL 35,624
+#define EL 37,680
+#define PL 38,706
+#define SM_LOG(40,734
+#define SM_WARN(41,766
+#define SM_ERROR(42,802
+#define SM_POLICY(44,838
+    SEND,48,890
+    RECIVE,49,900
+    NO_SUB_ACTION50,912
+} SUB_ACTION;51,930
+    REGESITER,54,960
+    REPORT_ASSERT,55,975
+    PULL_POLICY,56,994
+    SEND_LOG,57,1011
+    NO_ACTION58,1025
+} ACTION;59,1039
+typedef struct action 61,1050
+    ACTION p;62,1074
+    SUB_ACTION s;63,1088
+} action_t;64,1106
+typedef struct action_result 66,1119
+    int ret;67,1150
+    std::string reason;action_result::reason68,1163
+    action_result(action_result::action_result69,1187
+} action_result_t;73,1261
+typedef struct clog_header 75,1281
+    std::string time;clog_header::time76,1310
+    action_t action;clog_header::action77,1332
+    action_result_t result;clog_header::result78,1353
+    std::string content;clog_header::content79,1381
+    clog_header(clog_header::clog_header80,1406
+} clog_header_t;84,1521
+typedef struct network_info{network_info87,1540
+	char ip[network_info::ip88,1569
+	char mac[network_info::mac89,1583
+	char gateway[network_info::gateway90,1598
+	char sub_mask[network_info::sub_mask91,1617
+	char eth_name[network_info::eth_name92,1637
+} net_info;94,1680
+
+client_simulator/inc/SimpleIni.h,12944
+#define INCLUDED_SimpleIni_h195,10179
+# define SI_ASSERT(230,11197
+# define SI_ASSERT(232,11237
+enum SI_Error 235,11267
+    SI_OK 236,11283
+    SI_UPDATED 237,11321
+    SI_INSERTED 238,11380
+    SI_FAIL 241,11485
+    SI_NOMEM 242,11530
+    SI_FILE 243,11579
+#define SI_UTF8_SIGNATURE 246,11652
+# define SI_NEWLINE_A 249,11712
+# define SI_NEWLINE_W 250,11743
+# define SI_NEWLINE_A 252,11792
+# define SI_NEWLINE_W 253,11821
+# define SI_HAS_WIDE_FILE261,11955
+# define SI_WCHAR_T 262,11981
+# define SI_HAS_WIDE_FILE264,12043
+# define SI_WCHAR_T 265,12069
+class CSimpleIniTempl293,13269
+    typedef SI_CHAR SI_CHAR_T;CSimpleIniTempl::SI_CHAR_T296,13301
+    struct Entry CSimpleIniTempl::Entry299,13354
+        const SI_CHAR * pItem;CSimpleIniTempl::Entry::pItem300,13373
+        const SI_CHAR * pComment;CSimpleIniTempl::Entry::pComment301,13404
+        int             nOrder;CSimpleIniTempl::Entry::nOrder302,13438
+        Entry(CSimpleIniTempl::Entry::Entry304,13471
+        Entry(CSimpleIniTempl::Entry::Entry309,13640
+        Entry(CSimpleIniTempl::Entry::Entry314,13836
+        Entry & operator=(CSimpleIniTempl::Entry::operator=315,13889
+        bool operator<(CSimpleIniTempl::Entry::operator<324,14210
+        bool operator>(CSimpleIniTempl::Entry::operator>325,14294
+        struct KeyOrder CSimpleIniTempl::Entry::KeyOrder329,14442
+            bool operator()(CSimpleIniTempl::Entry::KeyOrder::operator()330,14511
+        struct LoadOrder CSimpleIniTempl::Entry::LoadOrder337,14794
+            bool operator()(CSimpleIniTempl::Entry::LoadOrder::operator()338,14864
+    typedef std::multimap<Entry,CSimpleIniTempl::Entry348,15176
+    typedef std::multimap<Entry,const SI_CHAR CSimpleIniTempl::SI_CHAR348,15176
+    typedef std::multimap<Entry,const SI_CHAR *,typename Entry::KeyOrder> TKeyVal;CSimpleIniTempl::TKeyVal348,15176
+    typedef std::map<Entry,CSimpleIniTempl::Entry351,15301
+    typedef std::map<Entry,TKeyVal,CSimpleIniTempl::TKeyVal351,15301
+    typedef std::map<Entry,TKeyVal,typename Entry::KeyOrder> TSection;CSimpleIniTempl::TSection351,15301
+    typedef std::list<Entry> TNamesDepend;CSimpleIniTempl::TNamesDepend356,15500
+    class OutputWriter CSimpleIniTempl::OutputWriter361,15672
+        OutputWriter(CSimpleIniTempl::OutputWriter::OutputWriter363,15709
+        virtual ~OutputWriter(CSimpleIniTempl::OutputWriter::~OutputWriter364,15736
+    class FileWriter CSimpleIniTempl::FileWriter372,16042
+        FILE * m_file;CSimpleIniTempl::FileWriter::m_file373,16087
+        FileWriter(CSimpleIniTempl::FileWriter::FileWriter375,16122
+        void Write(CSimpleIniTempl::FileWriter::Write376,16177
+    class StringWriter CSimpleIniTempl::StringWriter385,16475
+        std::string & m_string;CSimpleIniTempl::StringWriter::m_string386,16522
+        StringWriter(CSimpleIniTempl::StringWriter::StringWriter388,16566
+        void Write(CSimpleIniTempl::StringWriter::Write389,16636
+    class StreamWriter CSimpleIniTempl::StreamWriter399,16974
+        std::ostream & m_ostream;CSimpleIniTempl::StreamWriter::m_ostream400,17021
+        StreamWriter(CSimpleIniTempl::StreamWriter::StreamWriter402,17067
+        void Write(CSimpleIniTempl::StreamWriter::Write403,17141
+    class Converter CSimpleIniTempl::Converter415,17539
+        using SI_CONVERTER::SizeToStore;CSimpleIniTempl::Converter::SI_CONVERTER::SizeToStore417,17596
+        Converter(CSimpleIniTempl::Converter::Converter418,17637
+        Converter(CSimpleIniTempl::Converter::Converter421,17755
+        Converter & operator=(CSimpleIniTempl::Converter::operator=422,17816
+        bool ConvertToStore(CSimpleIniTempl::Converter::ConvertToStore426,17946
+        const char * Data(CSimpleIniTempl::Converter::Data439,18433
+        std::string m_scratch;CSimpleIniTempl::Converter::m_scratch441,18503
+    bool IsEmpty(CSimpleIniTempl::IsEmpty466,19176
+    void SetUnicode(CSimpleIniTempl::SetUnicode485,20157
+    bool IsUnicode(CSimpleIniTempl::IsUnicode490,20310
+    void SetMultiKey(CSimpleIniTempl::SetMultiKey510,21063
+    bool IsMultiKey(CSimpleIniTempl::IsMultiKey515,21219
+    void SetMultiLine(CSimpleIniTempl::SetMultiLine524,21617
+    bool IsMultiLine(CSimpleIniTempl::IsMultiLine529,21773
+    void SetSpaces(CSimpleIniTempl::SetSpaces537,22139
+    bool UsingSpaces(CSimpleIniTempl::UsingSpaces542,22266
+    SI_Error LoadData(CSimpleIniTempl::LoadData601,23867
+    SI_Error Save(CSimpleIniTempl::Save720,28298
+    SI_Error Save(CSimpleIniTempl::Save741,29041
+    SI_Error SetValue(CSimpleIniTempl::SetValue965,39085
+    Converter GetConverter(CSimpleIniTempl::GetConverter1097,45004
+    inline bool IsSpace(CSimpleIniTempl::IsSpace1160,47701
+    inline bool IsComment(CSimpleIniTempl::IsComment1165,47883
+    inline void SkipNewLine(CSimpleIniTempl::SkipNewLine1171,48058
+    bool IsLess(CSimpleIniTempl::IsLess1182,48504
+    SI_CHAR * m_pData;CSimpleIniTempl::m_pData1209,49506
+    size_t m_uDataLen;CSimpleIniTempl::m_uDataLen1215,49706
+    const SI_CHAR * m_pFileComment;CSimpleIniTempl::m_pFileComment1218,49784
+    TSection m_data;CSimpleIniTempl::m_data1221,49876
+    TNamesDepend m_strings;CSimpleIniTempl::m_strings1227,50085
+    bool m_bStoreIsUtf8;CSimpleIniTempl::m_bStoreIsUtf81230,50170
+    bool m_bAllowMultiKey;CSimpleIniTempl::m_bAllowMultiKey1233,50255
+    bool m_bAllowMultiLine;CSimpleIniTempl::m_bAllowMultiLine1236,50344
+    bool m_bSpaces;CSimpleIniTempl::m_bSpaces1239,50442
+    int m_nOrder;CSimpleIniTempl::m_nOrder1244,50599
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::CSimpleIniTempl(CSimpleIniTempl1252,50893
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::~CSimpleIniTempl(~CSimpleIniTempl1268,51311
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Reset(Reset1275,51465
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1298,52090
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1319,52595
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(LoadFile1344,53281
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(LoadData1384,54203
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(LoadData1461,56375
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindFileComment(FindFileComment1478,56780
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindEntry(FindEntry1505,57481
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineTag(IsMultiLineTag1638,61288
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineData(IsMultiLineData1651,61659
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsNewLineChar(IsNewLineChar1688,62390
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadMultiLineText(LoadMultiLineText1697,62596
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::CopyString(CopyString1821,66998
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::AddEntry(AddEntry1848,67713
+        typedef typename TSection::iterator 1886,68997
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetValue(GetValue1953,71318
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetLongValue(GetLongValue1990,72380
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetLongValue(SetLongValue2029,73584
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetDoubleValue(GetDoubleValue2061,74611
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetDoubleValue(SetDoubleValue2092,75553
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetBoolValue(GetBoolValue2123,76443
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetBoolValue(SetBoolValue2158,77500
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllValues(GetAllValues2184,78297
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSectionSize(GetSectionSize2219,79343
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSection(GetSection2254,80413
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllSections(GetAllSections2269,80779
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllKeys(GetAllKeys2282,81130
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2313,81960
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2333,82512
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(SaveFile2359,83280
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Save(Save2370,83551
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::OutputMultiLineText(OutputMultiLineText2497,87813
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Delete(Delete2526,88761
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::DeleteString(DeleteString2586,90585
+#  define SI_CONVERT_WIN322621,92093
+#  define SI_CONVERT_GENERIC2623,92127
+struct SI_GenericCase 2633,92368
+    bool operator()(SI_GenericCase::operator()2634,92392
+struct SI_GenericNoCase 2653,93040
+    inline SI_CHAR locase(SI_GenericNoCase::locase2654,93066
+    bool operator()(SI_GenericNoCase::operator()2657,93181
+class SI_ConvertA 2673,93615
+    bool m_bStoreIsUtf8;SI_ConvertA::m_bStoreIsUtf82674,93635
+    SI_ConvertA(SI_ConvertA::SI_ConvertA2676,93671
+    SI_ConvertA(SI_ConvertA::SI_ConvertA2678,93701
+    SI_ConvertA(SI_ConvertA::SI_ConvertA2681,93806
+    SI_ConvertA & operator=(SI_ConvertA::operator=2682,93867
+    size_t SizeFromStore(SI_ConvertA::SizeFromStore2700,94829
+    bool ConvertFromStore(SI_ConvertA::ConvertFromStore2724,95851
+    size_t SizeToStore(SI_ConvertA::SizeToStore2748,96868
+    bool ConvertToStore(SI_ConvertA::ConvertToStore2768,97745
+#define SI_Case 2791,98484
+#define SI_NoCase 2792,98519
+class SI_ConvertW 2802,98765
+    bool m_bStoreIsUtf8;SI_ConvertW::m_bStoreIsUtf82803,98785
+    SI_ConvertW(SI_ConvertW::SI_ConvertW2805,98821
+    SI_ConvertW(SI_ConvertW::SI_ConvertW2807,98851
+    SI_ConvertW(SI_ConvertW::SI_ConvertW2810,98956
+    SI_ConvertW & operator=(SI_ConvertW::operator=2811,99017
+    size_t SizeFromStore(SI_ConvertW::SizeFromStore2829,99979
+    bool ConvertFromStore(SI_ConvertW::ConvertFromStore2866,101589
+    size_t SizeToStore(SI_ConvertW::SizeToStore2913,103740
+    bool ConvertToStore(SI_ConvertW::ConvertToStore2946,105004
+#define SI_Case 2999,107036
+#define SI_NoCase 3000,107071
+class SI_ConvertW 3008,107246
+    const char * m_pEncoding;SI_ConvertW::m_pEncoding3009,107266
+    UConverter * m_pConverter;SI_ConvertW::m_pConverter3010,107296
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3012,107338
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3014,107408
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3019,107560
+    SI_ConvertW & operator=(SI_ConvertW::operator=3020,107621
+    ~SI_ConvertW(SI_ConvertW::~SI_ConvertW3025,107772
+    size_t SizeFromStore(SI_ConvertW::SizeFromStore3040,108667
+    bool ConvertFromStore(SI_ConvertW::ConvertFromStore3079,110122
+    size_t SizeToStore(SI_ConvertW::SizeToStore3116,111442
+    bool ConvertToStore(SI_ConvertW::ConvertToStore3152,112744
+#define SI_Case 3187,113664
+#  define SI_NO_MBCS3192,113789
+# define SI_NoCase 3198,113865
+struct SI_NoCase 3210,114379
+    bool operator()(SI_NoCase::operator()3211,114398
+class SI_ConvertW 3232,115193
+    UINT m_uCodePage;SI_ConvertW::m_uCodePage3233,115213
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3235,115246
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3237,115276
+    SI_ConvertW(SI_ConvertW::SI_ConvertW3242,115409
+    SI_ConvertW & operator=(SI_ConvertW::operator=3243,115470
+    size_t SizeFromStore(SI_ConvertW::SizeFromStore3261,116426
+    bool ConvertFromStore(SI_ConvertW::ConvertFromStore3287,117529
+    size_t SizeToStore(SI_ConvertW::SizeToStore3310,118531
+    bool ConvertToStore(SI_ConvertW::ConvertToStore3333,119500
+typedef CSimpleIniTempl<char,char3353,120106
+    SI_NoCase<SI_NoCase3354,120136
+    SI_NoCase<char>,SI_ConvertA<char> >                 CSimpleIniA;3354,120136
+typedef CSimpleIniTempl<char,char3355,120205
+    SI_Case<SI_Case3356,120235
+    SI_Case<char>,SI_ConvertA<char> >                   CSimpleIniCaseA;3356,120235
+typedef CSimpleIniTempl<UChar,UChar3359,120337
+    SI_NoCase<SI_NoCase3360,120368
+    SI_NoCase<UChar>,SI_ConvertW<UChar> >               CSimpleIniW;3360,120368
+typedef CSimpleIniTempl<UChar,UChar3361,120437
+    SI_Case<SI_Case3362,120468
+    SI_Case<UChar>,SI_ConvertW<UChar> >                 CSimpleIniCaseW;3362,120468
+typedef CSimpleIniTempl<wchar_t,wchar_t3364,120547
+    SI_NoCase<SI_NoCase3365,120580
+    SI_NoCase<wchar_t>,SI_ConvertW<wchar_t> >           CSimpleIniW;3365,120580
+typedef CSimpleIniTempl<wchar_t,wchar_t3366,120649
+    SI_Case<SI_Case3367,120682
+    SI_Case<wchar_t>,SI_ConvertW<wchar_t> >             CSimpleIniCaseW;3367,120682
+# define CSimpleIni 3371,120779
+# define CSimpleIniCase 3372,120816
+# define SI_NEWLINE 3373,120857
+# define CSimpleIni 3375,120914
+# define CSimpleIniCase 3376,120951
+# define SI_NEWLINE 3377,120992
+
+client_simulator/inc/pull_policy.h,29
+#define PULL_POLICY_XXX2,24
+
+client_simulator/inc/old_functions.h,31
+#define OLD_FUNCTIONS_XXX2,26
+
+client_simulator/Makefile,12
+CFLAGS 1,0
+
+client_simulator/bin/myfile.ini,10
+key 2,13
+
 client_simulator/bin/clt_simulator.sh,64
 function usage(2,13
 function stop(6,215
 function run(59,1097
 
-client_simulator/bin/myfile.ini,10
-key 2,13
+lib_src/simpleini-4.17/README.md,484
+simpleini1,0
+const char * pVal 47,1985
+SI_Error rc 56,2208
+std::string strData;60,2296
+rc 61,2317
+CSimpleIniA::TNamesDepend sections;69,2458
+CSimpleIniA::TNamesDepend keys;73,2554
+const char * pszValue 81,2682
+bool bHasMultipleValues;87,2907
+pszValue 88,2932
+    NULL /*default*/, &amp;bHasMultipleValues)89,2985
+CSimpleIniA::TNamesDepend values;92,3082
+CSimpleIniA::TNamesDepend::const_iterator i;99,3293
+rc 109,3491
+rc 116,3734
+rc 122,3916
+rc 144,4424
+rc 148,4509
 
-client_simulator/Makefile,12
-CFLAGS 1,0
+lib_src/simpleini-4.17/test1-input.ini,546
+; The number after a section or key is the order that it is defined in this file3,86
+; This comment should be joined on to the one below it about the key7,309
+lonely-key key11,422
+empty 15,497
+test 41,968
+test 43,987
+test 45,1006
+test 47,1025
+; This looks like multi-line,line61,1234
+; This looks like multi-line, but because the newline following the last61,1234
+; line is discarded,62,1307
+; If you wanted a multiline entry with a single line,67,1434
+; If you wanted a multiline entry with a single line, you need to add 67,1434
+
+lib_src/simpleini-4.17/ConvertUTF.h,532
+typedef unsigned int	UTF32;90,3943
+typedef unsigned short	UTF16;91,3994
+typedef unsigned char	UTF8;92,4047
+typedef unsigned char	Boolean;93,4098
+#define UNI_REPLACEMENT_CHAR 96,4176
+#define UNI_MAX_BMP 97,4223
+#define UNI_MAX_UTF16 98,4261
+#define UNI_MAX_UTF32 99,4301
+#define UNI_MAX_LEGAL_UTF32 100,4341
+	conversionOK,103,4403
+	sourceExhausted,104,4448
+	targetExhausted,105,4513
+	sourceIllegal	106,4575
+} ConversionResult;107,4634
+	strictConversion 110,4670
+	lenientConversion111,4693
+} ConversionFlags;112,4712
+
+lib_src/simpleini-4.17/simpleini.dsw,95
+Microsoft Developer Studio Workspace File,1,0
+Package=12,289
+Package=20,408
+Package=24,433
+
+lib_src/simpleini-4.17/simpleini.doxy,26
+DOXYFILE_ENCODING 23,962
+
+lib_src/simpleini-4.17/testsi-UTF8.ini,33
+; comments24,320
+invalid27,353
+
+lib_src/simpleini-4.17/LICENCE.txt,21
+The MIT License 1,0
+
+lib_src/simpleini-4.17/SimpleIni.sln,364
+Microsoft Visual Studio Solution File,1,0
+		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Debug.ActiveCfg ActiveCfg16,583
+		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Debug Unicode.ActiveCfg ActiveCfg18,725
+		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Release.ActiveCfg ActiveCfg20,899
+		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Release Unicode.ActiveCfg ActiveCfg22,1049
+
+lib_src/simpleini-4.17/Makefile,8
+CC=1,0
 
 lib_src/simpleini-4.17/SimpleIni.h,12944
 #define INCLUDED_SimpleIni_h195,10179
@@ -3327,84 +3407,8 @@ typedef CSimpleIniTempl<wchar_t,wchar_t3366,120649
 # define CSimpleIniCase 3376,120951
 # define SI_NEWLINE 3377,120992
 
-lib_src/simpleini-4.17/simpleini.dsw,95
-Microsoft Developer Studio Workspace File,1,0
-Package=12,289
-Package=20,408
-Package=24,433
-
-lib_src/simpleini-4.17/ini.syn,221
-; Suggested Colors:Colors3,66
-;   Comments (;#)   Comments,4,86
-;   Comments (;#)   Comments, Comments 2        Green4,86
-;   Sections        Characters                  Red5,140
-C=8,246
-SingleCommentColAlt 27,519
-
-lib_src/simpleini-4.17/simpleini.dsp,11
-CFG=7,232
-
 lib_src/simpleini-4.17/package.cmd,17
 set VERSION=1,0
-
-lib_src/simpleini-4.17/testsi-EUCJP.ini,33
-; comments24,311
-invalid27,344
-
-lib_src/simpleini-4.17/test1-input.ini,546
-; The number after a section or key is the order that it is defined in this file3,86
-; This comment should be joined on to the one below it about the key7,309
-lonely-key key11,422
-empty 15,497
-test 41,968
-test 43,987
-test 45,1006
-test 47,1025
-; This looks like multi-line,line61,1234
-; This looks like multi-line, but because the newline following the last61,1234
-; line is discarded,62,1307
-; If you wanted a multiline entry with a single line,67,1434
-; If you wanted a multiline entry with a single line, you need to add 67,1434
-
-lib_src/simpleini-4.17/testsi-UTF8.ini,33
-; comments24,320
-invalid27,353
-
-lib_src/simpleini-4.17/SimpleIni.sln,364
-Microsoft Visual Studio Solution File,1,0
-		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Debug.ActiveCfg ActiveCfg16,583
-		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Debug Unicode.ActiveCfg ActiveCfg18,725
-		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Release.ActiveCfg ActiveCfg20,899
-		{C23240A6-AA9D-4827-AF06-C98E97CA6DFB}.Release Unicode.ActiveCfg ActiveCfg22,1049
-
-lib_src/simpleini-4.17/ConvertUTF.h,532
-typedef unsigned int	UTF32;90,3943
-typedef unsigned short	UTF16;91,3994
-typedef unsigned char	UTF8;92,4047
-typedef unsigned char	Boolean;93,4098
-#define UNI_REPLACEMENT_CHAR 96,4176
-#define UNI_MAX_BMP 97,4223
-#define UNI_MAX_UTF16 98,4261
-#define UNI_MAX_UTF32 99,4301
-#define UNI_MAX_LEGAL_UTF32 100,4341
-	conversionOK,103,4403
-	sourceExhausted,104,4448
-	targetExhausted,105,4513
-	sourceIllegal	106,4575
-} ConversionResult;107,4634
-	strictConversion 110,4670
-	lenientConversion111,4693
-} ConversionFlags;112,4712
-
-lib_src/simpleini-4.17/snippets.cpp,53
-#define SI_SUPPORT_IOSTREAMS17,307
-snippets(21,365
-
-lib_src/simpleini-4.17/simpleini.doxy,26
-DOXYFILE_ENCODING 23,962
-
-lib_src/simpleini-4.17/LICENCE.txt,21
-The MIT License 1,0
 
 lib_src/simpleini-4.17/test1-expected.ini,546
 ; The number after a section or key is the order that it is defined in this file3,86
@@ -3420,57 +3424,6 @@ test 55,1025
 ; line is discarded,72,1321
 ; If you wanted a multiline entry with a single line,75,1433
 ; If you wanted a multiline entry with a single line, you need to add 75,1433
-
-lib_src/simpleini-4.17/README.md,484
-simpleini1,0
-const char * pVal 47,1985
-SI_Error rc 56,2208
-std::string strData;60,2296
-rc 61,2317
-CSimpleIniA::TNamesDepend sections;69,2458
-CSimpleIniA::TNamesDepend keys;73,2554
-const char * pszValue 81,2682
-bool bHasMultipleValues;87,2907
-pszValue 88,2932
-    NULL /*default*/, &amp;bHasMultipleValues)89,2985
-CSimpleIniA::TNamesDepend values;92,3082
-CSimpleIniA::TNamesDepend::const_iterator i;99,3293
-rc 109,3491
-rc 116,3734
-rc 122,3916
-rc 144,4424
-rc 148,4509
-
-lib_src/simpleini-4.17/testsi.cpp,227
-#define SI_SUPPORT_IOSTREAMS16,277
-# define TCHAR 34,667
-# define _T(35,692
-# define _tprintf 36,714
-# define _tmain 37,741
-Test(41,796
-TestStreams(147,4785
-TestFile(180,5674
-ParseCommandLine(233,7122
-_tmain(280,8305
-
-lib_src/simpleini-4.17/test1.cpp,354
-# define DELETE_FILE 14,279
-# define DELETE_FILE 17,339
-#define SI_SUPPORT_IOSTREAMS21,394
-class Test24,447
-    std::string m_strTest;Test::m_strTest26,460
-    Test(Test::Test29,496
-    bool Success(Test::Success35,631
-    bool Failure(Test::Failure41,744
-bool FileComparisonTest(48,895
-bool FileLoadTest(90,1844
-bool TestStreams(115,2642
-
-lib_src/simpleini-4.17/SimpleIni.vcproj,19
-<?xml version=1,0
-
-lib_src/simpleini-4.17/Makefile,8
-CC=1,0
 
 lib_src/simpleini-4.17/ConvertUTF.c,837
 static const int halfShift 47,1743
@@ -3494,10 +3447,60 @@ ConversionResult ConvertUTF8toUTF16 336,12419
 ConversionResult ConvertUTF32toUTF8 409,14838
 ConversionResult ConvertUTF8toUTF32 462,16679
 
+lib_src/simpleini-4.17/simpleini.dsp,11
+CFG=7,232
+
+lib_src/simpleini-4.17/ini.syn,221
+; Suggested Colors:Colors3,66
+;   Comments (;#)   Comments,4,86
+;   Comments (;#)   Comments, Comments 2        Green4,86
+;   Sections        Characters                  Red5,140
+C=8,246
+SingleCommentColAlt 27,519
+
+lib_src/simpleini-4.17/testsi-EUCJP.ini,33
+; comments24,311
+invalid27,344
+
+lib_src/simpleini-4.17/testsi.cpp,227
+#define SI_SUPPORT_IOSTREAMS16,277
+# define TCHAR 34,667
+# define _T(35,692
+# define _tprintf 36,714
+# define _tmain 37,741
+Test(41,796
+TestStreams(147,4785
+TestFile(180,5674
+ParseCommandLine(233,7122
+_tmain(280,8305
+
+lib_src/simpleini-4.17/snippets.cpp,53
+#define SI_SUPPORT_IOSTREAMS17,307
+snippets(21,365
+
+lib_src/simpleini-4.17/test1.cpp,354
+# define DELETE_FILE 14,279
+# define DELETE_FILE 17,339
+#define SI_SUPPORT_IOSTREAMS21,394
+class Test24,447
+    std::string m_strTest;Test::m_strTest26,460
+    Test(Test::Test29,496
+    bool Success(Test::Success35,631
+    bool Failure(Test::Failure41,744
+bool FileComparisonTest(48,895
+bool FileLoadTest(90,1844
+bool TestStreams(115,2642
+
+lib_src/simpleini-4.17/SimpleIni.vcproj,19
+<?xml version=1,0
+
+TAGS,81
+function usage(3113,149578
+function stop(3114,149599
+function run(3115,149620
+
 lib_src/simpleini-4.17/test.cmd,0
 
 lib_src/simpleini-4.17/testsi-SJIS.ini,0
 
 client_simulator/bin/run_simulator.sh,0
-
-TAGS,0

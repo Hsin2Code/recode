@@ -110,7 +110,7 @@
 #define CALL_MANAGER			53      //呼叫管理员
 */
 #define DISTRIBUTE_POLICY		54		//分发策略
-#define DOWNLOAD_POLICY			55		//下载策略
+#define DOWNLOAD_POLICY                 55              //下载策略
 #define DEVICE_CHANGE			56		//设备改变(字符串模式得)
 #define SCAN_REQUEST			57		//扫描器发给区域管理器的请求(字符串模式得)
 #define SCAN_ASK				58      //扫描请求(字符串模式得)
@@ -121,7 +121,7 @@
 #define REG_DEVICE_STRING		114
 #define REG_TRANSFILE_STRING	115
 #define REG_TRANSFINISH_STRING	116
-
+DOWNLOAD_POLICY
 ////////////////////////////////////////////////////////////////////////////////
 //vrvrf_c.exe
 ////////////////////////////////////////////////////////////////////////////////
@@ -438,7 +438,7 @@
 #define LOG_SYSTEMLOG			11
 
 //DOWNLOAD_POLICY 下载策略
-#define DETECT_POLICY			1
+DETECT_POLICY#define DETECT_POLICY			1
 #define GET_POLICY				2
 #define ECHO_POLICY				3
 #define LOWER_DETECT_POLICY		4
@@ -522,5 +522,16 @@ struct PktHead
 	DWORD PktCrc;
 	DWORD PktLen;//包括包头的数据报的长度
 };
+struct PktHead
+{
+    DWORD m_Flag;//VRV1.0=0x56525610
+    WORD  m_Type;//类型，是上报注册信息，变化，还是错误信息
+    WORD  m_What;//信息内容
+    DWORD m_Pwd;
+    DWORD PktCrc;
+    DWORD PktLen;//包括包头的数据报的长度
+};
+
+}
 
 #endif //EXPROTOCOL_H

@@ -61,7 +61,7 @@ void sig_action(int sig_no) {
             } else {
                 SM_LOG() << "free running thread success" ;
             }
-        } 
+        }
     }
 
     SM_LOG() << "start free hb thr";
@@ -127,9 +127,9 @@ void init_logger() {
     log_error.setGlobally(el::ConfigurationType::Filename,  logerror_fname);
     log_policy_content.setGlobally(el::ConfigurationType::Filename, log_pcontent_fname);
 
-	log_info.set(el::Level::Global, 
+	log_info.set(el::Level::Global,
 			el::ConfigurationType::Format, "%datetime{%y-%M-%d %H:%m:%s} %level %msg");
-	log_error.set(el::Level::Global, 
+	log_error.set(el::Level::Global,
 			el::ConfigurationType::Format, "%datetime{%y-%M-%d %H:%m:%s} %level %msg");
     log_policy_content.set(el::Level::Global,
             el::ConfigurationType::Format, "%datetime{%y-%M-%d %H:%m:%s} %level %msg");
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
             case 'c':
                 conf_file.append(optarg == NULL ? "" : optarg);
                 break;
-            case 'p': 
+            case 'p':
                 g_server_ip.append(optarg == NULL ? "" : optarg);
                 g_server_port = 88;
                 break;
@@ -187,7 +187,7 @@ int main(int argc, char *argv[]) {
                     g_policy_interval = atoi(optarg);
                 }
                 break;
-            case 'F': 
+            case 'F':
                 if(optarg) {
                     g_sfd_flag = atoi(optarg);
                 }
@@ -197,7 +197,7 @@ int main(int argc, char *argv[]) {
                     g_upload_log_times = atoi(optarg);
                 }
                 break;
-            case 'M': 
+            case 'M':
                 if(optarg) {
                     toggle_report_assert = atoi(optarg);
                 }

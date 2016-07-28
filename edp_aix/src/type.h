@@ -2,6 +2,7 @@
 #define _TYPE_H__
 #include <stdint.h>
 #include <stddef.h>
+#include "base.h"
 
 #define LINE_SIZE 256
 #define BUFF_SIZE 1024

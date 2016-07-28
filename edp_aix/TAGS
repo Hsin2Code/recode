@@ -1,31 +1,35 @@
 
-src/main.c,39
-do_heart_beat(17,285
-int main(36,664
+src/socket.h,26
+#define _SOCKET_H___2,21
 
-src/protocol.c,67
-send_pkt_ex(12,205
-recv_pkt_ex(58,1626
-get_encrypt_key(102,2830
+src/register.c,42
+register_info(14,236
+do_register(23,450
 
-src/type.h,496
-#define _TYPE_H__2,18
-#define BUFF_SIZE 6,77
-#define OK 8,101
-#define FAIL 9,114
-typedef int8_t    CHAR;11,133
-typedef int16_t   SHORT;12,157
-typedef int32_t   INT;13,182
-typedef int32_t   BOOL;14,205
-typedef int32_t   LONG;15,229
-typedef uint8_t   UCHAR;16,253
-typedef uint8_t   BYTE;17,278
-typedef uint16_t  WORD;18,302
-typedef uint16_t  USHORT;19,326
-typedef uint32_t  UINT;20,352
-typedef uint32_t  ULONG;21,376
-typedef uint32_t  DWORD;22,401
-typedef DWORD *    LPVOID;23,426
+src/comint.c,42
+type_from_target(8,133
+anonymous(18,387
+
+src/journal.c,17
+void _log(8,118
+
+src/comint.h,452
+#define _COMINT_H___2,21
+struct policy_gist_t 6,62
+    void *send_str;send_str7,85
+    void *recv_str;recv_str8,105
+struct policy_gen_t 10,128
+    int id;11,150
+struct netcard_t 15,167
+    char ip[ip16,186
+    char mac[mac17,203
+    char gw[gw18,221
+    char mask[mask19,238
+    char name[name20,257
+enum policy_type 26,310
+    ONLINE_DEAL_CTRL,28,367
+    POLICY_TYPE_COUNT,31,416
+const char * policy_target[policy_target34,461
 
 src/journal.h,109
 #define _JOURNAL_H_2,20
@@ -34,75 +38,127 @@ void _log(6,77
 #define LOG_ERR(8,146
 #define LOG_MSG(9,231
 
-src/protocol.h,513
+src/register.h,28
+#define _REGISTER_H___2,23
+
+src/protocol.c,67
+send_pkt_ex(14,226
+recv_pkt_ex(61,1756
+get_encrypt_key(107,3119
+
+src/protocol.h,803
 #define _PROTOCOL_H___2,23
 #define EX_OK 5,65
 #define EX_FAIL 6,106
 #define PKTHEADEX_SIZE 8,154
-#define DETECT_ENCRYPT 10,213
-#define VRV_TAG 13,293
-#define VRV_FLAG 17,387
-struct head_ex_t22,462
-    DWORD flag;24,481
-    WORD  type;25,538
-    WORD  what;26,629
-    DWORD key;27,672
-    DWORD data_crc;28,715
-    DWORD pkt_len;29,767
-    WORD  tag;30,831
-    WORD  head_len;31,877
-    DWORD address;32,920
-struct packet_ex_t35,984
-    struct head_ex_t head;37,1005
-    BYTE data[data38,1032
+#define DETECT_ENCRYPT 10,212
+#define REG_DEVICE_STRING 11,276
+#define VRV_TAG 14,351
+#define VRV_FLAG 18,450
+struct head_t21,528
+    DWORD flag;23,544
+    WORD  type;24,601
+    WORD  what;25,692
+    DWORD key;26,735
+    DWORD data_crc;27,778
+    DWORD pkt_len;28,830
+struct packet_t31,928
+    struct head_t head;33,946
+    BYTE date[date34,970
+struct head_ex_t37,992
+    DWORD flag;39,1011
+    WORD  type;40,1068
+    WORD  what;41,1159
+    DWORD key;42,1202
+    DWORD data_crc;43,1245
+    DWORD pkt_len;44,1297
+    WORD  tag;45,1361
+    WORD  head_len;46,1407
+    DWORD address;47,1450
+struct packet_ex_t50,1523
+    struct head_ex_t head;52,1544
+    BYTE data[data53,1571
 
-src/encrypt.h,27
-#define _ENCRYPT_H___2,22
-
-src/journal.c,17
-void _log(8,118
-
-src/socket.c,82
-create_server_socket(17,300
-create_client_socket(51,1107
-accept_socket(79,1769
-
-src/socket.h,26
-#define _SOCKET_H___2,21
-
-src/comint.h,26
-#define _COMINT_H___2,21
+src/main.c,39
+do_heart_beat(18,324
+int main(37,779
 
 src/encrypt.c,157
 BYTE m_key[m_key7,99
 encrypt_v1(18,299
-decrypt_v1(46,969
-ULONG CRCTab[CRCTab51,1116
-void CRCInit(52,1135
-ULONG CRC32(63,1327
-ULONG CRC32Raw(73,1537
+decrypt_v1(44,961
+ULONG CRCTab[CRCTab49,1108
+void CRCInit(50,1127
+ULONG CRC32(61,1319
+ULONG CRC32Raw(71,1529
 
-obj/protocol.o,14
-ELFELF1,0
+src/encrypt.h,27
+#define _ENCRYPT_H___2,22
 
-obj/socket.o,14
-ELFELF1,0
+src/base.h,218
+#define _BASE_H___2,19
+#define BigLittleSwap16(6,81
+#define BigLittleSwap32(10,227
+#define BigLittleSwap64(15,529
+#define ENDIANS(26,1260
+#define ENDIANL(27,1290
+#define ENDIANS(34,1390
+#define ENDIANL(35,1435
+
+src/socket.c,105
+create_server_socket(19,338
+create_client_socket(53,1144
+accept_socket(81,1818
+close_socket(113,2490
+
+src/type.h,523
+#define _TYPE_H__2,18
+#define LINE_SIZE 7,95
+#define BUFF_SIZE 8,117
+#define OK 11,142
+#define FAIL 12,155
+typedef int8_t    CHAR;14,174
+typedef int16_t   SHORT;15,198
+typedef int32_t   INT;16,223
+typedef int32_t   BOOL;17,246
+typedef int32_t   LONG;18,270
+typedef uint8_t   UCHAR;19,294
+typedef uint8_t   BYTE;20,319
+typedef uint16_t  WORD;21,343
+typedef uint16_t  USHORT;22,367
+typedef uint32_t  UINT;23,393
+typedef uint32_t  ULONG;24,417
+typedef uint32_t  DWORD;25,442
+typedef DWORD *    LPVOID;26,467
 
 Makefile,31
 DIR_INC 1,0
 $(8,97
 $(11,160
 
-bin/edp_client,0
+obj/register.o,42
+Æ@,@4,686
+IPCoH‰pH¹uIPCoH‰pH¹7,1011
+
+obj/protocol.o,25
+È‘ƒwY2æuwY2æu18,3382
+
+bin/edp_client,44
+Æ@,@9,6549
+IPCoH‰pH¹uIPCoH‰pH¹12,6874
 
 TAGS,0
 
-obj/journal.o,0
+obj/base.o,0
 
-obj/main.o,0
+obj/socket.o,0
 
 obj/encrypt.o,0
 
 obj/comint.o,0
 
-src/comint.c,0
+obj/main.o,0
+
+obj/journal.o,0
+
+src/base.c,0

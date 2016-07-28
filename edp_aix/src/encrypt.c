@@ -24,13 +24,11 @@ encrypt_v1(DWORD key,LPVOID src, LPVOID dst, DWORD len, DWORD offset)
 
     DWORD *pkey = (DWORD*)m_tmp, m_count, i;
     m_count = sizeof(m_key) / sizeof(DWORD);
-    for(i = 0; i < m_count; i++)
-    {
+    for(i = 0; i < m_count; i++) {
         *pkey ^=key; pkey++;
     }
     m_count = offset % sizeof(m_tmp);
-    for(i = 0; i < len; i++)
-    {
+    for(i = 0; i < len; i++) {
         ((BYTE*)dst)[i] = ((BYTE*)src)[i] ^ m_tmp[m_count];
         //下一个
         m_count++;
