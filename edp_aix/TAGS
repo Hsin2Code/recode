@@ -1,0 +1,34 @@
+
+src/main.c,35
+int main(10,166
+int main(70,1597
+
+src/a.out,14
+Cx`Cx3,2594
+
+src/journal.h,109
+#define _JOURNAL_H_2,20
+#define EDP_LOG 4,41
+void _log(6,77
+#define LOG_ERR(8,146
+#define LOG_MSG(9,231
+
+src/journal.c,17
+void _log(8,118
+
+src/socket.c,82
+create_server_socket(14,248
+create_client_socket(48,1056
+accept_socket(77,1719
+
+src/socket.h,26
+#define _SOCKET_H___2,21
+
+Makefile,31
+DIR_INC 1,0
+$(8,97
+$(11,160
+
+obj/journal.o,0
+
+obj/main.o,0
