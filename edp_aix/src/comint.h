@@ -26,7 +26,9 @@ enum policy_type {
 /* 获取策略概况 */
 uint32_t
 pull_policy(char *buf);
-
+/* 心跳函数 */
+uint32_t
+do_heart_beat(char* ip, uint16_t port);
 
 
 #endif

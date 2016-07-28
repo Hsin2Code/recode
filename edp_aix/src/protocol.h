@@ -19,7 +19,7 @@
 
 #define DETECT_ENCRYPT       109 /* 探测是否支持加密 */
 #define REG_DEVICE_STRING    114 /* 上报注册信息 */
-
+#define AGENT_GETCONFIG_STRING  117 /* 心跳 */
 #ifndef VRV_TAG
 #define VRV_TAG              0x5652  //初始化pkt_head.mtag项
 #endif//VRV_TAG

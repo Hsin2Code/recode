@@ -177,3 +177,60 @@ pull_policy(char *buf)
 
     return OK;
 }
+/* 心跳函数 */
+uint32_t
+do_heart_beat(char* ip, uint16_t port)
+{
+    int sock;
+    /* 创建客户端套接字 */
+    if(create_client_socket(&sock, ip, port)) {
+        LOG_ERR("Create client socket error!\n");
+        return FAIL;
+    }
+    /* 获取加密密钥 */
+    uint32_t key;
+    if(get_encrypt_key(sock, &key)) {
+        LOG_ERR("Get encrypt KEY error!\n");
+        close_socket(sock);
+        return FAIL;
+    }
+    char data[BUFF_SIZE] = {0};
+    /* 获取本地网卡信息 */
+    struct netcard_t netcard;
+    get_netcard_info(&netcard);
+    package_data(data, &netcard);
+    DWORD pkt_len = sizeof(struct head_ex_t) + strlen(data);
+    char * buf[pkt_len];
+    struct packet_ex_t *pkt = (struct packet_ex_t *)buf;
+    pkt->head.type = ENDIANS(AGENT_GETCONFIG_STRING);
+    pkt->head.what = ENDIANS(0);
+    pkt->head.key = ENDIANL(key);
+    pkt->head.data_crc = ENDIANL(0);
+    pkt->head.address = ENDIANL(0);
+    pkt->head.pkt_len = ENDIANL(pkt_len);
+    memcpy(pkt->data, data, strlen(data));
+    if(send_pkt_ex(sock, pkt)) {
+        LOG_ERR("Send register info error!\n");
+        close_socket(sock);
+        return FAIL;
+    }
+    /* 接收返回信息 */
+    if(recv_pkt_ex(sock, &pkt)) {
+        LOG_ERR("Recv register info ret error!\n");
+        close_socket(sock);
+        return FAIL;
+    }
+    close_socket(sock);
+    LOG_MSG("Recv flag = %u type = %d\n", ENDIANL(pkt->head.flag), ENDIANS(pkt->head.type));
+    /* 判断返回信息 */
+    if(ENDIANL(pkt->head.flag) != VRV_FLAG || ENDIANS(pkt->head.type) != EX_OK) {
+        if(ENDIANL(pkt->head.flag) != VRV_FLAG)
+            LOG_ERR("Recv ret flag error\n");
+        if (ENDIANS(pkt->head.type) != EX_OK )
+            LOG_ERR("Recv ret type error\n");
+        free(pkt);
+        return FAIL ;
+    }
+    free(pkt);
+    return OK;
+}
