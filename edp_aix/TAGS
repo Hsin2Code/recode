@@ -1,15 +1,31 @@
 
-src/socket.h,26
-#define _SOCKET_H___2,21
+src/main.c,39
+do_heart_beat(17,285
+int main(36,664
 
-src/comint.c,22
-get_encrypt_key(6,62
+src/protocol.c,67
+send_pkt_ex(12,205
+recv_pkt_ex(58,1626
+get_encrypt_key(102,2830
 
-src/journal.c,17
-void _log(8,118
-
-src/comint.h,26
-#define _COMINT_H___2,21
+src/type.h,496
+#define _TYPE_H__2,18
+#define BUFF_SIZE 6,77
+#define OK 8,101
+#define FAIL 9,114
+typedef int8_t    CHAR;11,133
+typedef int16_t   SHORT;12,157
+typedef int32_t   INT;13,182
+typedef int32_t   BOOL;14,205
+typedef int32_t   LONG;15,229
+typedef uint8_t   UCHAR;16,253
+typedef uint8_t   BYTE;17,278
+typedef uint16_t  WORD;18,302
+typedef uint16_t  USHORT;19,326
+typedef uint32_t  UINT;20,352
+typedef uint32_t  ULONG;21,376
+typedef uint32_t  DWORD;22,401
+typedef DWORD *    LPVOID;23,426
 
 src/journal.h,109
 #define _JOURNAL_H_2,20
@@ -18,75 +34,75 @@ void _log(6,77
 #define LOG_ERR(8,146
 #define LOG_MSG(9,231
 
-src/protocol.c,200
-send_pkt_ex(5,54
-    int PktHeadLen 56,1378
-    int nbytes;60,1480
-    nbytes 61,1496
-    int datalen 67,1698
-    SM_LOG() << "recive packet data len: " << datalen;69,1743
-recv_pkt_ex(110,2610
-
-src/protocol.h,300
+src/protocol.h,513
 #define _PROTOCOL_H___2,23
-#define PKTHEADEX_SIZE 5,48
-struct pkt_head_t9,125
-    DWORD flag;11,145
-    WORD  type;12,202
-    WORD  what;13,293
-    DWORD key;14,336
-    DWORD data_crc;15,379
-    DWORD pkt_len;16,431
-    WORD  tag;17,495
-    WORD  head_len;18,539
-    DWORD address;19,584
+#define EX_OK 5,65
+#define EX_FAIL 6,106
+#define PKTHEADEX_SIZE 8,154
+#define DETECT_ENCRYPT 10,213
+#define VRV_TAG 13,293
+#define VRV_FLAG 17,387
+struct head_ex_t22,462
+    DWORD flag;24,481
+    WORD  type;25,538
+    WORD  what;26,629
+    DWORD key;27,672
+    DWORD data_crc;28,715
+    DWORD pkt_len;29,767
+    WORD  tag;30,831
+    WORD  head_len;31,877
+    DWORD address;32,920
+struct packet_ex_t35,984
+    struct head_ex_t head;37,1005
+    BYTE data[data38,1032
 
-src/main.c,39
-do_heart_beat(17,264
-int main(36,646
+src/encrypt.h,27
+#define _ENCRYPT_H___2,22
+
+src/journal.c,17
+void _log(8,118
 
 src/socket.c,82
-create_server_socket(15,249
-create_client_socket(49,1057
-accept_socket(78,1720
+create_server_socket(17,300
+create_client_socket(51,1107
+accept_socket(79,1769
 
-src/type.h,469
-#define _TYPE_H__2,18
-#define TRUE 5,57
-#define FALSE 6,72
-typedef int8_t    CHAR;8,92
-typedef int16_t   SHORT;9,116
-typedef int32_t   INT;10,141
-typedef int32_t   BOOL;11,164
-typedef int64_t   LONG;12,188
-typedef uint8_t   UCHAR;13,212
-typedef uint8_t   BYTE;14,237
-typedef uint16_t  WORD;15,261
-typedef uint16_t  USHORT;16,285
-typedef uint32_t  UINT;17,311
-typedef uint64_t  ULONG;18,335
-typedef uint64_t  DWORD;19,360
-typedef void *    LPVOID;20,385
+src/socket.h,26
+#define _SOCKET_H___2,21
+
+src/comint.h,26
+#define _COMINT_H___2,21
+
+src/encrypt.c,157
+BYTE m_key[m_key7,99
+encrypt_v1(18,299
+decrypt_v1(46,969
+ULONG CRCTab[CRCTab51,1116
+void CRCInit(52,1135
+ULONG CRC32(63,1327
+ULONG CRC32Raw(73,1537
+
+obj/protocol.o,14
+ELFELF1,0
+
+obj/socket.o,14
+ELFELF1,0
 
 Makefile,31
 DIR_INC 1,0
 $(8,97
 $(11,160
 
-obj/socket.o,14
-ELFELF1,0
-
-bin/edp_client,13
-key32,10693
+bin/edp_client,0
 
 TAGS,0
 
-obj/comint.o,0
+obj/journal.o,0
 
 obj/main.o,0
 
-obj/journal.o,0
+obj/encrypt.o,0
 
-src/encrypt.h,0
+obj/comint.o,0
 
-src/encrypt.c,0
+src/comint.c,0

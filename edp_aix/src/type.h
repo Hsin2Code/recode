@@ -3,8 +3,12 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#define TRUE 0
-#define FALSE ~0x0
+#define LINE_SIZE 256
+#define BUFF_SIZE 1024
+
+
+#define OK 0
+#define FAIL ~0x0
 
 typedef int8_t    CHAR;
 typedef int16_t   SHORT;

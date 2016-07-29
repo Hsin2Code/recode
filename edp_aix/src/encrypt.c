@@ -18,7 +18,7 @@ uint32_t
 encrypt_v1(DWORD key,LPVOID src, LPVOID dst, DWORD len, DWORD offset)
 {
     if(src == NULL || src == NULL)
-        return FALSE;
+        return FAIL;
     BYTE m_tmp[sizeof(m_key)];
     memcpy(m_tmp, m_key, sizeof(m_key));
 
@@ -39,7 +39,7 @@ encrypt_v1(DWORD key,LPVOID src, LPVOID dst, DWORD len, DWORD offset)
             m_count=0;
         }
     }
-    return TRUE;
+    return OK;
 }
 /* 解密函数V1 */
 uint32_t

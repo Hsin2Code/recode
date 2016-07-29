@@ -1,7 +1,4 @@
 
-GSYMS,11
-b1b11,0
-
 client_simulator/src/pull_policy.cpp,3290
 struct tag_S_GetPlockyGEN 10,193
 	void * pSendStr tag_S_GetPlockyGEN::pSendStr11,221
@@ -447,36 +444,36 @@ static bool Get_Network_Info(34,717
 int      get_logHeader(49,1149
 int code_convert(86,2208
 
-client_simulator/src/regesiter.cpp,1231
+client_simulator/src/regesiter.cpp,1267
 struct tag_S_Soft_Asset 12,241
-	void  *   pAdd tag_S_Soft_Asset::pAdd13,267
-	void  *   pDel tag_S_Soft_Asset::pDel14,285
-	void  *   pModify tag_S_Soft_Asset::pModify15,303
-	bool      bFirst tag_S_Soft_Asset::bFirst16,324
-	tag_S_Soft_Asset(tag_S_Soft_Asset::tag_S_Soft_Asset17,344
-struct tag_S_Hard_Asset 25,442
-	void *  pAdd tag_S_Hard_Asset::pAdd26,468
-	void *  pDel tag_S_Hard_Asset::pDel27,484
-	void *  pModify tag_S_Hard_Asset::pModify28,500
-	void *  pFrontstr;tag_S_Hard_Asset::pFrontstr29,519
-	void *  pOld;tag_S_Hard_Asset::pOld30,539
-	void *  pMap tag_S_Hard_Asset::pMap31,554
-	tag_S_Hard_Asset(tag_S_Hard_Asset::tag_S_Hard_Asset32,570
-#define  SEND_LOG_BUF_LEN 40,651
-static char m_plogBuffer[m_plogBuffer41,692
-static char m_plogBufferDest 42,742
-const  char * g_asset_desc[g_asset_desc44,806
-bool do_regesiter(48,1105
-#define SOFT_MAX 142,4118
-bool  report_soft_asset(143,4140
-bool report_hard_asset(240,6934
-static bool _send_hard_assert(346,10360
-static bool _send_soft_assert(378,11008
-void _report_soft_assert(442,12803
-void _report_hard_assert(474,13691
-void report_assert(501,14424
-static bool _do_heart_beat(507,14505
-void *heart_beat_worker(heart_beat_worker562,15817
+    void  *   pAdd tag_S_Soft_Asset::pAdd13,267
+    void  *   pDel tag_S_Soft_Asset::pDel14,288
+    void  *   pModify tag_S_Soft_Asset::pModify15,309
+    bool      bFirst tag_S_Soft_Asset::bFirst16,333
+    tag_S_Soft_Asset(tag_S_Soft_Asset::tag_S_Soft_Asset17,356
+struct tag_S_Hard_Asset 25,484
+    void *  pAdd tag_S_Hard_Asset::pAdd26,510
+    void *  pDel tag_S_Hard_Asset::pDel27,529
+    void *  pModify tag_S_Hard_Asset::pModify28,548
+    void *  pFrontstr;tag_S_Hard_Asset::pFrontstr29,570
+    void *  pOld;tag_S_Hard_Asset::pOld30,593
+    void *  pMap tag_S_Hard_Asset::pMap31,611
+    tag_S_Hard_Asset(tag_S_Hard_Asset::tag_S_Hard_Asset32,630
+#define  SEND_LOG_BUF_LEN 40,735
+static char m_plogBuffer[m_plogBuffer41,776
+static char m_plogBufferDest 42,826
+const  char * g_asset_desc[g_asset_desc44,890
+bool do_regesiter(48,1193
+#define SOFT_MAX 142,4228
+bool  report_soft_asset(143,4250
+bool report_hard_asset(240,7613
+static bool _send_hard_assert(346,11546
+static bool _send_soft_assert(378,12229
+void _report_soft_assert(442,14059
+void _report_hard_assert(474,15052
+void report_assert(501,15872
+static bool _do_heart_beat(507,15953
+void *heart_beat_worker(heart_beat_worker562,17308
 
 client_simulator/src/run_policy_sfd.cpp,1306
 #define	EDPSERVER_PORT	17,340
@@ -571,8 +568,8 @@ void  CDeviceinfoHelper::check(363,7689
 client_simulator/src/old_functions.cpp,100
 bool conn_serv(9,156
 void closeSocket(62,1569
-void close_socket(79,2089
-int getSO_ERROR(89,2301
+void close_socket(79,2087
+int getSO_ERROR(89,2299
 
 client_simulator/src/CSoftInstallHelper.cpp,460
 #define  SINSTALL_TMP_FILE 20,312
@@ -604,18 +601,18 @@ int TCP::connect(72,1761
 client_simulator/src/VrvProtocol.cpp,408
 DWORD m_EncryptVersion 21,244
 BYTE m_Key[m_Key22,298
-BOOL Encrypt_V1(32,451
-BOOL Decrypt_V1(60,1029
-ULONG	    CRCTab[CRCTab68,1352
-void CRCInit(69,1375
-ULONG CRC32(84,1533
-ULONG CRC32Raw(96,1723
-int VRVPacket::SendPkt(109,1966
-int VRVPacket::sent_audit_info(168,3278
-int VRVPacket::RecvPkt(200,4269
-int VRVPacketEx::SendPktEx(249,5300
-int VRVPacketEx::RecvPktEx(308,6752
-int get_pwd(354,7784
+BOOL Encrypt_V1(32,469
+BOOL Decrypt_V1(60,1143
+ULONG	    CRCTab[CRCTab68,1469
+void CRCInit(69,1492
+ULONG CRC32(84,1698
+ULONG CRC32Raw(96,1908
+int VRVPacket::SendPkt(109,2175
+int VRVPacket::sent_audit_info(168,3690
+int VRVPacket::RecvPkt(200,4782
+int VRVPacketEx::SendPktEx(249,5990
+int VRVPacketEx::RecvPktEx(308,7651
+int get_pwd(354,8833
 
 client_simulator/src/ConvertUTF.c,837
 static const int halfShift 47,1743
@@ -1195,22 +1192,22 @@ typedef CSimpleIniTempl<wchar_t,wchar_t3366,120649
 client_simulator/inc/regesiter.h,29
 #define REGESITER_H_XXX2,24
 
-client_simulator/inc/VrvProtocol.h,534
+client_simulator/inc/VrvProtocol.h,539
 #define _VrvProtocol_H2,23
 using namespace std;4,64
 #define ENC_VERSION1 10,163
-    PktHead linux_head;14,247
-	string linux_data;15,271
-}Linux_Pkt;Linux_Pkt16,291
-	class VRVPacket31,793
-		PktHead head;VRVPacket::head34,822
-		string m_data;VRVPacket::m_data35,838
-	    Linux_Pkt linux_pkt;VRVPacket::linux_pkt37,886
-		VRVPacket(VRVPacket::VRVPacket39,915
-	class VRVPacketEx53,1410
-		PktHeadEx head;VRVPacketEx::head56,1441
-		string m_data;VRVPacketEx::m_data57,1459
-		VRVPacketEx(VRVPacketEx::VRVPacketEx64,1772
+    PktHead linux_head;14,246
+	string linux_data;15,270
+}Linux_Pkt;Linux_Pkt16,290
+	class VRVPacket31,792
+		PktHead head;VRVPacket::head34,821
+		string m_data;VRVPacket::m_data35,837
+	    Linux_Pkt linux_pkt;VRVPacket::linux_pkt37,885
+		VRVPacket(VRVPacket::VRVPacket39,912
+class VRVPacketEx53,1401
+    PktHeadEx head;VRVPacketEx::head56,1429
+    string m_data;VRVPacketEx::m_data57,1449
+    VRVPacketEx(VRVPacketEx::VRVPacketEx64,1767
 
 client_simulator/inc/run_policy_sfd.h,1059
 #define RUN_POLICY_FILE_XXXX_XX2,32
@@ -3497,9 +3494,6 @@ ConversionResult ConvertUTF8toUTF16 336,12419
 ConversionResult ConvertUTF32toUTF8 409,14838
 ConversionResult ConvertUTF8toUTF32 462,16679
 
-GPATH,18
-Üè¼LL3,8214
-
 lib_src/simpleini-4.17/test.cmd,0
 
 lib_src/simpleini-4.17/testsi-SJIS.ini,0
@@ -3507,7 +3501,3 @@ lib_src/simpleini-4.17/testsi-SJIS.ini,0
 client_simulator/bin/run_simulator.sh,0
 
 TAGS,0
-
-GTAGS,0
-
-GRTAGS,0

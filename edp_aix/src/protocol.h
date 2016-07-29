@@ -1,23 +1,26 @@
 #ifndef _PROTOCOL_H___
 #define _PROTOCOL_H___
+#include "type.h"
 
+#define EX_OK                0  //成功
+#define EX_FAIL              1  //注册失败
 
+#define PKTHEADEX_SIZE       28 /* 数据包头长度 */
+
+#define DETECT_ENCRYPT       109 /* 探测是否支持加密 */
+#define REG_DEVICE_STRING    114 /* 上报注册信息 */
 
 #ifndef VRV_TAG
-#define VRV_TAG         0x5652  //初始化pkt_head.mtag项
+#define VRV_TAG              0x5652  //初始化pkt_head.mtag项
 #endif//VRV_TAG
 
 #ifndef VRV_FLAG
-#define VRV_FLAG        0x56525620 //VRV1.0=0X56525620
+#define VRV_FLAG             0x56525620 //VRV1.0=0X56525620
 #endif//VRV_FLAG
 
 
 
-#define PKTHEADEX_SIZE  28       /* 数据包头长度 */
-
-#include "type.h"
-
-struct pkt_head_t
+struct head_ex_t
 {
     DWORD flag;             //VRV2.0=0x56525610 VRV_FLAG
     WORD  type;             //类型，是上报注册信息，变化，还是错误信息
@@ -29,5 +32,22 @@ struct pkt_head_t
     WORD  head_len;         //头的大小
     DWORD address;          //IP地址
 };
+/* 数据结构体 */
+struct packet_ex_t
+{
+    struct head_ex_t head;
+    BYTE data[0];
+};
+
+
+/* 发送数据包 扩展 */
+uint32_t
+send_pkt_ex(int sock, struct packet_ex_t* pkt);
+/* 接收数据包 扩展 */
+uint32_t
+recv_pkt_ex(int sock, struct packet_ex_t **pkt);
+/* 获取通讯加密密钥 */
+uint32_t
+get_encrypt_key(int sock, uint32_t *key);
 
 #endif
