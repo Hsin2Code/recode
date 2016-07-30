@@ -1,6 +1,7 @@
 #ifndef _BASE_H___
 #define _BASE_H___
 #include <stdint.h>
+#include <stdio.h>
 /* 字节序转换 */
 
 #define BigLittleSwap16(A)        ((((uint16_t)(A) & 0xff00) >> 8) |      \
@@ -35,7 +36,8 @@
 #define ENDIANL(A)        BigLittleSwap32(A)
 
 #endif
-
-
+/* 数据黏贴函数 */
+char *
+datacat(char *data, const char *fmt, ...)__attribute__((format(printf,2,3)));
 
 #endif

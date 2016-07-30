@@ -2,22 +2,17 @@
 #define _COMINT_H___
 #include "type.h"
 
+#define POLICY_COUNT_TAG  "_COUNT="
+#define STRITEM_TAG_END   "\r\n"
+#define POLICY_END_TAG    "</vrvscript>" /* 策略XML结束标志 */
 
-struct policy_gist_t {
-    void *send_str;
-    void *recv_str;
-};
+
 struct policy_gen_t {
-    int id;
-
-};
-
-struct netcard_t {
-    char ip[16];
-    char mac[16];
-    char gw[16];
-    char mask[16];
-    char name[16];
+    DWORD id;
+    DWORD crc;
+    DWORD type;
+    DWORD flag;
+    DWORD func;
 };
 
 
@@ -28,5 +23,10 @@ enum policy_type {
     /* 最大策略数 */
     POLICY_TYPE_COUNT,
 };
+/* 获取策略概况 */
+uint32_t
+pull_policy(char *buf);
+
+
 
 #endif

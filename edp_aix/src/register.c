@@ -9,13 +9,12 @@
 #include "base.h"
 #include "socket.h"
 
+extern struct reg_info_t _reg_info;
 /* 注册函数 */
 static uint32_t
-register_info(uint32_t type, char *buf, char *value)
+register_info(char *data, uint32_t num , char* key, char *value)
 {
-    char tmp[LINE_SIZE] = {0};
-    sprintf(tmp, "DBField%d=DeptName\r\nDBValue%d=%s\r\n", type, type, value);
-    strcat(buf, tmp);
+    datacat(data, "DBField%d=%s\r\nDBValue%d=%s\r\n", num, key, num, value);
     return OK;
 }
 
@@ -27,14 +26,14 @@ do_register(char *ip, uint16_t port)
 
     char buf[BUFF_SIZE] = {0};
     char tmp[LINE_SIZE] = {0};
-    register_info( 0, buf, "hsin");        /* 姓名 */
-    register_info( 1, buf, "beixinyuan");  /* 部门 */
-    register_info( 2, buf, "wangluo");     /* 办公室 */
-    register_info( 3, buf, "101");         /* 门排号 */
-    register_info( 4, buf, "123456789");   /* 电话 */
-    register_info( 5, buf, "123@123.com"); /* 邮箱 */
-    register_info( 6, buf, "AIXtest");     /* 保留字段 */
-    register_info( 7, buf, "710100");      /* 邮编？ */
+    register_info(buf, 0, "UserName", "hsin");        /* 姓名 */
+    register_info(buf, 1, "DeptName", "beixinyuan");  /* 单位 */
+    register_info(buf, 2, "OfficeName", "wangluo");     /* 办公室 */
+    register_info(buf, 3, "RoomNumber", "xian");         /* 计算机所在地 */
+    register_info(buf, 4, "Tel", "123456789");   /* 电话 */
+    register_info(buf, 5, "Email", "123@123.com"); /* 邮箱 */
+    register_info(buf, 6, "Reserved2", "AIXtest");     /* 保留字段 */
+    register_info(buf, 7, "FloorNumber", "710100");      /* 邮编? */
     strcat(buf, "DBFieldCount=8\r\n");
     strcat(buf, "SelectNicInfo=xxx.xxx.xxx.xxx/000c29d6b5d9\r\n");
     strcat(buf, "WebServerIP=192.168.131.94\r\n");
@@ -45,7 +44,7 @@ do_register(char *ip, uint16_t port)
     sprintf(tmp, "DeviceIdentify=%u\r\n", dev_id);
     strcat(buf, tmp);
     strcat(buf, "ComputerName=fake computer name\r\n");
-    strcat(buf, "EdpRegVersion=3.3.3.3\r\n");
+    datacat(buf, "EdpRegVersion=%s\r\n", _reg_info.clt_ver);
     strcat(buf, "OSVersion=2.6\r\n");
     strcat(buf, "OSType=GNU/Linux\r\n");
     LOG_ERR("builde basic register info success\n");
@@ -97,5 +96,17 @@ do_register(char *ip, uint16_t port)
         return FAIL ;
     }
     free(pkt);
+    return OK;
+}
+
+/* 从配置文件中获取注册信息 */
+uint32_t
+get_register_info(struct reg_info_t *reg_info)
+{
+    strcpy(reg_info->srv_ip, "192.168.133.143");
+    strcpy(reg_info->reg_mac, "xxxxxxxxxxxx");
+    strcpy(reg_info->reg_ip, "192.168.133.113");
+    strcpy(reg_info->clt_ver, "1.0.0.1");
+    reg_info->srv_port = 88;
     return OK;
 }

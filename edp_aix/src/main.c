@@ -10,9 +10,14 @@
 #include "socket.h"
 #include "journal.h"
 #include "comint.h"
+#include "common.h"
 #include "protocol.h"
 #include "base.h"
 #include "register.h"
+#include "comint.h"
+/* 全局变量 必须全部放置在这里 */
+struct reg_info_t _reg_info;
+
 /* 心跳函数 */
 static uint32_t
 do_heart_beat(char* ip, uint16_t port)
@@ -36,10 +41,19 @@ do_heart_beat(char* ip, uint16_t port)
 
 int main(int argc,char **argv) {
     /* 注册 */
-    do_register("192.168.133.143", 88);
+//    do_register("192.168.133.143", 88);
+    char buf[BUFF_SIZE] = {0};
+    get_register_info(&_reg_info);
+    pull_policy(buf);
     /* 心跳 */
+    printf("%s\n",buf);
     //do_heart_beat("192.168.133.143", 88);
     printf("pkt ex size %zu\n", sizeof(struct packet_ex_t));
     printf("head ex size %zu\n", sizeof(struct head_ex_t));
+
+    datacat(buf, "hellos %s\n", "hsin");
+    datacat(buf, "fake edp fake %s\n", "aix");
+    datacat(buf, "test the datacat fun \n");
+    printf("%s",buf);
     return OK;
 }

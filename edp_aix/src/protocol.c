@@ -17,8 +17,8 @@ send_pkt(const int sock, struct packet_t *pkt)
     /*if(NULL != data)
       {crc = CRC32(crc, data, datalen);}*/
     pkt->head.flag = ENDIANL(VRV_FLAG);
-    pkt->head.data_crc = crc;
-    WORD head_len = sizeof(struct packet_t);
+    pkt->head.data_crc = ENDIANL(crc);
+    WORD head_len = sizeof(struct head_t);
     DWORD data_len = ENDIANL(pkt->head.pkt_len) - head_len;
     //发送包头
     ssize_t nbytes;
@@ -31,11 +31,11 @@ send_pkt(const int sock, struct packet_t *pkt)
     //发送数据
     if(data_len > 0) {
         //加密数据
-        if(pkt->head.key) {
-            encrypt_v1(pkt->head.key, (LPVOID)pkt->data, (LPVOID)pkt->data, data_len, 0);
+        if(ENDIANL(pkt->head.key)) {
+            LOG_MSG("Send base 加密数据\n");
+            encrypt_v1(ENDIANL(pkt->head.key), (LPVOID)pkt->data, (LPVOID)pkt->data, data_len, 0);
         }
         ssize_t send_len = 0 ;
-
         while(send_len < data_len) {
             nbytes = send(sock, pkt->data + send_len, data_len - send_len, MSG_WAITALL);
             LOG_MSG("发送数据...%zu bytes\n", nbytes);
@@ -46,7 +46,7 @@ send_pkt(const int sock, struct packet_t *pkt)
             send_len += nbytes ;
         }
 
-        if (send_len != data_len) {
+        if(send_len != data_len) {
             LOG_ERR("socket send pkt obliterated data !\n");
             return FAIL;
         }
@@ -83,6 +83,7 @@ int recv_pkt(const int sock, struct packet_t ** pkt)
         }
         //解密数据
         if(ENDIANL(p_pkt->head.key)) {
+            LOG_MSG("Recv base 解密数据\n");
             decrypt_v1(ENDIANL(p_pkt->head.key), (LPVOID)p_pkt->data, (LPVOID)p_pkt->data, data_len, 0);
         }
 #if 0

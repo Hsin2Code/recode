@@ -17,6 +17,8 @@ BYTE m_key[24]=
 uint32_t
 encrypt_v1(DWORD key,LPVOID src, LPVOID dst, DWORD len, DWORD offset)
 {
+    /* 大小端加密解决方案 */
+    key = ENDIANL(key);
     if(src == NULL || src == NULL)
         return FAIL;
     BYTE m_tmp[sizeof(m_key)];

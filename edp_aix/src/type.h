@@ -4,9 +4,10 @@
 #include <stddef.h>
 #include "base.h"
 
+#define UNIT_SIZE 64
 #define LINE_SIZE 256
 #define BUFF_SIZE 1024
-
+#define DATA_SIZE 2048
 
 #define OK 0
 #define FAIL ~0x0
