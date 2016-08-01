@@ -6,23 +6,23 @@
 #include "register.h"
 #include "journal.h"
 #include "type.h"
-#include "base.h"
+#include "common.h"
 #include "socket.h"
 
 extern struct reg_info_t _reg_info;
-/* 注册函数 */
+
+/* 注册函数的小弟 */
 static uint32_t
 register_info(char *data, uint32_t num , char* key, char *value)
 {
     datacat(data, "DBField%d=%s\r\nDBValue%d=%s\r\n", num, key, num, value);
     return OK;
 }
-
+/* 注册函数 */
 uint32_t
 do_register(char *ip, uint16_t port)
 {
     char * ip_str = "192.168.133.113";
-    uint32_t dev_id = 8888888;
 
     char buf[BUFF_SIZE] = {0};
     char tmp[LINE_SIZE] = {0};
@@ -41,7 +41,7 @@ do_register(char *ip, uint16_t port)
     sprintf(tmp, "IPAddress0=%s\r\n", ip_str);
     strcat(buf, tmp);
     strcat(buf, "MACCount=1\r\nIPCount=1\r\n");
-    sprintf(tmp, "DeviceIdentify=%u\r\n", dev_id);
+    sprintf(tmp, "DeviceIdentify=%u\r\n", _reg_info.reg_id);
     strcat(buf, tmp);
     strcat(buf, "ComputerName=fake computer name\r\n");
     datacat(buf, "EdpRegVersion=%s\r\n", _reg_info.clt_ver);
@@ -59,7 +59,7 @@ do_register(char *ip, uint16_t port)
     DWORD key;
     if(get_encrypt_key(sock, &key)) {
         LOG_ERR("Get encrypt KEY error!\n");
-        close(sock);
+        close_socket(sock);
         return FAIL;
     }
     printf("key = %u\n", key);
@@ -74,17 +74,17 @@ do_register(char *ip, uint16_t port)
     memcpy(pkt->data, buf, strlen(buf));
     if(send_pkt_ex(sock, pkt)) {
         LOG_ERR("Send register info error!\n");
-        close(sock);
+        close_socket(sock);
         return FAIL;
     }
     free(pkt);
     /* 接收返回信息 */
     if(recv_pkt_ex(sock, &pkt)) {
         LOG_ERR("Recv register info ret error!\n");
-        close(sock);
+        close_socket(sock);
         return FAIL;
     }
-    close(sock);
+    close_socket(sock);
     LOG_MSG("Recv flag = %u type = %d\n", ENDIANL(pkt->head.flag), ENDIANS(pkt->head.type));
      /* 判断返回信息 */
     if(ENDIANL(pkt->head.flag) != VRV_FLAG || ENDIANS(pkt->head.type) != EX_OK) {
@@ -108,5 +108,6 @@ get_register_info(struct reg_info_t *reg_info)
     strcpy(reg_info->reg_ip, "192.168.133.113");
     strcpy(reg_info->clt_ver, "1.0.0.1");
     reg_info->srv_port = 88;
+    reg_info->reg_id = 888888;
     return OK;
 }

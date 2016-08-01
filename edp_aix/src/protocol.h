@@ -16,9 +16,12 @@
 #define LOWER_DETECT_POLICY  4
 #define LOWER_GET_POLICY     5
 
+#define AGENT_RPTAUDITLOG    61     /* 上报审计日志 */
+#define AUDITLOG_REQUEST     1      /* 上报请求 */
+#define AUDITLOG_ECHO        2      /* 上报回应 */
 
-#define DETECT_ENCRYPT       109 /* 探测是否支持加密 */
-#define REG_DEVICE_STRING    114 /* 上报注册信息 */
+#define DETECT_ENCRYPT       109    /* 探测是否支持加密 */
+#define REG_DEVICE_STRING    114    /* 上报注册信息 */
 #define AGENT_GETCONFIG_STRING  117 /* 心跳 */
 #ifndef VRV_TAG
 #define VRV_TAG              0x5652  //初始化pkt_head.mtag项
@@ -41,7 +44,7 @@ struct head_t
 struct packet_t
 {
     struct head_t head;
-    BYTE data[0];
+    char data[0];
 };
 
 struct head_ex_t
@@ -60,7 +63,7 @@ struct head_ex_t
 struct packet_ex_t
 {
     struct head_ex_t head;
-    BYTE data[0];
+    char data[0];
 };
 /* 发送数据包 基准 */
 uint32_t

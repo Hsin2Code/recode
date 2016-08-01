@@ -51,6 +51,7 @@ send_pkt(const int sock, struct packet_t *pkt)
             return FAIL;
         }
     }
+    LOG_MSG("Send packet data len %u \n", data_len);
     return OK;
 }
 /* 接收数据包 基准 */
@@ -70,6 +71,10 @@ int recv_pkt(const int sock, struct packet_t ** pkt)
     //计算长度和申请空间
     DWORD pkt_len = ENDIANL(head.pkt_len);
     struct packet_t *p_pkt = (struct packet_t *)malloc(pkt_len);
+    if(p_pkt == NULL) {
+        LOG_ERR("malloc failed!\n");
+        return FAIL;
+    }
     memset(p_pkt, 0, pkt_len);
     memcpy(p_pkt, &head, head_len);
     DWORD data_len = pkt_len - head_len;
@@ -145,6 +150,7 @@ send_pkt_ex(int sock, struct packet_ex_t* pkt)
             return FAIL;
         }
     }
+    LOG_MSG("Send packet data len %u \n", data_len);
     return OK;
 }
 /* 接收数据包 扩展 */
@@ -165,6 +171,10 @@ recv_pkt_ex(int sock, struct packet_ex_t **pkt)
     //计算长度和申请空间
     DWORD pkt_len = ENDIANL(head.pkt_len);
     struct packet_ex_t *p_pkt = (struct packet_ex_t *)malloc(pkt_len);
+    if(p_pkt == NULL) {
+        LOG_ERR("malloc failed!\n");
+        return FAIL;
+    }
     memset(p_pkt, 0, pkt_len);
     memcpy(p_pkt, &head, head_len);
     DWORD data_len = pkt_len - head_len;
@@ -197,6 +207,7 @@ recv_pkt_ex(int sock, struct packet_ex_t **pkt)
 uint32_t
 get_encrypt_key(int sock, uint32_t *key)
 {
+    LOG_MSG("Start getting the Communication key...\n");
     char buf[BUFF_SIZE] = {0};
     sprintf(buf, "%s", "GET_PWD_SEND");
     struct packet_ex_t pkt;

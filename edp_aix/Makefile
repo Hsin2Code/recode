@@ -25,7 +25,7 @@ TARGET = edp_client
 BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 # 连接选项
-LINK = -lpthread
+LINK = -lpthread -ldl
 # 编译器
 CC = gcc
 # 编译器选项

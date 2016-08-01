@@ -12,7 +12,7 @@ struct policy_gen_t {
     DWORD crc;
     DWORD type;
     DWORD flag;
-    DWORD func;
+    /* DWORD func; */
 };
 
 

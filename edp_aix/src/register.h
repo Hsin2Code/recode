@@ -10,6 +10,7 @@ struct reg_info_t
     char reg_mac[16];
     char clt_ver[16];
     uint16_t srv_port;
+    uint32_t reg_id;
 };
 
 /* 注册函数 */
