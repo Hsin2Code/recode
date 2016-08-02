@@ -9,6 +9,7 @@
 #include "register.h"
 #include "common.h"
 #include "journal.h"
+#include "localdb.h"
 
 extern struct reg_info_t _reg_info;
 /* 策略名称 */
@@ -116,26 +117,7 @@ get_tag_val(const char *data, const char * beg, const char * end, char *val)
     val[end_mrk - beg_mrk] ='\0';
     return val;
 }
-/* 获取策略概况列表 */
-static uint32_t
-get_policy_list(char *buf, struct policy_gen_t *list)
-{
-    char tmp[UNIT_SIZE] = {0};
-    char tag[UNIT_SIZE] = {0};
-    uint32_t count = atoi(get_tag_val(buf, POLICY_COUNT_TAG, ".", tmp));
-    uint32_t i = 0;
-    for(i = 0; i < count; i++) {
-        sprintf(tag, "_ID%u=", i);
-        list[i].id = atoi(get_tag_val(buf, tag, ".", tmp));
-        sprintf(tag, "_FUNC%u=", i);
-        list[i].type = type_from_target(get_tag_val(buf, tag, ".", tmp));
-        sprintf(tag, "_CRC%u=", i);
-        list[i].crc = atoi(get_tag_val(buf, tag, ".", tmp));
-        sprintf(tag, "_FLG%u=", i);
-        list[i].flag = atoi(get_tag_val(buf, tag, ".", tmp));
-    }
-    return OK;
-}
+/* 下载更新策略 */
 static uint32_t
 down_policy2db(const char *content)
 {
@@ -189,17 +171,19 @@ down_policy2db(const char *content)
     char tmp[UNIT_SIZE] = {0};
     char tag[UNIT_SIZE] = {0};
     uint32_t i = 0,count = atoi(get_tag_val(p_pkt->data, "_COUNT=", ".", tmp));
+    struct policy_gen_t gen;
+    memset(&gen, 0, sizeof(gen));
     for(i = 0; i < count; i++) {
         char xml[DATA_SIZE];
         sprintf(tag, "P_CONTENT%u=", i);
         get_tag_val(p_pkt->data, tag, "._", xml);
+        sprintf(tag, "_ID%u=", i);
+        gen.id = atoi(trim_str(get_tag_val(p_pkt->data, tag, ".", tmp)));
         sprintf(tag, "_FUNC%u=", i);
-        get_tag_val(p_pkt->data, tag, ".", tmp);
-        strcat (tmp, ".xml");
-        trim_str(tmp);
-        FILE* pf = fopen(tmp, "w+");
-        fwrite(xml, strlen(xml), 1, pf);
-        fclose(pf);
+        gen.type = type_from_target(trim_str(get_tag_val(p_pkt->data, tag, ".", tmp)));
+        sprintf(tag, "_CRC%u=", i);
+        gen.crc = atoi(trim_str(get_tag_val(p_pkt->data, tag, ".", tmp)));
+        db_update_policy(&gen, xml);
     }
     free(p_pkt);
     return OK;
@@ -208,7 +192,6 @@ down_policy2db(const char *content)
 uint32_t
 pull_policy(char *buf)
 {
-    int ret = 0;
     /* 获取策略概况 */
     if(pull_policy_gen(buf)) {
         LOG_MSG("获取策略概况失败..\n");
@@ -222,35 +205,57 @@ pull_policy(char *buf)
     if(count == 0) {
         return FAIL;
     }
-    /* 分配临时空间 避免malloc,小心栈溢出 */
+    char tag[UNIT_SIZE] = {0};
+    uint32_t i, j;
+    /* 过滤掉未变化的策略 */
     struct policy_gen_t list[count];
-    memset(list, 0, count *sizeof(struct policy_gen_t));
-    /* 把策略概要 整理为列表 */
-    ret = get_policy_list(buf, list);
-    if(ret) {
-        LOG_MSG("Analytical Policys Gen List Failed!");
-        return FAIL;
+    for(i = 0; i < count; i++) {
+        sprintf(tag, "_FUNC%u=", i);
+        list[i].type = type_from_target(get_tag_val(buf, tag, ".", tmp));
+        sprintf(tag, "_CRC%u=", i);
+        list[i].crc = atoi(get_tag_val(buf, tag, ".", tmp));
+        sprintf(tag, "_ID%u=", i);
+        list[i].id = atoi(get_tag_val(buf, tag, ".", tmp));
+        sprintf(tag, "_FLG%u=", i);
+        list[i].flag = atoi(get_tag_val(buf, tag, ".", tmp));
     }
     char id_str[LINE_SIZE] = {0};
     char flag_str[LINE_SIZE] = {0};
-    uint32_t i = 0;
-    for(i = 0; i < count; i++) {
-        /* 过滤掉不支持的策略 */
-        if(list[i].type == POLICY_TYPE_COUNT)
-            continue;
-        /* 过滤掉未变化的策略 */
-        LOG_MSG("Delete unused policy\n");
-        datacat(id_str, "%u,", list[i].id);
-        datacat(flag_str, "%u,", list[i].flag);
+    struct policy_gen_t gen;
+    memset(&gen, 0, sizeof(gen));
+    for(j = 0; j < POLICY_TYPE_COUNT; j++) {
+        gen.type = j;
+        for(i = 0; i < count; i++) {
+            if(list[i].type == j) {
+                if(db_que_policy(&gen, NULL))
+                    ;//                    break;
+                /* CRC不一样更新策略 */
+                if(gen.crc != list[i].crc) {
+                    datacat(id_str, "%u,", list[i].id);
+                    datacat(flag_str, "%u,", list[i].flag);
+                }else {
+                    LOG_MSG("%s CRC未变化无需重新拉去...\n", policy_target[j]);
+                    db_ctrl_policy(&gen, 0);//启用
+                }
+                i += count;
+            }
+        }
+        if(i <= count) {
+            LOG_MSG("%s 禁用策略...\n", policy_target[gen.type]);
+            db_ctrl_policy(&gen, 1);//禁用
+        }
     }
-    /* 需要下载的策略 */
+    if(strlen(id_str) == 0) return FAIL;
+    /* 更新下载的策略 */
     char content[LINE_SIZE] = {0};
     datacat(content, "Policys=%s\r\n", id_str);
     datacat(content, "FLG=%s\r\n", flag_str);
-    printf("--------------\n%s\n--------------\n", content);
-    /* 下载策略到数据库 */
+    LOG_MSG("拉取以下策略"                                      \
+            "--------------\n%s\n--------------\n", content);
+    /* 更新策略到数据库 */
     LOG_MSG("Begin download policy to database\n");
-    down_policy2db(content);
+    if(down_policy2db(content))
+        return FAIL;
     return OK;
 }
 

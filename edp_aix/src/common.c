@@ -44,13 +44,3 @@ get_netcard_info(struct netcard_t *netcard)
     strcpy(netcard->dns, "8.8.8.8");
     return OK;
 }
-
-
-/********************  数据库操作封装 ******************/
-/* 数据库初始化 */
-uint32_t
-database_init()
-{
-
-    return OK;
-}

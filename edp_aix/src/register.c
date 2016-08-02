@@ -103,7 +103,7 @@ do_register(char *ip, uint16_t port)
 uint32_t
 get_register_info(struct reg_info_t *reg_info)
 {
-    strcpy(reg_info->srv_ip, "192.168.133.143");
+    strcpy(reg_info->srv_ip, "192.168.133.145");
     strcpy(reg_info->reg_mac, "xxxxxxxxxxxx");
     strcpy(reg_info->reg_ip, "192.168.133.113");
     strcpy(reg_info->clt_ver, "1.0.0.1");
