@@ -2,13 +2,16 @@
 #define _COMMON_H___
 #include "type.h"
 
-struct netcard_t {
-    char ip[16];
-    char gw[16];
-    char mask[16];
-    char dns[16];
-    char mac[24];
-    char name[40];
+#define _UNIX_
+
+struct netcard_t
+{
+    char name[UNIT_SIZE];
+    char mac[UNIT_SIZE];
+    char ip[UNIT_SIZE];
+    char broadcast[UNIT_SIZE];
+    char mask[UNIT_SIZE];
+    struct netcard_t *next;
 };
 
 
@@ -23,8 +26,8 @@ char *
 datacat(char *data, const char *fmt, ...)__attribute__((format(printf,2,3)));
 
 /* 获取本地网卡信息 */
-uint32_t
-get_netcard_info(struct netcard_t *netcard);
+static uint32_t
+get_local_netcard(struct netcard_t * head);
 
 /* 获取本地时间 */
 void

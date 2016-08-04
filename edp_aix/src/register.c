@@ -151,6 +151,26 @@ dbug_register() {
     return OK;
 }
 
+/* 选择一个网卡 */
+uint32_t
+choose_one_netcard(struct netcard_t *head, char *name)
+{
+    struct netcard_t *tmp, *next;
+    next = head->next;
+    do {
+        tmp = next;
+        if(strcmp(tmp->name, name) == 0) {
+            strcpy(head->name, tmp->name);
+            strcpy(head->ip, tmp->ip);
+            strcpy(head->mac, tmp->mac);
+            strcpy(head->broadcast, tmp->broadcast);
+            strcpy(head->mask, tmp->mask);
+            return OK;
+        }
+        next = tmp->next;
+    }while(next != NULL);
+    return FAIL;
+}
 /* 注册交互函数 */
 uint32_t
 do_register()
@@ -171,10 +191,30 @@ do_register()
         }
         printf("(服务器IP无法连通.....)\n");
     }while(1);
-    printf("选取注册网卡(待开发...)\n");
-    printf("注册IP写死:192.168.133.113 devid写死:88888888\n");
-    strcpy(_reg_info.reg_ip, "192.168.133.113");
-    strcpy(_reg_info.reg_mac, "xx:xx:xx:xx:xx:xx");
+    struct netcard_t netcard_head;
+    struct netcard_t *tmp, *next;
+    if(get_local_netcard(&netcard_head)) {
+        LOG_ERR("获取本地网卡失败\n");
+        printf("本地无激活可用网卡,请配置网卡之后再注册!\n");
+        exit(0);
+    }
+    next = netcard_head.next;
+    printf("请选择注册网卡(输入网卡名称):\n");
+    printf("name IPv4 address    MAC address      netmask         broadcast\n");
+    do {
+        tmp = next;
+        printf("%s  %s %s %s %s\n",
+               tmp->name, tmp->ip, tmp->mac, tmp->broadcast, tmp->mask);
+        next = tmp->next;
+    }while(next != NULL);
+    char buf[UNIT_SIZE];
+    printf("EDP#");
+    scanf("%s", buf);
+    while(choose_one_netcard(&netcard_head, buf)) {
+        printf("请输入正确的网卡名...\nEDP#");
+    }
+    strcpy(_reg_info.reg_ip, netcard_head.ip);
+    strcpy(_reg_info.reg_mac, netcard_head.mac);
     _reg_info.reg_id = 88888888;
     interaction(1 ,"请输入单位名称. *", _reg_info.reg_com);
     interaction(1 ,"请输入部门名称. *", _reg_info.reg_dep);
@@ -183,7 +223,7 @@ do_register()
     interaction(1 ,"请输入使用人电话 *.", _reg_info.reg_tel);
     interaction(0 ,"请输入使用人邮箱.", _reg_info.reg_mail);
     interaction(0 ,"请输入备注信息.", _reg_info.reg_note);
-    _reg_info.reg_id = 7777777;//暂时写死
+
     strcpy(_reg_info.reg_dev, "AIX 6.1");
     strcpy(_reg_info.reg_os, "AIX");
 
