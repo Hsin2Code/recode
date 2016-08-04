@@ -3,7 +3,9 @@
 #include "sqlite3.h"
 #include "type.h"
 #include "comint.h"
-#define LOCALDB_PATH "./local.db"
+#include "register.h"
+
+#define LOCALDB_PATH "/opt/edp/bin/local.db"
 
 
 /* 连接数据库 */
@@ -25,6 +27,21 @@ db_ctrl_policy(struct policy_gen_t *gen, uint32_t flag);
 /* 查 */
 uint32_t
 db_que_policy(struct policy_gen_t *gen, char *policy);
+
+/* 插入审计日志 */
+uint32_t
+db_ins_report(uint32_t type, uint32_t what, char *data);
+
+/* 上报数据库中的数据 */
+uint32_t
+db_send_report();
+
+/* 插入注册信息 */
+uint32_t
+db_ins_register_info(struct reg_info_t *reg_info);
+/* 查询注册信息 */
+uint32_t
+db_que_register_info(struct reg_info_t *reg_info);
 
 /* 关闭数据库 */
 uint32_t

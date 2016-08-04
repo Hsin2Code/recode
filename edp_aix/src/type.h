@@ -3,13 +3,14 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define FIELD_SIZE 32
 #define UNIT_SIZE 64
 #define LINE_SIZE 256
 #define BUFF_SIZE 1024
 #define DATA_SIZE 2048
 
 #define OK 0
-#define FAIL ~0x0
+#define FAIL 0xFFFFFFFF
 
 typedef int8_t    CHAR;
 typedef int16_t   SHORT;

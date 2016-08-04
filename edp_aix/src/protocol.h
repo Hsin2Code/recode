@@ -5,8 +5,28 @@
 #define EX_OK                0  //成功
 #define EX_FAIL              1  //注册失败
 
+//<>classaction=  行为类别上报字段
+#define Illegal_Behavior     0  //违规行为
+#define Abnormal_Behavior    1  //异常行为
+#define General_Behavior     2  //一般行为
+
+//<>riskrank=    风险级别上报字段
+#define Event_Emergency      0  //紧急：系统不可用
+#define Event_Alarm          1  //警报：必须立即进行处理
+#define Event_Critical       2  //关键：符合关键条件
+#define Event_Error          3  //错误：符合错误条件
+#define Event_Caution        4  //警告：符合警告条件
+#define Event_Inform         5  //通知：普通情况，但具有重要意义
+#define Event_Message        6  //信息：一般信息消息
+#define Event_Debug          7  //调试：调试级别信息
+
 #define PKTHEADEX_SIZE       28 /* 加强版协议包头长度 */
 
+
+#define FIND_DAILUP          49     /* 字符串方式的违规联网报警 */
+#define FIND_DAILUPING       1      /* 正在上网 */
+#define FIND_DAILUPED        2      /* 曾经上过网 */
+#define FIND_OUTOFNETWORK    4      /* 曾经上过网 */
 
 
 #define DOWNLOAD_POLICY      55 /* 下载策略 */
@@ -19,6 +39,8 @@
 #define AGENT_RPTAUDITLOG    61     /* 上报审计日志 */
 #define AUDITLOG_REQUEST     1      /* 上报请求 */
 #define AUDITLOG_ECHO        2      /* 上报回应 */
+
+
 
 #define DETECT_ENCRYPT       109    /* 探测是否支持加密 */
 #define REG_DEVICE_STRING    114    /* 上报注册信息 */

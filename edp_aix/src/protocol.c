@@ -208,8 +208,6 @@ uint32_t
 get_encrypt_key(int sock, uint32_t *key)
 {
     LOG_MSG("Start getting the Communication key...\n");
-    char buf[BUFF_SIZE] = {0};
-    sprintf(buf, "%s", "GET_PWD_SEND");
     struct packet_ex_t pkt;
     memset(&pkt, 0, sizeof(pkt));
     pkt.head.type = ENDIANS(DETECT_ENCRYPT);
@@ -230,10 +228,12 @@ get_encrypt_key(int sock, uint32_t *key)
         return ret;
     }
     if(ENDIANL(p_pkt->head.flag) == VRV_FLAG && ENDIANS(p_pkt->head.type) == EX_OK ) {
-        LOG_MSG("Get Communication key success!\n");
+        LOG_MSG("Get Communication key success key is %u!\n",ENDIANL(p_pkt->head.key));
         *key = ENDIANL(p_pkt->head.key);
+        free(p_pkt);
         return OK;
-    } else {
-        return FAIL;
     }
+    free(p_pkt);
+    return FAIL;
+
 }

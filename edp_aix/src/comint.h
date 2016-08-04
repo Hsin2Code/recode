@@ -16,6 +16,7 @@ struct policy_gen_t {
 };
 
 
+
 /* 策略类型枚举值 */
 enum policy_type {
     /* 本次只针对违规外联 */
@@ -25,10 +26,12 @@ enum policy_type {
 };
 /* 获取策略概况 */
 uint32_t
-pull_policy(char *buf);
+pull_policy(void);
 /* 心跳函数 */
 uint32_t
 do_heart_beat(char* ip, uint16_t port);
-
+/* 上报函数 */
+uint32_t
+send_audit_log(uint16_t type, uint16_t what, const char *data);
 
 #endif

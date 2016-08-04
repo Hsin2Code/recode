@@ -30,8 +30,8 @@ type_from_target(const char * target) {
 static uint32_t
 package_data(char * data, struct netcard_t* netcard)
 {
-    datacat(data, "MACAddress0=%s\r\n", "xxx");
-    datacat(data, "IPAddress0=%s\r\n", "192.168.133.113");
+    datacat(data, "MACAddress0=%s\r\n", _reg_info.reg_mac);
+    datacat(data, "IPAddress0=%s\r\n", _reg_info.reg_ip);
     datacat(data, "MACCount=1\r\nIPCount=1\r\n");
     datacat(data, "IPReport=%s|%s|%s|%s*84C9B2A7E124|%s#\r\n",
             _reg_info.reg_mac, netcard->ip, netcard->mask, netcard->gw, netcard->dns);
@@ -101,22 +101,6 @@ pull_policy_gen(char *buf)
     return OK;
 }
 
-/* 获取从beg开始到end结束的字符串值 */
-static char*
-get_tag_val(const char *data, const char * beg, const char * end, char *val)
-{
-    char *beg_mrk = strlen(beg) + strstr(data, beg);
-    if(beg_mrk == NULL)
-        return NULL;
-    char *end_mrk = strstr(beg_mrk, end);
-    if(end_mrk == NULL)
-        strcpy(val, beg_mrk);
-    else
-        strncpy(val, beg_mrk, end_mrk - beg_mrk);
-    /* 尽头的张望 */
-    val[end_mrk - beg_mrk] ='\0';
-    return val;
-}
 /* 下载更新策略 */
 static uint32_t
 down_policy2db(const char *content)
@@ -138,6 +122,8 @@ down_policy2db(const char *content)
     char pkt[DATA_SIZE] = {0};
     struct packet_t *p_pkt = (struct packet_t *)pkt;
     struct netcard_t netcard;
+    get_netcard_info(&netcard);
+    printf("%s", netcard.ip);
     package_data(p_pkt->data, &netcard);
     /* 粘贴需要上报数据 */
     strcat(p_pkt->data, content);
@@ -190,8 +176,9 @@ down_policy2db(const char *content)
 }
 /* 拉取策略并存入数据库 */
 uint32_t
-pull_policy(char *buf)
+pull_policy(void)
 {
+    char buf[BUFF_SIZE] = {0};
     /* 获取策略概况 */
     if(pull_policy_gen(buf)) {
         LOG_MSG("获取策略概况失败..\n");
@@ -227,8 +214,9 @@ pull_policy(char *buf)
         gen.type = j;
         for(i = 0; i < count; i++) {
             if(list[i].type == j) {
-                if(db_que_policy(&gen, NULL))
-                    ;//                    break;
+                if(db_que_policy(&gen, NULL)) {
+                    ;//break;
+                }
                 /* CRC不一样更新策略 */
                 if(gen.crc != list[i].crc) {
                     datacat(id_str, "%u,", list[i].id);
@@ -241,7 +229,7 @@ pull_policy(char *buf)
             }
         }
         if(i <= count) {
-            LOG_MSG("%s 禁用策略...\n", policy_target[gen.type]);
+            LOG_MSG("i= %u count = %u ---> %s 禁用策略...\n", i, count, policy_target[gen.type]);
             db_ctrl_policy(&gen, 1);//禁用
         }
     }
@@ -261,11 +249,11 @@ pull_policy(char *buf)
 
 /* 上报函数 */
 uint32_t
-send_audit_log(const char *data, char* ip, uint32_t port)
+send_audit_log(uint16_t type, uint16_t what, const char *data)
 {
     int sock;
     /* 创建客户端套接字 */
-    if(create_client_socket(&sock, ip, port)) {
+    if(create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)) {
         LOG_ERR("Create client socket error!\n");
         return FAIL;
     }
@@ -280,13 +268,14 @@ send_audit_log(const char *data, char* ip, uint32_t port)
     char pkt[DATA_SIZE] = {0};
     struct packet_t *p_pkt = (struct packet_t *)pkt;
     struct netcard_t netcard;
+    get_netcard_info(&netcard);
     package_data(p_pkt->data, &netcard);
     /* 粘贴需要上报数据 */
     strcat(p_pkt->data, data);
     DWORD pkt_len = strlen(p_pkt->data) + sizeof(struct head_t);
-    printf("%s",p_pkt->data);
-    p_pkt->head.type = ENDIANS(AGENT_RPTAUDITLOG);
-    p_pkt->head.what = ENDIANS(AUDITLOG_REQUEST);
+//    printf("%s",p_pkt->data);
+    p_pkt->head.type = ENDIANS(type);
+    p_pkt->head.what = ENDIANS(what);
     p_pkt->head.key = ENDIANL(key);
     p_pkt->head.pkt_len = ENDIANL(pkt_len);
     /* 发送数据 */

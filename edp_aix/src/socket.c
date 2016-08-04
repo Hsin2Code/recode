@@ -1,4 +1,3 @@
-#include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -9,6 +8,7 @@
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
+#include <strings.h>
 
 #include "socket.h"
 #include "journal.h"
@@ -27,7 +27,6 @@ create_server_socket(int *fd, const uint16_t port)
         LOG_ERR("Failed to create socket!\n");
         return FAIL;
     }
-
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(port);
@@ -35,11 +34,13 @@ create_server_socket(int *fd, const uint16_t port)
     setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
     if (bind(sock, (struct sockaddr *)(&server_addr), sizeof(server_addr))) {
         LOG_ERR("Failed to bind socket!\n");
+        close_socket(sock);
         return FAIL;
     }
 
     if (listen(sock, 5)) {
         LOG_ERR("Failed to listen socket!\n");
+        close_socket(sock);
         return FAIL;
     }
 
@@ -60,17 +61,21 @@ create_client_socket(int* fd, const char* ip, const uint16_t port)
         LOG_ERR("Failed to create socket. \n");
         return FAIL;
     }
+    struct timeval timeout = {3,0};
+    //设置发送超时
+    setsockopt(sock, SOL_SOCKET,SO_SNDTIMEO, (char *)&timeout,sizeof(struct timeval));
+    //设置接收超时
+    setsockopt(sock, SOL_SOCKET,SO_RCVTIMEO, (char *)&timeout,sizeof(struct timeval));
 
     their_addr.sin_family = AF_INET;
     their_addr.sin_addr.s_addr = inet_addr(ip);
     their_addr.sin_port = htons(port);
     bzero(&their_addr.sin_zero, 8);
-
     if(-1 == connect(sock, (struct sockaddr*)&their_addr, sizeof(struct sockaddr))){
         LOG_ERR("Cannot connect. \n");
+        close_socket(sock);
         return FAIL;
     }
-
 //    epoll_add_client(sock);
     *fd = sock;
 

@@ -1,5 +1,8 @@
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,77 +23,141 @@
 #include "register.h"
 #include "comint.h"
 #include "thpool.h"
+#include "online_deal_ctrl.h"
+#include "main.h"
 /* 全局变量 必须全部放置在这里 */
 struct reg_info_t _reg_info;
 
 
 /* 心跳线程 */
-void *
+static void *
 thread_heart_beat(void *arg)
 {
-    do_heart_beat(_reg_info.srv_ip, _reg_info.srv_port);
+    while(1) {
+        do_heart_beat(_reg_info.srv_ip, _reg_info.srv_port);
+        sleep(30);
+    }
     return NULL;
 }
 /* 获取策略线程 */
-void *
+static void *
 thread_pull_policy(void *arg)
 {
-    char buf[BUFF_SIZE] = {0};
-    test();
-    pull_policy(buf);
+    while(1) {
+        pull_policy();
+        sleep(30);
+    }
     return NULL;
 }
 
-void
-policy_scheduling(threadpool *thpool)
+static void *
+thread_do_main(void *arg)
 {
-    printf("hello");
+    uint32_t crc_list[POLICY_TYPE_COUNT] = {0};
+    char xml[DATA_SIZE] = {0};
+    struct policy_gen_t gen;
+    while(1) {
+        db_que_policy(&gen, xml);
+        if(gen.flag != 1) {
+            if(crc_list[gen.type] != gen.crc) {
+                printf("初始化策略\n");
+                online_deal_ctrl_uninit();
+                online_deal_ctrl_init(xml);
+                crc_list[gen.type] = gen.crc;
+            }
+            online_deal_ctrl_work();
+        }
+        sleep(5);
+    }
+    return NULL;
 }
-void *
-do_main(void *args) {
-    static threadpool thpool = NULL;
-    if(thpool == NULL)
-        thpool = thpool_init(4);
-    thpool_add_work(thpool, thread_heart_beat, NULL);
-    thpool_add_work(thpool, thread_pull_policy, NULL);
+static void *
+thread_send_report(void *arg)
+{
+    while(1) {
+        /* 上报数据 */
+        db_send_report();
+        sleep(30);
+    }
     return NULL;
 }
 
 int
-main(int argc,char **argv) {
-    /* 创建线程池 */
-    threadpool thpool = thpool_init(10);
-    db_conn();
-    db_init();
-    test();
-
-    sleep (10);
-    if(thpool == NULL) {
-        LOG_MSG("thpool_create failed...\n");
+main(int argc,char **argv)
+{
+    if(db_conn()) {
+        LOG_MSG("连接数据库失败\n");
         return FAIL;
     }
-    get_register_info(&_reg_info);
-    /* 注册 */
-    if(do_register("192.168.133.145", 88))
-        LOG_ERR("register failed\n");
-    int i = 10000;
-    while(i--){
+    /* 未注册则 注册 */
+    if(db_que_register_info(&_reg_info) != REGISTERED) {
+        db_init();
+        do_register();
+        //dbug_register();
+    }
+    if(fork() != 0) exit(0);    /* parent  */
+    if(setsid() == -1) {
+        printf("setsid failed\n");
+        exit(-1);
+    }
+    int stdfd = open ("/dev/null", O_RDWR);
+    dup2(stdfd, STDOUT_FILENO);
+    dup2(stdfd, STDERR_FILENO);
+    if(fork() != 0) exit(0);   /* double kill */
+
+    pthread_t tid_beat = 0, tid_policy = 0;
+    pthread_t tid_main = 0, tid_report = 0;
+    while(1){
         /* 需要一个状态机控制 */
-        /* 心跳 */
-        thpool_add_work(thpool, thread_heart_beat, NULL);
-        sleep(2);
         /* 获取策略 */
-        //        test();
-        thpool_add_work(thpool, thread_pull_policy, NULL);
-        sleep(2);
-        do_main(NULL);
+        if(tid_policy == 0) {
+            pthread_create(&tid_policy, NULL, thread_pull_policy, NULL);
+            LOG_RUN("获取策略线程创建成功\n");
+        }else{
+            /* 监测线程是否存在 */
+            if(ESRCH == pthread_kill(tid_policy, 0))
+                tid_beat = 0;
+        }
+        sleep(5);
         /* 执行策略 */
-        //policy_scheduling(thpool);
-        //sleep(10);
+        if(tid_main == 0) {
+            pthread_create(&tid_main, NULL, thread_do_main, NULL);
+            LOG_RUN("执行策略线程创建成功\n");
+        }else{
+            /* 监测线程是否存在 */
+            if(ESRCH == pthread_kill(tid_main, 0))
+                tid_beat = 0;
+        }
+        sleep(5);
+        /* 心跳 */
+        if(tid_beat == 0) {
+            pthread_create(&tid_beat, NULL, thread_heart_beat, NULL);
+            LOG_RUN("心跳线程创建成功\n");
+        }else{
+            /* 监测线程是否存在 */
+            if(ESRCH == pthread_kill(tid_beat, 0))
+                tid_beat = 0;
+        }
+        sleep(5);
+        /* 上报审计 */
+        if(tid_report == 0) {
+            pthread_create(&tid_report, NULL, thread_send_report, NULL);
+            LOG_RUN("上报审计线程创建成功\n");
+        }else{
+            /* 监测线程是否存在 */
+            if(ESRCH == pthread_kill(tid_report, 0))
+                tid_beat = 0;
+        }
+        sleep(25);
     }
     db_close();
-
-    thpool_wait(thpool);
-    thpool_destroy(thpool);
+    /* 创建线程池 */
+    /* threadpool thpool = thpool_init(4); */
+    /* if(thpool == NULL) { */
+    /*     LOG_MSG("thpool_create failed...\n"); */
+    /*     return FAIL; */
+    /* } */
+    /* thpool_wait(thpool); */
+    /* thpool_destroy(thpool); */
     return OK;
 }
