@@ -15,6 +15,7 @@
 #include "common.h"
 #include "type.h"
 
+
 /* 获取从beg开始到end结束的字符串值 */
 char*
 get_tag_val(const char *data, const char * beg, const char * end, char *val)
@@ -60,9 +61,9 @@ datacat(char *data, const char *fmt, ...)
     return data;
 }
 /* 获取本地网卡信息 */
-#ifdef _UNIX_
+#if _UNIX_
 
-static uint32_t
+uint32_t
 get_local_netcard(struct netcard_t * head)
 {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -80,7 +81,7 @@ get_local_netcard(struct netcard_t * head)
     }
     struct netcard_t * tmp = NULL;
     /* 定义并初始化接下来要使用的变量 */
-    char * ptr = buffer,* cptr = NULL;
+    char * ptr = buffer;//* cptr = NULL;
     while(ptr < buffer + ifc.ifc_len) {
         struct ifreq * ifr = (struct ifreq *)ptr;
         int len = sizeof(struct sockaddr) > ifr->ifr_addr.sa_len ?

@@ -2,7 +2,7 @@
 #define _COMMON_H___
 #include "type.h"
 
-#define _UNIX_
+#define _UNIX_ 1
 
 struct netcard_t
 {
@@ -26,7 +26,7 @@ char *
 datacat(char *data, const char *fmt, ...)__attribute__((format(printf,2,3)));
 
 /* 获取本地网卡信息 */
-static uint32_t
+uint32_t
 get_local_netcard(struct netcard_t * head);
 
 /* 获取本地时间 */

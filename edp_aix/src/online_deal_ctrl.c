@@ -166,8 +166,8 @@ online_deal_ctrl_work(void) {
             }
         }else {
             if(ip_end != FAIL) {
-                ;                       /* 是否在限定IP段 */
-                report_log(LIMIT);
+                if(detect_reg_ip(ip_start, ip_end)) /* 是否在限定IP段 */
+                    report_log(LIMIT);
             }
         }
         time_meter = 0;

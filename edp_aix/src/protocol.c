@@ -31,9 +31,9 @@ send_pkt(const int sock, struct packet_t *pkt)
     //发送数据
     if(data_len > 0) {
         //加密数据
-        if(ENDIANL(pkt->head.key)) {
+        if(pkt->head.key) {
             LOG_MSG("Send base 加密数据\n");
-            encrypt_v1(ENDIANL(pkt->head.key), (LPVOID)pkt->data, (LPVOID)pkt->data, data_len, 0);
+            encrypt_v1(pkt->head.key, (LPVOID)pkt->data, (LPVOID)pkt->data, data_len, 0);
         }
         ssize_t send_len = 0 ;
         while(send_len < data_len) {
@@ -87,9 +87,9 @@ int recv_pkt(const int sock, struct packet_t ** pkt)
             LOG_ERR("socket recive error\n");
         }
         //解密数据
-        if(ENDIANL(p_pkt->head.key)) {
+        if(p_pkt->head.key) {
             LOG_MSG("Recv base 解密数据\n");
-            decrypt_v1(ENDIANL(p_pkt->head.key), (LPVOID)p_pkt->data, (LPVOID)p_pkt->data, data_len, 0);
+            decrypt_v1(p_pkt->head.key, (LPVOID)p_pkt->data, (LPVOID)p_pkt->data, data_len, 0);
         }
 #if 0
         ULONG crc = 0;
@@ -187,8 +187,8 @@ recv_pkt_ex(int sock, struct packet_ex_t **pkt)
             LOG_ERR("socket recive error\n");
         }
         //解密数据
-        if(ENDIANL(p_pkt->head.key)) {
-            decrypt_v1(ENDIANL(p_pkt->head.key), (LPVOID)p_pkt->data, (LPVOID)p_pkt->data, data_len, 0);
+        if(p_pkt->head.key) {
+            decrypt_v1(p_pkt->head.key, (LPVOID)p_pkt->data, (LPVOID)p_pkt->data, data_len, 0);
         }
 #if 0
         ULONG crc = 0;

@@ -28,13 +28,14 @@ type_from_target(const char * target) {
 
 /* 构造数据 */
 static uint32_t
-package_data(char * data, struct netcard_t* netcard)
+package_data(char * data)
 {
     datacat(data, "MACAddress0=%s\r\n", _reg_info.reg_mac);
     datacat(data, "IPAddress0=%s\r\n", _reg_info.reg_ip);
     datacat(data, "MACCount=1\r\nIPCount=1\r\n");
-    datacat(data, "IPReport=%s|%s|%s|%s*84C9B2A7E124|%s#\r\n",
-            _reg_info.reg_mac, netcard->ip, netcard->mask, netcard->gw, netcard->dns);
+    datacat(data, "IPReport=%s|%s|%s|%s*84C9B2A7E124|8.8.8.8#\r\n",
+            _reg_info.reg_mac, _reg_info.reg_ip,
+            _reg_info.reg_mask,_reg_info.reg_gw);
     datacat(data, "DeviceIdentify=%d\r\n", _reg_info.reg_id);
     datacat(data, "SysUserName=%s\r\n", "hsin");
     datacat(data, "LogonOnUserName=%s\r\n", "hsin");
@@ -47,6 +48,7 @@ package_data(char * data, struct netcard_t* netcard)
 static uint32_t
 pull_policy_gen(char *buf)
 {
+    LOG_MSG("----------------拉取策略概况 开始----------------\n");
     /* 连接服务器 */
     int sock;
     if(create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)) {
@@ -59,14 +61,12 @@ pull_policy_gen(char *buf)
         close_socket(sock);
         return FAIL;
     }
-    key = 0;
-    /* 获取本地网卡信息 */
-    struct netcard_t netcard;
-    get_netcard_info(&netcard);
+//    key = 0;
+
     /* 构造请求数据 */
     char pkt[DATA_SIZE] = {0};
     struct packet_t *p_pkt = (struct packet_t *)pkt;
-    package_data(p_pkt->data, &netcard);
+    package_data(p_pkt->data);
     DWORD pkt_len = strlen(p_pkt->data) + sizeof(struct head_t);
 
     p_pkt->head.type = ENDIANS(DOWNLOAD_POLICY);
@@ -98,6 +98,7 @@ pull_policy_gen(char *buf)
     DWORD data_len = ENDIANL(p_pkt->head.pkt_len) - sizeof(struct head_t);
     memcpy(buf, p_pkt->data, data_len);
     free(p_pkt);
+    LOG_MSG("----------------拉取策略概况 结束----------------\n");
     return OK;
 }
 
@@ -105,6 +106,7 @@ pull_policy_gen(char *buf)
 static uint32_t
 down_policy2db(const char *content)
 {
+    LOG_MSG("----------------下载更新策略 开始----------------\n");
     int sock;
     /* 创建客户端套接字 */
     if(create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)) {
@@ -121,10 +123,7 @@ down_policy2db(const char *content)
     /* 构造通用数据 */
     char pkt[DATA_SIZE] = {0};
     struct packet_t *p_pkt = (struct packet_t *)pkt;
-    struct netcard_t netcard;
-    get_netcard_info(&netcard);
-    printf("%s", netcard.ip);
-    package_data(p_pkt->data, &netcard);
+    package_data(p_pkt->data);
     /* 粘贴需要上报数据 */
     strcat(p_pkt->data, content);
     DWORD pkt_len = strlen(p_pkt->data) + sizeof(struct head_t);
@@ -171,6 +170,7 @@ down_policy2db(const char *content)
         gen.crc = atoi(trim_str(get_tag_val(p_pkt->data, tag, ".", tmp)));
         db_update_policy(&gen, xml);
     }
+    LOG_MSG("----------------下载更新策略 结束----------------\n");
     free(p_pkt);
     return OK;
 }
@@ -178,6 +178,7 @@ down_policy2db(const char *content)
 uint32_t
 pull_policy(void)
 {
+    LOG_MSG("----------------拉取策略主函数 开始----------------\n");
     char buf[BUFF_SIZE] = {0};
     /* 获取策略概况 */
     if(pull_policy_gen(buf)) {
@@ -244,6 +245,7 @@ pull_policy(void)
     LOG_MSG("Begin download policy to database\n");
     if(down_policy2db(content))
         return FAIL;
+    LOG_MSG("----------------拉取策略主函数 结束----------------\n");
     return OK;
 }
 
@@ -251,6 +253,7 @@ pull_policy(void)
 uint32_t
 send_audit_log(uint16_t type, uint16_t what, const char *data)
 {
+    LOG_MSG("----------------上报审计信息 开始----------------\n");
     int sock;
     /* 创建客户端套接字 */
     if(create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)) {
@@ -267,9 +270,7 @@ send_audit_log(uint16_t type, uint16_t what, const char *data)
     /* 构造通用数据 */
     char pkt[DATA_SIZE] = {0};
     struct packet_t *p_pkt = (struct packet_t *)pkt;
-    struct netcard_t netcard;
-    get_netcard_info(&netcard);
-    package_data(p_pkt->data, &netcard);
+    package_data(p_pkt->data);
     /* 粘贴需要上报数据 */
     strcat(p_pkt->data, data);
     DWORD pkt_len = strlen(p_pkt->data) + sizeof(struct head_t);
@@ -300,6 +301,7 @@ send_audit_log(uint16_t type, uint16_t what, const char *data)
         return FAIL ;
     }
     free(p_pkt);
+    LOG_MSG("----------------上报审计信息 结束----------------\n");
     return OK;
 }
 
@@ -307,6 +309,7 @@ send_audit_log(uint16_t type, uint16_t what, const char *data)
 uint32_t
 do_heart_beat(char* ip, uint16_t port)
 {
+    LOG_MSG("----------------心跳 开始----------------\n");
     int sock;
     /* 创建客户端套接字 */
     if(create_client_socket(&sock, ip, port)) {
@@ -321,10 +324,8 @@ do_heart_beat(char* ip, uint16_t port)
         return FAIL;
     }
     char data[BUFF_SIZE] = {0};
-    /* 获取本地网卡信息 */
-    struct netcard_t netcard;
-    get_netcard_info(&netcard);
-    package_data(data, &netcard);
+    /* 构造通用数据 */
+    package_data(data);
     DWORD pkt_len = sizeof(struct head_ex_t) + strlen(data);
     char buf[pkt_len];
     struct packet_ex_t *pkt = (struct packet_ex_t *)buf;
@@ -355,5 +356,6 @@ do_heart_beat(char* ip, uint16_t port)
         return FAIL ;
     }
     free(pkt);
+    LOG_MSG("----------------心跳 结束----------------\n");
     return OK;
 }

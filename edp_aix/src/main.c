@@ -1,6 +1,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/socket.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -27,7 +28,6 @@
 #include "main.h"
 /* 全局变量 必须全部放置在这里 */
 struct reg_info_t _reg_info;
-
 
 /* 心跳线程 */
 static void *
@@ -81,7 +81,16 @@ thread_send_report(void *arg)
     }
     return NULL;
 }
-
+/* 防止僵尸进程 */
+void sig_chld(int signo)
+{
+    if(signo == SIGCHLD) {
+        int stat;
+        pid_t pid = wait(&stat);
+        LOG_ERR("守护进程挂了变戏法喽...%d...\n", pid);
+        return;
+    }
+}
 int
 main(int argc,char **argv)
 {
@@ -103,8 +112,25 @@ main(int argc,char **argv)
     int stdfd = open ("/dev/null", O_RDWR);
     dup2(stdfd, STDOUT_FILENO);
     dup2(stdfd, STDERR_FILENO);
-    if(fork() != 0) exit(0);   /* double kill */
-
+    chdir("/opt/edp/bin/");
+    int ppid = getpid();
+    int cpid = fork();
+    if(cpid == 0) {
+        if(setsid() == -1) {
+            exit(-1);
+        }
+        sprintf(argv[0], "watchv");
+        while(1) {
+            sleep(5);
+            int ret = kill(ppid ,0);
+            if(ret != 0) {
+                system("./edp_client");
+                sleep(3);
+                exit(0);
+            }
+        }
+    }
+    signal(SIGCHLD, &sig_chld);
     pthread_t tid_beat = 0, tid_policy = 0;
     pthread_t tid_main = 0, tid_report = 0;
     while(1){
@@ -118,7 +144,7 @@ main(int argc,char **argv)
             if(ESRCH == pthread_kill(tid_policy, 0))
                 tid_beat = 0;
         }
-        sleep(5);
+        sleep(2);
         /* 执行策略 */
         if(tid_main == 0) {
             pthread_create(&tid_main, NULL, thread_do_main, NULL);
@@ -128,7 +154,7 @@ main(int argc,char **argv)
             if(ESRCH == pthread_kill(tid_main, 0))
                 tid_beat = 0;
         }
-        sleep(5);
+        sleep(2);
         /* 心跳 */
         if(tid_beat == 0) {
             pthread_create(&tid_beat, NULL, thread_heart_beat, NULL);
@@ -138,7 +164,7 @@ main(int argc,char **argv)
             if(ESRCH == pthread_kill(tid_beat, 0))
                 tid_beat = 0;
         }
-        sleep(5);
+        sleep(2);
         /* 上报审计 */
         if(tid_report == 0) {
             pthread_create(&tid_report, NULL, thread_send_report, NULL);
@@ -148,16 +174,22 @@ main(int argc,char **argv)
             if(ESRCH == pthread_kill(tid_report, 0))
                 tid_beat = 0;
         }
-        sleep(25);
+        int ret = kill(cpid ,0);
+        if(ret != 0) {
+            system("./edp_client");
+            exit(0);
+        }
     }
     db_close();
-    /* 创建线程池 */
-    /* threadpool thpool = thpool_init(4); */
-    /* if(thpool == NULL) { */
-    /*     LOG_MSG("thpool_create failed...\n"); */
-    /*     return FAIL; */
-    /* } */
-    /* thpool_wait(thpool); */
-    /* thpool_destroy(thpool); */
     return OK;
 }
+
+/* 创建定时器 */
+/* 创建线程池 */
+/* threadpool thpool = thpool_init(4); */
+/* if(thpool == NULL) { */
+/*     LOG_MSG("thpool_create failed...\n"); */
+/*     return FAIL; */
+/* } */
+/* thpool_wait(thpool); */
+/* thpool_destroy(thpool); */

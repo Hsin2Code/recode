@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 #include "protocol.h"
 #include "register.h"
 #include "journal.h"
@@ -12,6 +13,15 @@
 
 extern struct reg_info_t _reg_info;
 
+/* 检测网卡是否在某个IP端 */
+uint32_t
+detect_reg_ip(uint32_t ip_start, uint32_t ip_end)
+{
+    uint32_t ip = ntohl(inet_addr(_reg_info.reg_ip));
+    if(ip_start < ip && ip < ip_end)
+        return OK;
+    return FAIL;
+}
 /* 注册函数的小弟 */
 static uint32_t
 register_info(char *data, uint32_t num , char* key, char *value)
@@ -23,6 +33,7 @@ register_info(char *data, uint32_t num , char* key, char *value)
 uint32_t
 send_register(void)
 {
+    LOG_MSG("------------------上报注册数据 开始--------------\n");
     char buf[BUFF_SIZE] = {0};
     register_info(buf, 0, "UserName", _reg_info.reg_user); /* 姓名 */
     register_info(buf, 1, "DeptName", _reg_info.reg_com);  /* 单位 */
@@ -44,7 +55,7 @@ send_register(void)
     datacat(buf, "OSVersion=%s\r\n", "6.1");
     datacat(buf, "OSType=%s\r\n", _reg_info.reg_os);
     LOG_MSG("build basic register info success\n");
-    printf("%s",buf);
+    LOG_MSG("%s\n",buf);
     /* 创建客户端套接字 */
     int sock;
     if(create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)) {
@@ -92,6 +103,7 @@ send_register(void)
         return FAIL ;
     }
     free(pkt);
+    LOG_MSG("------------------上报注册数据 结束--------------\n");
     return OK;
 }
 /* 注册之小弟 人机交互 */
@@ -171,10 +183,24 @@ choose_one_netcard(struct netcard_t *head, char *name)
     }while(next != NULL);
     return FAIL;
 }
+
+static uint32_t
+calc_dev_id(const char * mac) {
+    int a,b,c,d,e,f;
+    sscanf(mac, "%x:%x:%x:%x:%x:%x", &a, &b, &c, &d, &e, &f);
+    if((a | b | c | d | e | f) == 0) {
+        return FAIL;
+    }
+    return ((((uint32_t)(a) & 0x000000ff)) |                            \
+            (((uint32_t)(b) << 16 & 0x00ff0000)) |                      \
+            (((uint32_t)(e) << 8  & 0x0000ff00)) |                      \
+            (((uint32_t)(f) << 24 &  0xff000000)));
+}
 /* 注册交互函数 */
 uint32_t
 do_register()
 {
+    LOG_MSG("------------------交互注册 开始--------------\n");
     memset(&_reg_info, 0, sizeof(struct reg_info_t));
     int sock;
     _reg_info.srv_port = DEFAULT_PORT;
@@ -184,12 +210,13 @@ do_register()
     printf("注: *号标记为必填\n");
     do {
         interaction(1, "请输入服务器IP(eg:xxx.xxx.xxx.xxx) *.", _reg_info.srv_ip);
-        printf("开始检测服务器IP是否能联通......\n");
+        printf("开始检测服务器IP是否能联通......");
         if(OK == create_client_socket(&sock, _reg_info.srv_ip, _reg_info.srv_port)){
             close_socket(sock); /* 忘了关...吃亏了，妈蛋 */
+            printf("[连接成功]\n");
             break;
         }
-        printf("(服务器IP无法连通.....)\n");
+        printf("[连接失败]\n(请检查服务器IP地址并重新输入.....)\n");
     }while(1);
     struct netcard_t netcard_head;
     struct netcard_t *tmp, *next;
@@ -208,14 +235,24 @@ do_register()
         next = tmp->next;
     }while(next != NULL);
     char buf[UNIT_SIZE];
-    printf("EDP#");
+    printf("EDP# ");
     scanf("%s", buf);
     while(choose_one_netcard(&netcard_head, buf)) {
-        printf("请输入正确的网卡名...\nEDP#");
+        printf("请输入正确的网卡名...\nEDP# ");
+        scanf("%s", buf);
     }
     strcpy(_reg_info.reg_ip, netcard_head.ip);
     strcpy(_reg_info.reg_mac, netcard_head.mac);
-    _reg_info.reg_id = 88888888;
+    strcpy(_reg_info.reg_mask, netcard_head.mask);
+    strcpy(_reg_info.reg_gw, netcard_head.broadcast);
+    _reg_info.reg_id = calc_dev_id(netcard_head.mac);
+    LOG_MSG("Get dev only ID is %u\n", _reg_info.reg_id);
+    next = netcard_head.next;
+    do{
+        free(next);
+        next = next->next;
+    }while(next != NULL);
+
     interaction(1 ,"请输入单位名称. *", _reg_info.reg_com);
     interaction(1 ,"请输入部门名称. *", _reg_info.reg_dep);
     interaction(1 ,"请输入计算机所在地(eg:陕西西安) *.", _reg_info.reg_addr);
@@ -240,6 +277,7 @@ do_register()
         printf("请启动 /opt/edp/edp_client 重新注册\n");
         exit(0);
     }
+    LOG_MSG("------------------交互注册 结束--------------\n");
     return OK;
 }
 

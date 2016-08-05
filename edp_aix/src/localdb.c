@@ -44,6 +44,8 @@ db_init()
         "reg_id INTEGER,"                                         \
         "reg_ip TEXT,"                                            \
         "reg_mac TEXT,"                                           \
+        "reg_mask TEXT,"                                          \
+        "reg_gw TEXT,"                                            \
         "reg_dev TEXT,"                                           \
         "reg_com TEXT,"                                           \
         "reg_dep TEXT,"                                           \
@@ -223,9 +225,10 @@ db_que_policy(struct policy_gen_t *gen, char *policy)
 uint32_t
 db_ins_register_info(struct reg_info_t *reg_info) {
     char *err_msg = NULL;
-    char *sql = sqlite3_mprintf("INSERT INTO tbl_register VALUES('%u','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%u')",
+    char *sql = sqlite3_mprintf("INSERT INTO tbl_register VALUES('%u','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%u')",
                                 reg_info->reg_id, reg_info->reg_ip,
-                                reg_info->reg_mac, reg_info->reg_dev,
+                                reg_info->reg_mac, reg_info->reg_mask,
+                                reg_info->reg_gw, reg_info->reg_dev,
                                 reg_info->reg_com, reg_info->reg_dep,
                                 reg_info->reg_addr, reg_info->reg_user,
                                 reg_info->reg_tel, reg_info->reg_mail,
@@ -271,6 +274,8 @@ db_que_register_info(struct reg_info_t *reg_info) {
         reg_info->reg_id = atoi(p_result[n_col + i++]);
         strcpy(reg_info->reg_ip,p_result[n_col + i++]);
         strcpy(reg_info->reg_mac,p_result[n_col + i++]);
+        strcpy(reg_info->reg_mask,p_result[n_col + i++]);
+        strcpy(reg_info->reg_gw,p_result[n_col + i++]);
         strcpy(reg_info->reg_dev,p_result[n_col + i++]);
         strcpy(reg_info->reg_com,p_result[n_col + i++]);
         strcpy(reg_info->reg_dep,p_result[n_col + i++]);

@@ -5,7 +5,7 @@
 #include "comint.h"
 #include "register.h"
 
-#define LOCALDB_PATH "/opt/edp/bin/local.db"
+#define LOCALDB_PATH "./local.db"
 
 
 /* 连接数据库 */

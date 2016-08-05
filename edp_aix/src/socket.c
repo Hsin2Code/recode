@@ -9,7 +9,7 @@
 #include <errno.h>
 #include <assert.h>
 #include <strings.h>
-
+#include <fcntl.h>
 #include "socket.h"
 #include "journal.h"
 
@@ -49,16 +49,17 @@ create_server_socket(int *fd, const uint16_t port)
 
     return OK;
 }
+
 /* 创建客户端 套接字 */
 uint32_t
 create_client_socket(int* fd, const char* ip, const uint16_t port)
 {
-    int sock;
+    int sock, flags, res;
     struct sockaddr_in their_addr;
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(-1 == sock) {
-        LOG_ERR("Failed to create socket. \n");
+        LOG_ERR("Failed to create socket. ERROR:%s\n", strerror(errno));
         return FAIL;
     }
     struct timeval timeout = {3,0};
@@ -71,15 +72,52 @@ create_client_socket(int* fd, const char* ip, const uint16_t port)
     their_addr.sin_addr.s_addr = inet_addr(ip);
     their_addr.sin_port = htons(port);
     bzero(&their_addr.sin_zero, 8);
-    if(-1 == connect(sock, (struct sockaddr*)&their_addr, sizeof(struct sockaddr))){
-        LOG_ERR("Cannot connect. \n");
-        close_socket(sock);
+
+    if((flags = fcntl(sock, F_GETFL, 0)) < 0) {
+        LOG_ERR("Connet fcntl.... ERROR:%s\n", strerror(errno));
+        close(sock);
         return FAIL;
     }
-//    epoll_add_client(sock);
-    *fd = sock;
 
-    return OK;
+    if(fcntl(sock, F_SETFL, flags | O_NONBLOCK) < 0) {
+        LOG_ERR("Connet fcntl.... ERROR:%s\n", strerror(errno));
+        close(sock);
+        return FAIL;
+    }
+
+    if(0 != connect(sock, (struct sockaddr*)&their_addr, sizeof(struct sockaddr))) {
+        if(errno != EINPROGRESS) { // EINPROGRESS
+            LOG_ERR("Connect server.... ERROR:%s\n", strerror(errno));
+            close(sock);
+            return FAIL;
+        }
+    }else {
+        fcntl(sock, F_GETFL, &flags);
+        fcntl(sock, F_SETFL, flags & (~O_NONBLOCK));
+        *fd = sock;
+        return OK;
+    }
+    fd_set fdr, fdw;
+    FD_ZERO(&fdr); FD_ZERO(&fdw);
+    FD_SET(sock, &fdr); FD_SET(sock, &fdw);
+    res = select(sock + 1, &fdr, &fdw, NULL, &timeout);
+    if(res == 1) {
+        if(FD_ISSET(sock, &fdw)) {
+            LOG_MSG("Connected...\n");
+            fcntl(sock, F_GETFL, &flags);
+            fcntl(sock, F_SETFL, flags & (~O_NONBLOCK));
+            *fd = sock;
+            return OK;
+        }
+    }
+    if(res < 0) {
+        LOG_ERR("Connect server.... ERROR:%s\n", strerror(errno));
+        close(sock);
+        return FAIL;
+    }
+    LOG_MSG("Connect server timeout\n");
+    close(sock);
+    return FAIL;
 }
 /* 接入客户端请求 */
 uint32_t
