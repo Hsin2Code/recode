@@ -84,9 +84,9 @@ create_client_socket(int* fd, const char* ip, const uint16_t port)
         close(sock);
         return FAIL;
     }
-
+    LOG_MSG("IP is ->%s<- port is ->%u<- \n", ip, port);
     if(0 != connect(sock, (struct sockaddr*)&their_addr, sizeof(struct sockaddr))) {
-        if(errno != EINPROGRESS) { // EINPROGRESS
+        if(errno != 0 && errno != EINPROGRESS) { // EINPROGRESS
             LOG_ERR("Connect server.... ERROR:%s\n", strerror(errno));
             close(sock);
             return FAIL;
@@ -94,6 +94,7 @@ create_client_socket(int* fd, const char* ip, const uint16_t port)
     }else {
         fcntl(sock, F_GETFL, &flags);
         fcntl(sock, F_SETFL, flags & (~O_NONBLOCK));
+
         *fd = sock;
         return OK;
     }

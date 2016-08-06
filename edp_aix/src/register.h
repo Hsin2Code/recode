@@ -6,8 +6,8 @@
 #define VERSION "1.0.0.1"
 
 #define REGISTERED           1  /* 已经注册 */
-
 #define DEFAULT_PORT         88 /* 默认通信服务端口 */
+
 struct reg_info_t{
     uint32_t reg_id;
     char reg_ip[FIELD_SIZE];

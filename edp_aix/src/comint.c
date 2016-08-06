@@ -37,8 +37,8 @@ package_data(char * data)
             _reg_info.reg_mac, _reg_info.reg_ip,
             _reg_info.reg_mask,_reg_info.reg_gw);
     datacat(data, "DeviceIdentify=%d\r\n", _reg_info.reg_id);
-    datacat(data, "SysUserName=%s\r\n", "hsin");
-    datacat(data, "LogonOnUserName=%s\r\n", "hsin");
+    datacat(data, "SysUserName=%s\r\n", "root");
+    datacat(data, "LogonOnUserName=%s\r\n", "root");
     datacat(data, "LangId=%s\r\n", "zh_CN.UTF-8");
     datacat(data, "ActiveIPAddress=%s\r\n", _reg_info.reg_ip);
     return strlen(data);

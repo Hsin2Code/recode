@@ -3,7 +3,7 @@
 
 #include <errno.h>
 
-#define EDP_LOG "./edp_run.log"
+#define EDP_LOG "/opt/edp_vrv/bin/edp_run.log"
 
 void _log(const char *fmt, ...)__attribute__((format(printf,1,2)));
 

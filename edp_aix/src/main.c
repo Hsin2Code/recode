@@ -124,7 +124,7 @@ main(int argc,char **argv)
             sleep(5);
             int ret = kill(ppid ,0);
             if(ret != 0) {
-                system("./edp_client");
+                system("/opt/edp_vrv/bin/edp_client");
                 sleep(3);
                 exit(0);
             }
@@ -176,7 +176,7 @@ main(int argc,char **argv)
         }
         int ret = kill(cpid ,0);
         if(ret != 0) {
-            system("./edp_client");
+            system("/opt/edp_vrv/bin/edp_client");
             exit(0);
         }
     }
