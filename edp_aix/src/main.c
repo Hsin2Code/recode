@@ -112,7 +112,7 @@ main(int argc,char **argv)
     int stdfd = open ("/dev/null", O_RDWR);
     dup2(stdfd, STDOUT_FILENO);
     dup2(stdfd, STDERR_FILENO);
-    chdir("/opt/edp/bin/");
+    chdir("/opt/edp_vrv/bin/");
     int ppid = getpid();
     int cpid = fork();
     if(cpid == 0) {

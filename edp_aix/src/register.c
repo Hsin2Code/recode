@@ -150,14 +150,14 @@ dbug_register() {
     if(OK == send_register()) {
         if(db_ins_register_info(&_reg_info)) {
             printf("##### 注册信息入库失败 #####\n");
-            printf("请启动 /opt/edp/edp_client 重新注册\n");
+            printf("请启动 /opt/edp_vrv/edp_client 重新注册\n");
             exit(0);
         }else {
             printf("######### 注册成功 #########\n");
         }
     }else {
         printf("######### 注册失败 #########\n");
-        printf("请启动 /opt/edp/edp_client 重新注册\n");
+        printf("请启动 /opt/edp_vrv/edp_client 重新注册\n");
         exit(0);
     }
     return OK;

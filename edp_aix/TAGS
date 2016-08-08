@@ -441,41 +441,51 @@ struct sqlite3_api_routines 34,1141
 # define SQLITE_EXTENSION_INIT2(542,29220
 # define SQLITE_EXTENSION_INIT3 543,29288
 
-src/main.c,128
-struct reg_info_t _reg_info;20,396
-thread_heart_beat(25,453
-thread_pull_policy(32,592
-policy_scheduling(40,702
-main(45,749
+src/main.c,177
+struct reg_info_t _reg_info;30,612
+thread_heart_beat(34,675
+thread_pull_policy(44,865
+thread_do_main(54,994
+thread_send_report(75,1551
+void sig_chld(85,1720
+main(95,1919
 
 src/protocol.c,109
 send_pkt(14,243
-int recv_pkt(58,1706
-send_pkt_ex(110,3199
-recv_pkt_ex(158,4782
-get_encrypt_key(208,6233
+int recv_pkt(58,1688
+send_pkt_ex(110,3163
+recv_pkt_ex(158,4746
+get_encrypt_key(208,6179
 
-src/type.h,574
+src/type.h,796
 #define _TYPE_H__2,18
-#define UNIT_SIZE 7,95
-#define LINE_SIZE 8,116
-#define BUFF_SIZE 9,138
-#define DATA_SIZE 10,161
-#define OK 12,185
-#define FAIL 13,198
-typedef int8_t    CHAR;15,217
-typedef int16_t   SHORT;16,241
-typedef int32_t   INT;17,266
-typedef int32_t   BOOL;18,289
-typedef int32_t   LONG;19,313
-typedef uint8_t   UCHAR;20,337
-typedef uint8_t   BYTE;21,362
-typedef uint16_t  WORD;22,386
-typedef uint16_t  USHORT;23,410
-typedef uint32_t  UINT;24,436
-typedef uint32_t  ULONG;25,460
-typedef uint32_t  DWORD;26,485
-typedef DWORD *    LPVOID;27,510
+#define FIELD_SIZE 6,77
+#define UNIT_SIZE 7,99
+#define LINE_SIZE 8,120
+#define BUFF_SIZE 9,142
+#define DATA_SIZE 10,165
+#define OK 12,189
+#define FAIL 13,202
+typedef int8_t    CHAR;15,227
+typedef int16_t   SHORT;16,251
+typedef int32_t   INT;17,276
+typedef int32_t   BOOL;18,299
+typedef int32_t   LONG;19,323
+typedef uint8_t   UCHAR;20,347
+typedef uint8_t   BYTE;21,372
+typedef uint16_t  WORD;22,396
+typedef uint16_t  USHORT;23,420
+typedef uint32_t  UINT;24,446
+typedef uint32_t  ULONG;25,470
+typedef uint32_t  DWORD;26,495
+typedef DWORD *    LPVOID;27,520
+#define BigLittleSwap16(30,570
+#define BigLittleSwap32(34,716
+#define BigLittleSwap64(39,1018
+#define ENDIANS(50,1749
+#define ENDIANL(51,1779
+#define ENDIANS(58,1879
+#define ENDIANL(59,1924
 
 src/sqlite3.h,27094
 #define _SQLITE3_H_34,1512
@@ -1114,156 +1124,98 @@ struct fts5_api 10147,485936
   int (*xFindTokenizer)xFindTokenizer10160,486243
   int (*xCreateFunction)xCreateFunction10168,486410
 
-src/journal.h,109
+src/journal.h,158
 #define _JOURNAL_H_2,20
-#define EDP_LOG 4,41
-void _log(6,77
-#define LOG_ERR(8,146
-#define LOG_MSG(9,231
+#define EDP_LOG 6,61
+void _log(8,94
+#define LOG_ERR(10,163
+#define LOG_MSG(12,249
+#define LOG_DB(14,335
+#define LOG_RUN(16,419
 
-src/txml_parser.h,97
-#define	_TXML_PARSER_H25,1214
-typedef void* txml_node;30,1408
-typedef void* txml_attr;31,1434
-
-src/protocol.h,1134
+src/protocol.h,1612
 #define _PROTOCOL_H___2,23
 #define EX_OK 5,65
 #define EX_FAIL 6,106
-#define PKTHEADEX_SIZE 8,154
-#define DOWNLOAD_POLICY 12,223
-#define DETECT_POLICY 13,274
-#define GET_POLICY 14,305
-#define ECHO_POLICY 15,336
-#define LOWER_DETECT_POLICY 16,367
-#define LOWER_GET_POLICY 17,398
-#define AGENT_RPTAUDITLOG 19,430
-#define AUDITLOG_REQUEST 20,491
-#define AUDITLOG_ECHO 21,546
-#define DETECT_ENCRYPT 23,602
-#define REG_DEVICE_STRING 24,669
-#define AGENT_GETCONFIG_STRING 25,730
-#define VRV_TAG 27,795
-#define VRV_FLAG 31,894
-struct head_t34,972
-    DWORD flag;36,988
-    WORD  type;37,1045
-    WORD  what;38,1136
-    DWORD key;39,1179
-    DWORD data_crc;40,1222
-    DWORD pkt_len;41,1274
-struct packet_t44,1372
-    struct head_t head;46,1390
-    char data[data47,1414
-struct head_ex_t50,1436
-    DWORD flag;52,1455
-    WORD  type;53,1512
-    WORD  what;54,1603
-    DWORD key;55,1646
-    DWORD data_crc;56,1689
-    DWORD pkt_len;57,1741
-    WORD  tag;58,1805
-    WORD  head_len;59,1851
-    DWORD address;60,1894
-struct packet_ex_t63,1967
-    struct head_ex_t head;65,1988
-    char data[data66,2015
+#define Illegal_Behavior 9,197
+#define Abnormal_Behavior 10,244
+#define General_Behavior 11,291
+#define Event_Emergency 14,381
+#define Event_Alarm 15,440
+#define Event_Critical 16,508
+#define Event_Error 17,570
+#define Event_Caution 18,632
+#define Event_Inform 19,694
+#define Event_Message 20,774
+#define Event_Debug 21,836
+#define PKTHEADEX_SIZE 23,899
+#define FIND_DAILUP 26,967
+#define FIND_DAILUPING 27,1046
+#define FIND_DAILUPED 28,1101
+#define FIND_OUTOFNETWORK 29,1159
+#define DOWNLOAD_POLICY 32,1219
+#define DETECT_POLICY 33,1270
+#define GET_POLICY 34,1301
+#define ECHO_POLICY 35,1332
+#define LOWER_DETECT_POLICY 36,1363
+#define LOWER_GET_POLICY 37,1394
+#define AGENT_RPTAUDITLOG 39,1426
+#define AUDITLOG_REQUEST 40,1487
+#define AUDITLOG_ECHO 41,1542
+#define DETECT_ENCRYPT 45,1600
+#define REG_DEVICE_STRING 46,1667
+#define AGENT_GETCONFIG_STRING 47,1728
+#define VRV_TAG 49,1793
+#define VRV_FLAG 53,1892
+struct head_t56,1970
+    DWORD flag;58,1986
+    WORD  type;59,2043
+    WORD  what;60,2134
+    DWORD key;61,2177
+    DWORD data_crc;62,2220
+    DWORD pkt_len;63,2272
+struct packet_t66,2370
+    struct head_t head;68,2388
+    char data[data69,2412
+struct head_ex_t72,2434
+    DWORD flag;74,2453
+    WORD  type;75,2510
+    WORD  what;76,2601
+    DWORD key;77,2644
+    DWORD data_crc;78,2687
+    DWORD pkt_len;79,2739
+    WORD  tag;80,2803
+    WORD  head_len;81,2849
+    DWORD address;82,2892
+struct packet_ex_t85,2965
+    struct head_ex_t head;87,2986
+    char data[data88,3013
 
-src/register.h,234
+src/register.h,663
 #define _REGISTER_H___2,23
-struct reg_info_t6,68
-    char srv_ip[srv_ip8,88
-    char reg_ip[reg_ip9,109
-    char reg_mac[reg_mac10,130
-    char clt_ver[clt_ver11,152
-    uint16_t srv_port;12,174
-    uint32_t reg_id;13,197
-
-src/txml_parser.c,2617
-#define TXML_ALLOC(30,1341
-#define TXML_FREE(31,1388
-#define TXML_PRINT	32,1421
-#define TXML_ALLOC(38,1539
-#define TXML_FREE(39,1576
-#define TXML_PRINT	40,1608
-struct _txml_attr 47,1695
-	char* name;48,1716
-	char* value;49,1730
-	struct _txml_attr* next;50,1745
-struct _txml_text 53,1778
-	unsigned char isCDATA;54,1799
-	char* str;55,1849
-struct _txml_node 59,1945
-	char* tag;60,1966
-	struct _txml_text text;61,2002
-	struct _txml_attr*  attrs;62,2068
-	struct  _txml_node* parent;63,2136
-	struct  _txml_node* first_child;64,2166
-	struct  _txml_node* next_sibling;65,2201
-#define TXML_SUCCESS 69,2268
-#define TXML_FAILURE 70,2295
-#define TXML_INVALIDARG	71,2323
-#define TXML_OUTOFMEMORY	72,2353
-#define TXML_PARSEERROR	73,2383
-#define TXML_CHK_MEM(75,2415
-#define TXML_CHK_ARG(84,2754
-#define TXML_CHK_STATUS(93,3089
-#define TXML_SET_STRING(102,3455
-#define TXML_START	111,3710
-#define TXML_OPENTAG_START	112,3746
-#define TXML_OPENTAG_NAME	113,3788
-#define TXML_AFTER_OPENTAG_NAME	114,3830
-#define TXML_ATTR_NAME	115,3877
-#define TXML_AFTER_ATTR_NAME	116,3917
-#define TXML_AFTER_EQUAL	117,3962
-#define TXML_ATTR_VAL_STRING	118,4003
-#define TXML_ATTR_VAL_QUOTES	119,4048
-#define TXML_AFTER_ATTR_VAL	120,4092
-#define TXML_CLOSETAG_START	121,4135
-#define TXML_CLOSETAG_NAME	122,4179
-#define TXML_AFTER_CLOSETAG_NAME	123,4222
-#define TXML_OPENTAG_END	124,4269
-#define TXML_SKIPTAG_START	125,4310
-#define TXML_AFTER_EXLM	126,4353
-#define TXML_AFTER_OPEN_HYPEN1	127,4393
-#define TXML_AFTER_OPEN_HYPEN2	128,4439
-#define TXML_AFTER_CLOSE_HYPEN1	129,4485
-#define TXML_AFTER_CLOSE_HYPEN2	130,4532
-#define TXML_TAG_BODY	131,4579
-#define TXML_CDATA_START	132,4617
-#define TXML_END	133,4657
-#define _IsWhiteSpace	136,4711
-#define _IsSlash	137,4800
-#define _IsLessThan	138,4854
-#define _IsGreaterThan	139,4911
-#define _IsEqualTo	140,4970
-#define _IsQuote	141,5026
-#define _IsQuestion	142,5117
-#define _IsExclamation	143,5174
-#define _IsHyphen	144,5233
-#define _IsSquareBracket	145,5288
-#define _IsAlphaNumeric	147,5350
-#define _IsSymbol	151,5611
-#define NEXT_CHAR 158,5836
-#define NEXT_OFFSET(166,6039
-#define STRIP_SPACES 174,6223
-static void _txml_delete_node(187,6651
-txml_node txml_parse(222,7359
-void txml_free(570,16975
-char* txml_node_get_name(580,17144
-char* txml_node_get_text(587,17281
-char* txml_node_get_prop(594,17423
-txml_attr txml_node_get_first_attr(612,17805
-txml_attr txml_node_get_next_attr(625,18052
-void txml_node_get_attr_name_value(632,18230
-txml_node txml_node_get_first_child(645,18492
-txml_node txml_node_get_next_sibling(652,18659
+#define VERSION 6,66
+#define REGISTERED 8,93
+#define DEFAULT_PORT 10,145
+struct reg_info_t{reg_info_t11,208
+    uint32_t reg_id;12,227
+    char reg_ip[reg_ip13,248
+    char reg_mac[reg_mac14,277
+    char reg_mask[reg_mask15,307
+    char reg_gw[reg_gw16,338
+    char reg_com[reg_com17,367
+    char reg_dep[reg_dep18,397
+    char reg_addr[reg_addr19,427
+    char reg_user[reg_user20,458
+    char reg_tel[reg_tel21,489
+    char reg_mail[reg_mail22,519
+    char reg_note[reg_note23,550
+    char reg_os[reg_os24,581
+    char reg_dev[reg_dev25,610
+    char srv_ip[srv_ip26,640
+    uint16_t srv_port;27,669
 
 src/encrypt.h,27
 #define _ENCRYPT_H___2,22
-
-src/base.c,15
-datacat(8,110
 
 src/thpool.c,1779
 #define THPOOL_DEBUG 14,231
@@ -1324,21 +1276,23 @@ static void bsem_wait(523,13925
 src/journal.c,17
 void _log(8,118
 
-src/common.h,193
+src/common.h,262
 #define _COMMON_H___2,21
-struct netcard_t 5,61
-    char ip[ip6,80
-    char mac[mac7,97
-    char gw[gw8,115
-    char mask[mask9,132
-    char dns[dns10,151
-    char name[name11,169
+#define _UNIX_ 5,61
+struct netcard_t7,79
+    char name[name9,98
+    char mac[mac10,124
+    char ip[ip11,149
+    char broadcast[broadcast12,173
+    char mask[mask13,204
+    struct netcard_t *next;next14,230
+datacat(26,465
 
-src/socket.c,105
-create_server_socket(19,338
-create_client_socket(53,1144
-accept_socket(81,1818
-close_socket(113,2478
+src/socket.c,106
+create_server_socket(19,336
+create_client_socket(54,1197
+accept_socket(105,2839
+close_socket(137,3499
 
 src/socket.h,26
 #define _SOCKET_H___2,21
@@ -12710,56 +12664,102 @@ struct policy_gen_t 10,201
     DWORD crc;12,237
     DWORD type;13,252
     DWORD flag;14,268
-enum policy_type 20,339
-    ONLINE_DEAL_CTRL,22,396
-    POLICY_TYPE_COUNT,24,444
+enum policy_type 21,340
+    ONLINE_DEAL_CTRL,23,397
+    POLICY_TYPE_COUNT,25,445
 
-src/encrypt.c,158
+src/online_deal_ctrl.c,525
+static char last_offline_time[last_offline_time18,325
+static char addr1[addr120,368
+static char addr2[addr221,398
+static uint32_t interval;23,429
+static uint32_t detect_door;24,455
+static uint32_t addr_door;25,484
+static uint32_t ip_start;27,539
+static uint32_t ip_end;28,565
+enum stat{stat32,592
+    ONLINE,33,603
+    OFFLINE,34,615
+    LIMIT,35,628
+import_xml(39,659
+report_log(60,1433
+detect_addr(91,2218
+online_deal_ctrl_init(131,3228
+online_deal_ctrl_work(137,3357
+online_deal_ctrl_uninit(178,4596
+
+src/main.h,24
+#define _MAIN_H___2,19
+
+src/encrypt.c,157
 BYTE m_key[m_key7,99
 encrypt_v1(18,299
-decrypt_v1(46,1023
-ULONG CRCTab[CRCTab51,1170
-void CRCInit(52,1189
-ULONG CRC32(63,1381
-ULONG CRC32Raw(73,1591
+decrypt_v1(44,961
+ULONG CRCTab[CRCTab49,1108
+void CRCInit(50,1127
+ULONG CRC32(61,1319
+ULONG CRC32Raw(71,1529
 
-src/register.c,70
-register_info(16,282
-do_register(23,471
-get_register_info(104,3489
+src/register.c,209
+detect_reg_ip(18,332
+register_info(27,557
+send_register(34,746
+interaction(111,3905
+dbug_register(133,4522
+choose_one_netcard(168,5709
+calc_dev_id(188,6235
+do_register(201,6726
+get_srv_addr(287,10025
 
-src/common.c,41
-trim_str(8,141
-get_netcard_info(22,393
+src/common.c,106
+get_tag_val(21,393
+trim_str(39,883
+datacat(53,1127
+get_local_netcard(67,1393
+get_local_time(132,3724
 
-src/base.h,236
-#define _BASE_H___2,19
-#define BigLittleSwap16(7,100
-#define BigLittleSwap32(11,246
-#define BigLittleSwap64(16,548
-#define ENDIANS(27,1279
-#define ENDIANL(28,1309
-#define ENDIANS(35,1409
-#define ENDIANL(36,1454
-datacat(41,1539
+src/localdb.c,268
+static sqlite3 *db db11,183
+db_conn(16,307
+db_init(28,537
+db_ins_report(96,3584
+db_send_report(114,4170
+db_update_policy(154,5592
+db_ctrl_policy(172,6211
+db_que_policy(189,6735
+db_ins_register_info(226,7966
+db_que_register_info(250,9103
+db_close(299,11093
 
-src/comint.c,264
-const char * policy_target[policy_target15,258
-type_from_target(19,384
-package_data(30,657
-pull_policy_gen(47,1366
-get_tag_val(105,3060
-get_policy_list(121,3517
-down_policy2db(140,4201
-pull_policy(209,6389
-send_audit_log(259,7993
-do_heart_beat(314,9619
+src/online_deal_ctrl.h,63
+#define _ONLINE_DEAL_CTRL_H___2,31
+#define DEFAULT_ADDR 5,81
+
+src/localdb.h,55
+#define _LOCALDB_H___2,22
+#define LOCALDB_PATH 8,126
+
+src/comint.c,217
+const char * policy_target[policy_target16,280
+type_from_target(20,406
+package_data(31,679
+pull_policy_gen(49,1389
+down_policy2db(107,3107
+pull_policy(179,5615
+send_audit_log(254,8345
+do_heart_beat(310,10093
 
 obj/protocol.o,27
-»ëÉw…Y1‰Êw…Y1‰31,5402
+»ëÉw…Y1‰Êw…Y1‰31,5263
+
+obj/localdb.o,16
+ret row 6,4986
 
 obj/comint.o,16
-IPCount=5,5773
+IPCount=6,5769
+
+obj/online_deal_ctrl.o,16
+EndTime=6,1958
 
 obj/sqlite3.o,168
 HãEH;E¯r∑E¯r93,37287
@@ -12769,22 +12769,50 @@ HãE¯HãE103,41932
 HãE¯H;E»tE»t103,41932
 HâEËHãEÿã@HâEËHãEÿã@184,74775
 
-obj/txml_parser.o,44
-êÎêÎêÎêÉEàEà11,6221
-ÇwXwX27,10274
+obj/register.o,41
+∆@,@3,626
+IPCoHâpHπuIPCoHâpHπ4,786
 
-obj/register.o,42
-∆@,@3,676
-IPCoHâHHæuIPCoHâHHæ6,1004
+test.c,16
+int main(8,127
 
-bin/edp_client,185
+pack/edp.spec,51
+#%define usrlib 29,689
+#%define localpath 30,720
+
+pack/edp_package.sh,14
+VERSION=3,11
+
+pack/edp_vrv/bin/edp_client,202
 ELFELF1,0
-HãEH;E¯r∑E¯r152,48665
-–âEÉEEÉ154,49027
-–âEÉEÏãEÏ;E‘å\ˇˇˇHãU¯HãEÿH)¬HâH154,49027
-HãE¯HãE170,53310
-HãE¯H;E»tE»t170,53310
-HâEËHãEÿã@HâEËHãEÿã@264,86153
+HãEH;E¯r∑E¯r164,49491
+–âEÉEEÉ166,49853
+–âEÉEÏãEÏ;E‘å\ˇˇˇHãU¯HãEÿH)¬HâH166,49853
+HãE¯HãE182,54136
+HãE¯H;E»tE»t182,54136
+HâEËHãEÿã@HâEËHãEÿã@272,86979
+I—I2151,868902
+
+local.db,16
+EndTime=4,9510
+
+bin/edp_client,591
+ELFELF1,0
+HãEH;E¯r∑E¯r150,48988
+–âEÉEEÉ152,49350
+–âEÉEÏãEÏ;E‘å\ˇˇˇHãU¯HãEÿH)¬HâH152,49350
+HãE¯HãE168,53633
+HãE¯H;E»tE»t168,53633
+HâEËHãEÿã@HâEËHãEÿã@259,86476
+HÉm¯Î∑êÎê…√UHâÂHâ}¯HãE¯ã@xçPHãE¯ã@xç591,346281
+HãE¯∆@Î6ÉEÙHÉE¯É}Ù	~€HãEË∂@çHHãU~€HãEË∂@çHHã611,360767
+HãE¯∆@Î6ÉEÙHÉE¯É}Ù	~€HãEË∂@çHHãUËàJ∂–HãEËHc“HçJãU‰âTà]√UHâÂHâ}Ëâu‰HãEËã@LâEu‰HãEËã@Lâ611,360767
+êÎêÎêÎêHãH614,370331
+ãE‹E672,429136
+HãU¯HòHãU¯H977,596635
+Ö¿tHãE–ã@DHãUÿHÉ¬Tâ∆Hâ◊ËÛ≠ˇˇH	E»HÉE–pHE»HÉE–p1013,617506
+êÎêÎêÎêÉÖxˇˇxˇ1016,618559
+HãEÄHãE1032,627684
 
 Makefile,31
 DIR_INC 1,0
@@ -12802,5 +12830,3 @@ obj/socket.o,0
 obj/common.o,0
 
 obj/thpool.o,0
-
-obj/base.o,0
